@@ -22,6 +22,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{fancyhdr}
 \usepackage{mathtools}
+\usepackage{amsmath}
 \usepackage{lastpage}
 \usepackage{graphicx, wrapfig, subcaption, setspace, booktabs}
 % \usepackage{minted} % need `-shell-escape' argument for local compile
@@ -37,7 +38,7 @@
 \title{ \normalsize \textsc{}
 	\\ [2.0cm]
 	\HRule{0.5pt} \\
-	\LARGE \textbf{\uppercase{Nonlinear Markovian Stochastic Approximation}
+	\LARGE \textbf{\uppercase{Report No. 3}
 		\HRule{2pt} \\ [0.5cm]
 		\normalsize \today \vspace*{5\baselineskip}}
 }
@@ -168,11 +169,11 @@ Solving this recursion gives us the following inequality:
 	\begin{split}
 		\mathbb{E}\left[||\theta_{k + 1} - \theta^{*}||^{2}\right] & \le \left(1 - 2\alpha\left(\alpha L^{2} + \mu\right)\right)^{k + 1}\mathbb{E}\left[||\theta_{0} - \theta^{*}||^{2}\right] \\
 		& + \sum_{t = 0}^{k}\left(1 - 2\alpha\left(\alpha L^{2} + \mu\right)\right)^{t}2\alpha^{2}L^{2} \\
-		& + \sum_{t = 0}^{k}2\alpha\left(1 - 2\alpha\left(\alpha L^{2} + \mu\right)\right)^{t}\mathbb{E}\left[\left\langle \theta_{t} - \theta^{*}, g\left(\theta_{t}, X_{t + 1}\right) - \bar{g}\left(\theta_{t}\right) \right\rangle\right].
+		& + \sum_{t = 0}^{k}2\alpha\left(1 - 2\alpha\left(\alpha L^{2} + \mu\right)\right)^{k - t}\mathbb{E}\left[\left\langle \theta_{t} - \theta^{*}, g\left(\theta_{t}, X_{t + 1}\right) - \bar{g}\left(\theta_{t}\right) \right\rangle\right].
 	\end{split}
 \end{equation}
 
-For notational simplicity we define $\gamma_{t} \coloneq 2\alpha\left(1 - 2\alpha\left(\alpha L^{2} + \mu\right)\right)^{t}$.
+For notational simplicity we define $\gamma_{t} \coloneq 2\alpha\left(1 - 2\alpha\left(\alpha L^{2} + \mu\right)\right)^{k - t}$ for $0 \le t \le k$.
 
 The second term above is just a geometric series which is equal to $2\alpha^{2}L^{2}\left(\alpha L^{2} + \mu\right)^{k}$.
 
@@ -212,7 +213,7 @@ For $A_{3}$, we obtain
 		A_{3} & \le \sum_{t = 1}^{k}\gamma_{t}||\theta_{t} - \theta_{t - 1}|| \; ||P_{\theta_{t - 1}}\hat{g}\left(\theta_{t - 1}, X_{t}\right)||\\
 		& \le \sum_{t = 1}^{k}\alpha L_{PH}^{(0)}\gamma_{t}||g\left(\theta_{t}, X_{t + 1}\right)‌ + \xi_{t + 1}(\theta_{t})||\\
 		& \le \sum_{t = 1}^{k}L_{PH}^{(0)}\gamma_{t}\left(\alpha L_{1}\left(||\theta_{t} - \theta^{*}|| + 1\right) + \alpha L_{2}\left(||\theta_{t} - \theta^{*}|| + 1\right)\right)\\
-		& \le \sum_{t = 1}^{k}L_{PH}^{(0)}\gamma_{t}(1 + \alpha L)||\theta_{t} - \theta^{*}||
+		& \le \sum_{t = 1}^{k}\alpha L L_{PH}^{(0)}\gamma_{t}\left(||\theta_{t} - \theta^{*}|| + 1\right)
 	\end{split}
 \end{equation}
 where second line follows from \ref{MCLipschitzness} and third line is similarly done to the previous part, using Lipschitzness condition and noise assumption.
@@ -236,27 +237,79 @@ which follows from Cacuhy-Scwarz inequality and \ref{MCLipschitzness}.
 Combining the above terms and taking expectations, gives us:
 \begin{equation}
 	\begin{split}
-		\mathbb{E}\left[\sum_{t = 0}^{k}\gamma_{t}\left\langle \theta_{t} - \theta^{*}, g\left(\theta_{t}, X_{t + 1} - \bar{g}\left(\theta_{t}\right)\right)\right\rangle\right] \le & \sum_{t = 1}^{k}\frac{L_{PH}^{(1)}\gamma_{t}}{2}(1 + \alpha L)\left(1 + 3\mathbb{E}\left[||\theta_{t} - \theta^{*}||^{2}\right] \right) + \sum_{t = 1}^{k}L_{PH}^{(0)}\gamma_{t}(1 + \alpha L)\mathbb{E}\left[||\theta_{t} - \theta^{*}||\right]‌ +\\
-		& \sum_{t = 0}^{k - 1}L_{PH}^{(0)}|\gamma_{t + 1} - \gamma_{t}| \; \mathbb{E}\left[||\theta_{t} - \theta^{*}||\right] + L_{PH}^{(0)}\left(\gamma_{0}\mathbb{E}\left[||\theta_{0} - \theta^{*}||\right] + \gamma_{k}\mathbb{E}\left[||\theta_{k} - \theta^{*}||\right]\right)
+		\mathbb{E}\left[\sum_{t = 0}^{k}\gamma_{t}\left\langle \theta_{t} - \theta^{*}, g\left(\theta_{t}, X_{t + 1} - \bar{g}\left(\theta_{t}\right)\right)\right\rangle\right] \le & \sum_{t = 1}^{k}\frac{L_{PH}^{(1)}\gamma_{t}}{2}(1 + \alpha L)\left(1 + 3\mathbb{E}\left[||\theta_{t} - \theta^{*}||^{2}\right] \right) + \sum_{t = 1}^{k}\alpha L L_{PH}^{(0)}\gamma_{t}\left(\mathbb{E}\left[||\theta_{t} - \theta^{*}||\right]‌ + 1\right) +\\
+		& \sum_{t = 0}^{k - 1}L_{PH}^{(0)}|\gamma_{t} - \gamma_{t + 1}| \; \mathbb{E}\left[||\theta_{t} - \theta^{*}||\right] + L_{PH}^{(0)}\left(\gamma_{0}\mathbb{E}\left[||\theta_{0} - \theta^{*}||\right] + \gamma_{k}\mathbb{E}\left[||\theta_{k} - \theta^{*}||\right]\right)
 	\end{split}
 \end{equation}
 now it should be noticed that as long as we have $\alpha \le \frac{\sqrt{2\mu^{2} + 4L^{2}} - \mu}{2L^{2}}$, we have $\gamma_{t + 1} \le \gamma_{t}$. Thus, we can simplify the above upper bound and write it this way:
 \begin{equation}
 	\begin{split}
-		\mathbb{E}\left[\sum_{t = 0}^{k}\gamma_{t}\left\langle \theta_{t} - \theta^{*}, g\left(\theta_{t}, X_{t + 1} - \bar{g}\left(\theta_{t}\right)\right)\right\rangle\right] \le & \sum_{t = 1}^{k}\frac{L_{PH}^{(1)}\gamma_{t}}{2}(1 + \alpha L)\left(1 + 3\mathbb{E}\left[||\theta_{t} - \theta^{*}||^{2}\right] \right) +\\ & \sum_{t = 1}^{k - 1}L_{PH}^{(0)}\left((2 + \alpha L)\gamma_{t} - \gamma_{t + 1}\right)\mathbb{E}\left[||\theta_{t} - \theta^{*}||\right] +\\
-		& L_{PH}^{(0)}\left(\left(2\gamma_{0} - \gamma_{1}\right)\mathbb{E}\left[||\theta_{0} - \theta^{*}||\right] + \gamma_{k}\mathbb{E}\left[||\theta_{k} - \theta^{*}||\right]\right) 
+		\mathbb{E}\left[\sum_{t = 0}^{k}\gamma_{t}\left\langle \theta_{t} - \theta^{*}, g\left(\theta_{t}, X_{t + 1} - \bar{g}\left(\theta_{t}\right)\right)\right\rangle\right] \le & \sum_{t = 1}^{k}\frac{L_{PH}^{(1)}\gamma_{t}}{2}(1 + \alpha L)\left(1 + 3\mathbb{E}\left[||\theta_{t} - \theta^{*}||^{2}\right] \right) +\\ & \sum_{t = 1}^{k - 1}L_{PH}^{(0)}\left(\left(\alpha L + 1\right)\gamma_{t} - \gamma_{t + 1}\right)\mathbb{E}\left[||\theta_{t} - \theta^{*}||\right] +\\
+		& \sum_{t = 1}^{k}\alpha L L_{PH}^{(0)}\gamma_{t} +  L_{PH}^{(0)}\left(\left(2\gamma_{0} - \gamma_{1}\right)\mathbb{E}\left[||\theta_{0} - \theta^{*}||\right] + \left(\alpha L + 1\right)\gamma_{k}\mathbb{E}\left[||\theta_{k} - \theta^{*}||\right]\right) 
 	\end{split}
 \end{equation}
 
 Hence, using the derived upper bounds from the above terms, we have:
 \begin{equation}
 	\begin{split}
-		\mathbb{E}\left[||\theta_{k + 1} - \theta^{*}||^{2}\right] \le & \sum_{t = 1}^{k}\frac{L_{PH}^{(1)}\gamma_{t}}{2}(1 + \alpha L)\left(1 + 3\mathbb{E}\left[||\theta_{t} - \theta^{*}||^{2}\right] \right) + \sum_{t = 1}^{k - 1}L_{PH}^{(0)}\left((2 + \alpha L)\gamma_{t} - \gamma_{t + 1}\right)\mathbb{E}\left[||\theta_{t} - \theta^{*}||\right] +\\
-		& \left(L_{PH}^{(0)}\left(2\gamma_{0} - \gamma_{1}\right) + \frac{\gamma_{k + 1}}{2\alpha}\right)\mathbb{E}\left[||\theta_{0} - \theta^{*}||\right] + L_{PH}^{(0)}\gamma_{k}\mathbb{E}\left[||\theta_{k} - \theta^{*}||\right] + 2\alpha^{2}L^{2}\left(\alpha L^{2} + \mu\right)^{k}\\
+		\mathbb{E}\left[||\theta_{k + 1} - \theta^{*}||^{2}\right] \le & \sum_{t = 1}^{k}\frac{L_{PH}^{(1)}\gamma_{t}}{2}(1 + \alpha L)\left(1 + 3\mathbb{E}\left[||\theta_{t} - \theta^{*}||^{2}\right] \right) + \sum_{t = 1}^{k - 1}L_{PH}^{(0)}\left(\left(\alpha L + 1\right)\gamma_{t} - \gamma_{t + 1}\right)\mathbb{E}\left[||\theta_{t} - \theta^{*}||\right] +\\
+		& \left(1 - 2\alpha\left(\alpha L^{2} + \mu\right)\right)\gamma_{0}\mathbb{E}\left[||\theta_{0} - \theta^{*}||^{2}\right] + L_{PH}^{(0)}\left(2\gamma_{0} - \gamma_{1}\right)\mathbb{E}\left[||\theta_{0} - \theta^{*}||\right] + \left(\alpha L + 1\right)L_{PH}^{(0)}\gamma_{k}\mathbb{E}\left[||\theta_{k} - \theta^{*}||\right] +\\ 
+		& \left(\frac{L_{PH}^{(0)}}{L} + 1\right)\frac{\alpha L^{2}\left(1 - \left(1 - 2\alpha\left(\alpha L^{2} + \mu\right)\right)^{k}\right)}{\left(\alpha L^{2} + \mu\right)} + \left(1 - 2\alpha\left(\alpha L^{2} + \mu\right)\right)^{k}2\alpha^{2}L^{2}\\
 	\end{split}
 \end{equation}
+to write down this upper bound in a way in which it only depends on $||\theta_{0} - \theta^{*}||$related terms and constants, we can write:
+\begin{equation}
+	\begin{split}
+		\mathbb{E}\left[||\theta_{k + 1} - \theta^{*}||^{2}\right] \le & \sum_{t = 1}^{k}\left[\frac{3L_{PH}^{(1)}\gamma_{t}}{2}(1 + \alpha L)\mathbb{E}\left[||\theta_{t} - \theta^{*}||^{2}\right] + \frac{L_{PH}^{(1)}\gamma_{t}}{2}(1 + \alpha L)\right] + \sum_{t = 1}^{k - 1}L_{PH}^{(0)}\left(\left(\alpha L + 1\right)\gamma_{t} - \gamma_{t + 1}\right)\mathbb{E}\left[||\theta_{t} - \theta^{*}||\right] +\\
+		& \left(1 - 2\alpha\left(\alpha L^{2} + \mu\right)\right)\gamma_{0}\mathbb{E}\left[||\theta_{0} - \theta^{*}||^{2}\right] + L_{PH}^{(0)}\left(2\gamma_{0} - \gamma_{1}\right)\mathbb{E}\left[||\theta_{0} - \theta^{*}||\right] + \left(\alpha L + 1\right)L_{PH}^{(0)}\gamma_{k}\mathbb{E}\left[||\theta_{k} - \theta^{*}||\right] +\\
+		& \left(\frac{L_{PH}^{(0)}}{L} + 1\right)\frac{\alpha L^{2}\left(1 - \left(1 - 2\alpha\left(\alpha L^{2} + \mu\right)\right)^{k}\right)}{\left(\alpha L^{2} + \mu\right)} + \left(1 - 2\alpha\left(\alpha L^{2} + \mu\right)\right)^{k}2\alpha^{2}L^{2}\\
+		= & \sum_{t = 1}^{k}\frac{3L_{PH}^{(1)}\gamma_{t}}{2}(1 + \alpha L)\mathbb{E}\left[||\theta_{t} - \theta^{*}||^{2}\right] + \frac{L_{PH}^{(1)}}{2}(1 + \alpha L)\sum_{t = 1}^{k}\gamma_{t} + \sum_{t = 1}^{k - 1}L_{PH}^{(0)}\left(\left(\alpha L + 1\right)\gamma_{t} - \gamma_{t + 1}\right)\mathbb{E}\left[||\theta_{t} - \theta^{*}||\right] +\\
+		& \left(1 - 2\alpha\left(\alpha L^{2} + \mu\right)\right)\gamma_{0}\mathbb{E}\left[||\theta_{0} - \theta^{*}||^{2}\right] + L_{PH}^{(0)}\left(2\gamma_{0} - \gamma_{1}\right)\mathbb{E}\left[||\theta_{0} - \theta^{*}||\right] + \left(\alpha L + 1\right)L_{PH}^{(0)}\gamma_{k}\mathbb{E}\left[||\theta_{k} - \theta^{*}||\right] +\\ 
+		& \left(\frac{L_{PH}^{(0)}}{L} + 1\right)\frac{\alpha L^{2}\left(1 - \left(1 - 2\alpha\left(\alpha L^{2} + \mu\right)\right)^{k}\right)}{\left(\alpha L^{2} + \mu\right)} + \left(1 - 2\alpha\left(\alpha L^{2} + \mu\right)\right)^{k}2\alpha^{2}L^{2}\\
+		= & \sum_{t = 1}^{k}\frac{3L_{PH}^{(1)}\gamma_{t}}{2}(1 + \alpha L)\mathbb{E}\left[||\theta_{t} - \theta^{*}||^{2}\right] + \sum_{t = 1}^{k - 1}L_{PH}^{(0)}\left(\left(\alpha L + 1\right)\gamma_{t} - \gamma_{t + 1}\right)\mathbb{E}\left[||\theta_{t} - \theta^{*}||\right] +\\
+		& \left(1 - 2\alpha\left(\alpha L^{2} + \mu\right)\right)\gamma_{0}\mathbb{E}\left[||\theta_{0} - \theta^{*}||^{2}\right] + L_{PH}^{(0)}\left(2\gamma_{0} - \gamma_{1}\right)\mathbb{E}\left[||\theta_{0} - \theta^{*}||\right] + \left(\alpha L + 1\right)L_{PH}^{(0)}\gamma_{k}\mathbb{E}\left[||\theta_{k} - \theta^{*}||\right] +\\ 
+		& \left(\frac{L_{PH}^{(0)}}{L} + 1\right)\frac{\alpha L^{2}\left(1 - \left(1 - 2\alpha\left(\alpha L^{2} + \mu\right)\right)^{k}\right)}{\left(\alpha L^{2} + \mu\right)} + \left(1 - 2\alpha\left(\alpha L^{2} + \mu\right)\right)^{k}2\alpha^{2}L^{2} +\\
+		& \frac{L_{PH}^{(1)}\left(1 + \alpha L\right)\left(1 - 2\alpha\left(\alpha L^{2} + \mu\right)\right)\left[1 - \left(1 - 2\alpha\left(\alpha L^{2} + \mu\right)\right)^{k}\right]}{4\alpha\left(\alpha L^{2} + \mu\right)}\\
+	\end{split}
+\end{equation}
+where the last equality follows from the definition of $\gamma_{t}$'s.
 
 \subsection{General Case}
+In this case, we assume that the moment bound in [??] has been proven for $k \le n - 1$, we now proceed to show that the desired moment convergence holds for $n$ with $2 \le n \le p$.
+
+We start with the following decomposition of $||\theta_{k + 1} - \theta^{*}||^{2n}$
+\begin{equation*}
+	\begin{split}
+		||\theta_{k + 1} - \theta^{*}||^{2n} & = \left(||\theta_{k} - \theta^{*}||^{2} + 2\alpha \left\langle \theta_{k} - \theta^{*}, g\left(\theta_{k}, X_{k + 1}\right) + \xi_{k + 1}\left(\theta_{k}\right)\right\rangle + \alpha^{2}||g\left(\theta_{x}, X_{k + 1}\right) + \xi_{k + 1}\left(\theta_{k}\right)||^{2} \right)^{n}\\
+		& = \sum_{\substack{i, j, l \\ i + j + l = n}} \binom{n}{i, j, l}||\theta_{k} - \theta^{*}||^{2i}\left(2\alpha \left\langle \theta_{k} - \theta^{*}, g\left(\theta_{k}, X_{k + 1}\right) + \xi_{k + 1}\left(\theta_{k}\right)\right\rangle \right)^{j}\left(\alpha ||g\left(\theta_{k}, X_{k + 1}\right) + \xi_{k + 1}\left(\theta_{k}\right)||\right)^{2l}
+	\end{split}
+\end{equation*}
+We note the following cases.
+\begin{enumerate}
+	\item $i = n$, $j = l = 0$. In this case, the summand is simply $||\theta_{k} - \theta^{*}||^{2i}$.
+	\item When $i = n - 1, j = 1$ and $l = 0$. In this case, the summand is of order $\alpha$, i.e., $\alpha 2n\left \langle \theta_{k} - \theta^{*}, g\left(\theta_{k}, X_{k + 1}\right) + \xi_{k + 1}\left(\theta_{k}\right) \right\rangle^{j} ||\theta_{k} - \theta^{*}||^{2(n - 1)}$. We can further decompose it as
+	\begin{equation*}
+		\begin{split}
+			& 2n\alpha \left\langle \theta_{k} - \theta^{*}, g\left(\theta_{k}, X_{k + 1}\right) + \xi_{k + 1}\left(\theta_{k}\right) \right\rangle||\theta_{k} - \theta^{*}||^{2(n - 1)} \\
+			& = \underbrace{2n\alpha\left\langle \theta_{k} - \theta^{*}, g\left(\theta_{k}, X_{k+ 1}\right) - \bar{g}\left(\theta_{k}\right) + \xi_{k + 1}\left(\theta_{k}\right) \right\rangle ||\theta_{k} - \theta^{*}||^{2(n - 1)}}_{T_{1}} + \underbrace{2n\alpha \left\langle \theta_{k} - \theta^{*}, \bar{g}\left(\theta_{k}\right) \right\rangle ||\theta_{k} - \theta^{*}||^{2(n - 1)}}_{T_{2}}.
+		\end{split}
+	\end{equation*}
+	Note that, when $\left(X_{k}\right)$ is i.i.d or from a martingale noise, we have
+	$$\mathbb{E}\left[T_{1} | \theta_{k}\right] = 0$$
+	However, when $\left(X_{k}\right)$ is Markovian, the above inequality does not hold and $T_{1}$ requires careful analysis.\\
+	Nonetheless, under the strong monotonicity assumption, we have
+	$$T_{2} \le -2n\alpha\mu||\theta_{k} - \theta^{*}||^{2n}.$$
+	\item For the remaining terms, we see that they are of higher orders of $\alpha$. Therefore, when $\alpha$ is selected sufficiently small, these terms do not raise concern. 
+\end{enumerate}
+
+Therefore, to prove the desired moment bound, we spend the remaining section analyzing $T_{1}$. Immediately, we note that
+\begin{equation*}
+	\begin{split}
+		\mathbb{E}\left[T_{1}\right] &= \mathbb{E}\left[2n\alpha \left\langle \theta_{k} - \theta^{*}, g\left(\theta_{k}, X_{k + 1}\right) - \bar{g}\left(\theta_{k}\right) + \mathbb{E}\left[\xi_{k + 1}\left(\theta_{k}\right) | \theta_{k}\right] \right\rangle||\theta_{k} - \theta^{*}||^{2(n - 1)}\right]\\
+		& = \mathbb{E}\left[\underbrace{2n\alpha \left\langle \theta_{k} - \theta^{*}, g\left(\theta_{x}, X_{k + 1}\right) - \bar{g}\left(\theta_{k}\right)||\theta_{k} - \theta^{*}||^{2(n - 1)}\right\rangle}_{T_{1}^{\prime}}\right].
+	\end{split}
+\end{equation*}
+Subsequently, we focus on analyzing $T_{1}^{\prime}$.
 
 \bibliographystyle{ieee}
 \bibliography{ref.bib}
