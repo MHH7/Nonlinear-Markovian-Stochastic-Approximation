@@ -33,6 +33,8 @@
 \newcommand{\Exs}{\mathbb{E}}
 \newcommand{\thetastar}{\theta^*}
 \newcommand{\constLPH}[1]{L_{PH}^{(#1)}}
+\newcommand{\constT}[1]{T_{#1}}
+\newcommand{\constTprime}[1]{T_{#1}^{\prime}}
 \newcommand{\mwlcomment}[1]{{\color{orange} #1}}
 \newcommand{\stepsize}{\alpha}
 
@@ -192,7 +194,7 @@ with
 	A_{2} \coloneq & \sum_{t = 1}^{k}\gamma_{t}\left\langle \theta_{t} - \thetastar, P_{\theta_{t}}\hat{g}\left(\theta_{t}, X_{t}\right) - P_{\theta_{t - 1}}\hat{g}\left( \theta_{t - 1}, X_{t} \right) \right\rangle,\\
 	A_{3} \coloneq & \sum_{t = 1}^{k}\gamma_{t}\left\langle \theta_{t} - \theta_{t - 1}, P_{\theta_{t - 1}}\hat{g}\left( \theta_{t - 1}, X_{t}\right) \right\rangle,\\
 	A_{4} \coloneq & \sum_{t = 1}^{k}\left(\gamma_{t} - \gamma_{t - 1}\right)\left\langle \theta_{t - 1} - \thetastar, P_{\theta_{t - 1}}\hat{g}\left( \theta_{t - 1} - \thetastar, X_{t}\right) \right\rangle,\\
-	A_{5} \coloneq & \gamma_{0}\left\langle \theta_{0} - \thetastar, \hat{g}\left(\theta_{0}, X_{0}\right) \right\rangle + \gamma_{k}\left\langle \theta_{t} - \thetastar, P_{\theta_{t}}\hat{g}\left(\theta_{t}, X_{t + 1}\right)\right\rangle
+	A_{5} \coloneq & \gamma_{0}\left\langle \theta_{0} - \thetastar, \hat{g}\left(\theta_{0}, X_{0}\right) \right\rangle + \gamma_{k}\left\langle \theta_{k} - \thetastar, P_{\theta_{k}}\hat{g}\left(\theta_{k}, X_{k + 1}\right)\right\rangle
 \end{align*}
 
 For $A_{1}$, we note that $\hat{g}\left(\theta_{t}, X_{t + 1}\right) - P_{\theta_{t}}\hat{g}\left(\theta_{t}, X_{t}\right)$ is a martingale difference sequence [cf. ?] and therefore we have $\Exs[A_{1}] = 0$ by taking the total expectation.
@@ -354,25 +356,45 @@ We start with the following decomposition of $\norm{\theta_{k + 1} - \thetastar}
 We note the following cases.
 \begin{enumerate}
 	\item $i = n$, $j = l = 0$. In this case, the summand is simply $\norm{\theta_{k} - \thetastar}^{2i}$.
-	\item When $i = n - 1, j = 1$ and $l = 0$. In this case, the summand is of order $\stepsize$, i.e., $\stepsize 2n\left \langle \theta_{k} - \thetastar, g\left(\theta_{k}, X_{k + 1}\right) + \xi_{k + 1}\left(\theta_{k}\right) \right\rangle^{j} \norm{\theta_{k} - \thetastar}^{2(n - 1)}$. We can further decompose it as
+	\item When $i = n - 1, j = 1$ and $l = 0$. In this case, the summand is of order $\stepsize$, i.e., $$\stepsize 2n\left \langle \theta_{k} - \thetastar, g\left(\theta_{k}, X_{k + 1}\right) + \xi_{k + 1}\left(\theta_{k}\right) \right\rangle^{j} \norm{\theta_{k} - \thetastar}^{2(n - 1)}.$$ We can further decompose it as
 	\begin{align*}
 		& 2n\stepsize \left\langle \theta_{k} - \thetastar, g\left(\theta_{k}, X_{k + 1}\right) + \xi_{k + 1}\left(\theta_{k}\right) \right\rangle\norm{\theta_{k} - \thetastar}^{2(n - 1)} \\
-		& = \underbrace{2n\stepsize\left\langle \theta_{k} - \thetastar, g\left(\theta_{k}, X_{k+ 1}\right) - \bar{g}\left(\theta_{k}\right) + \xi_{k + 1}\left(\theta_{k}\right) \right\rangle \norm{\theta_{k} - \thetastar}^{2(n - 1)}}_{T_{1}} + \underbrace{2n\stepsize \left\langle \theta_{k} - \thetastar, \bar{g}\left(\theta_{k}\right) \right\rangle \norm{\theta_{k} - \thetastar}^{2(n - 1)}}_{T_{2}}.
+		& = \underbrace{2n\stepsize\left\langle \theta_{k} - \thetastar, g\left(\theta_{k}, X_{k+ 1}\right) - \bar{g}\left(\theta_{k}\right) + \xi_{k + 1}\left(\theta_{k}\right) \right\rangle \norm{\theta_{k} - \thetastar}^{2(n - 1)}}_{\constT{1}} + \underbrace{2n\stepsize \left\langle \theta_{k} - \thetastar, \bar{g}\left(\theta_{k}\right) \right\rangle \norm{\theta_{k} - \thetastar}^{2(n - 1)}}_{\constT{2}}.
 	\end{align*}
 	Note that, when $\left(X_{k}\right)$ is i.i.d or from a martingale noise, we have
-	$$\Exs\left[T_{1} | \theta_{k}\right] = 0$$
-	However, when $\left(X_{k}\right)$ is Markovian, the above inequality does not hold and $T_{1}$ requires careful analysis.\\
+	$$\Exs\left[\constT{1} | \theta_{k}\right] = 0$$
+	However, when $\left(X_{k}\right)$ is Markovian, the above inequality does not hold and $\constT{1}$ requires careful analysis.\\
 	Nonetheless, under the strong monotonicity assumption, we have
-	$$T_{2} \le -2n\stepsize\mu\norm{\theta_{k} - \thetastar}^{2n}.$$
+	$$\constT{2} \le -2n\stepsize\mu\norm{\theta_{k} - \thetastar}^{2n}.$$
 	\item For the remaining terms, we see that they are of higher orders of $\stepsize$. Therefore, when $\stepsize$ is selected sufficiently small, these terms do not raise concern. 
 \end{enumerate}
 
-Therefore, to prove the desired moment bound, we spend the remaining section analyzing $T_{1}$. Immediately, we note that
+Therefore, to prove the desired moment bound, we spend the remaining section analyzing $\constT{1}$. Immediately, we note that
 \begin{align*}
-	\Exs\left[T_{1}\right] &= \Exs\left[2n\stepsize \left\langle \theta_{k} - \thetastar, g\left(\theta_{k}, X_{k + 1}\right) - \bar{g}\left(\theta_{k}\right) + \Exs\left[\xi_{k + 1}\left(\theta_{k}\right) | \theta_{k}\right] \right\rangle\norm{\theta_{k} - \thetastar}^{2(n - 1)}\right]\\
-	& = \Exs\left[\underbrace{2n\stepsize \left\langle \theta_{k} - \thetastar, g\left(\theta_{x}, X_{k + 1}\right) - \bar{g}\left(\theta_{k}\right)\norm{\theta_{k} - \thetastar}^{2(n - 1)}\right\rangle}_{T_{1}^{\prime}}\right].
+	\Exs\left[\constT{1}\right] &= \Exs\left[2n\stepsize \left\langle \theta_{k} - \thetastar, g\left(\theta_{k}, X_{k + 1}\right) - \bar{g}\left(\theta_{k}\right) + \Exs\left[\xi_{k + 1}\left(\theta_{k}\right) | \theta_{k}\right] \right\rangle\norm{\theta_{k} - \thetastar}^{2(n - 1)}\right]\\
+	& = 2n\stepsize\Exs\left[\underbrace{\left\langle \theta_{k} - \thetastar, g\left(\theta_{k}, X_{k + 1}\right) - \bar{g}\left(\theta_{k}\right)\right\rangle \norm{\theta_{k} - \thetastar}^{2(n - 1)}}_{\constTprime{1}}\right].
 \end{align*}
-Subsequently, we focus on analyzing $T_{1}^{\prime}$.
+Subsequently, we focus on analyzing $\constTprime{1}$; but before that, we write the general recursion of the error bound. First, we define $\constTprime{1, t} \coloneq \left\langle \theta_{t} - \thetastar, g\left(\theta_{t}, X_{t + 1}\right) - \bar{g}\left(\theta_{t}\right)\norm{\theta_{t} - \thetastar}^{2(n - 1)}\right\rangle$ to make $\constTprime{1}$ dependent on the iteration index. Now, following the above decomposition and taking the expectations, we have:
+\begin{align*}
+	\Exs\norm{\theta_{k + 1} - \thetastar}^{2n} \le \Exs\norm{\theta_{k} - \thetastar}^{2n} + \Exs\left[\constTprime{1, k}\right] - 2n\stepsize\mu\Exs\norm{\theta_{k} - \thetastar}^{2n} + o\left(\stepsize\right) = \left(1 - 2n\stepsize\mu\right)\Exs\norm{\theta_{k} - \thetastar}^{2n} + \Exs\left[\constTprime{1, k}\right] + o\left(\stepsize\right)
+\end{align*}
+similarly to the previous case we define $\gamma_{t} \coloneq 2n\stepsize\left(1 - 2n\stepsize\mu\right)^{k - t}$ for $0 \le t \le k$. Solving the above recursion will give us
+\begin{align*}
+	\Exs\norm{\theta_{k + 1} - \thetastar}^{2n} \le \sum_{t = 0}^{k}\gamma_{t}\Exs\left[\constTprime{1, t}\right] + \gamma_{0}\Exs\norm{\theta_{0} - \thetastar}^{2n} + o\left(\stepsize\right)
+\end{align*}
+
+We have to upper bound the first term in the RHS above. For this purpose, we use a similar decomposition to our base case analysis:
+\begin{align*}
+	\sum_{t = 0}^{k}\gamma_{t}\Exs\left[\constTprime{1, t}\right] = \sum_{t = 0}^{k}\gamma_{t}\left\langle \theta_{t} - \thetastar, g\left(\theta_{t}, X_{t + 1}\right) - \bar{g}\left(\theta_{t}\right)\right\rangle\norm{\theta_{t} - \thetastar}^{2(n - 1)} = \Exs\left[ A_{1} + A_{2} + A_{3} + A_{4} + A_{5}\right]
+\end{align*} 
+with
+\begin{align*}
+	A_{1} \coloneq & \sum_{t = 1}^{k}\gamma_{t}\left\langle \theta_{t} - \thetastar, \hat{g}\left(\theta_{t}, X_{t + 1}\right) - P_{\theta_{t}}\hat{g}\left(\theta_{t}, X_{t}\right) \right\rangle\norm{\theta_{t} - \thetastar}^{2(n - 1)},\\
+	A_{2} \coloneq & \sum_{t = 1}^{k}\gamma_{t}\left\langle \theta_{t} - \thetastar, P_{\theta_{t}}\hat{g}\left(\theta_{t}, X_{t}\right) - P_{\theta_{t - 1}}\hat{g}\left( \theta_{t - 1}, X_{t} \right) \right\rangle\norm{\theta_{t} - \thetastar}^{2(n - 1)},\\
+	A_{3} \coloneq & \sum_{t = 1}^{k}\gamma_{t}\left\langle \theta_{t} - \theta_{t - 1}, P_{\theta_{t - 1}}\hat{g}\left( \theta_{t - 1}, X_{t}\right) \right\rangle,\norm{\theta_{t} - \thetastar}^{2(n - 1)}\\
+	A_{4} \coloneq & \sum_{t = 1}^{k}\left(\gamma_{t} - \gamma_{t - 1}\right)\left\langle \theta_{t - 1} - \thetastar, P_{\theta_{t - 1}}\hat{g}\left( \theta_{t - 1} - \thetastar, X_{t}\right) \right\rangle\norm{\theta_{t} - \thetastar}^{2(n - 1)},\\
+	A_{5} \coloneq & \gamma_{0}\left\langle \theta_{0} - \thetastar, \hat{g}\left(\theta_{0}, X_{0}\right) \right\rangle\norm{\theta_{0} - \thetastar}^{2(n - 1)} + \gamma_{k}\left\langle \theta_{k} - \thetastar, P_{\theta_{k}}\hat{g}\left(\theta_{k}, X_{k + 1}\right)\right\rangle\norm{\theta_{k} - \thetastar}^{2(n - 1)}
+\end{align*}
 
 \bibliographystyle{ieee}
 \bibliography{ref.bib}
