@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.15)  14 NOV 2024 19:57
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.15)  27 NOV 2024 23:02
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1192,146 +1192,138 @@ LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 160
 .
 
 
-LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 164
+LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 170
 .
 
 
-LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 164
+LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 170
 .
 
 
-LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 171
+LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 175
 .
 
 
-LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 171
+LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 175
 .
 
 
-LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 176
+LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 175
 .
 
 
-LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 176
-.
-
-
-LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 176
-.
-
-
-LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 176
+LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 175
 .
 
 [3]
 
 LaTeX Warning: Reference `MCLipschitzness' on page 4 undefined on input line 20
-3.
+2.
 
 
-LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 209
+LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 208
 .
 
 
-LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 209
+LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 208
 .
 
 [4]
 
-LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 224
+LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 223
 .
 
 
-LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 224
+LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 223
 .
 
 
 LaTeX Warning: Reference `MCLipschitzness' on page 5 undefined on input line 22
-5.
+4.
 
 
 LaTeX Warning: Reference `MCLipschitzness' on page 5 undefined on input line 23
-7.
+6.
 
 
-LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 243
+LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 242
 .
 
 
-LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 243
+LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 242
 .
 
 
-Overfull \hbox (7.23338pt too wide) detected at line 243
+Overfull \hbox (7.23338pt too wide) detected at line 242
 []
  []
 
 [5]
-Overfull \hbox (0.54488pt too wide) detected at line 266
+Overfull \hbox (7.16487pt too wide) detected at line 265
 []
  []
 
 
-Overfull \hbox (17.75201pt too wide) detected at line 271
+Overfull \hbox (24.37201pt too wide) detected at line 270
 []
  []
 
 [6]
 
-LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 302
+LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 301
 .
 
 
-LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 302
+LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 301
 .
 
 
-Overfull \hbox (44.36908pt too wide) detected at line 302
+Overfull \hbox (57.60907pt too wide) detected at line 301
 []
  []
 
 
-LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 314
+LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 313
 .
 
 
-LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 314
+LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 313
 .
 
 
-Overfull \hbox (12.83194pt too wide) detected at line 314
+Overfull \hbox (26.07193pt too wide) detected at line 313
 []
  []
 
 [7]
 
-LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 321
+LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 320
 .
 
 
-LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 321
+LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 320
 .
 
 
-LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 321
+LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 320
 .
 
 
-LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 321
+LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 320
 .
 
 
-Overfull \hbox (49.99298pt too wide) detected at line 343
+Overfull \hbox (49.99298pt too wide) detected at line 342
 []
  []
 
 [8]
-Overfull \hbox (0.1298pt too wide) detected at line 356
+Overfull \hbox (0.1298pt too wide) detected at line 355
 []
  []
 
 
-Overfull \hbox (0.61543pt too wide) detected at line 381
+Overfull \hbox (0.61543pt too wide) detected at line 380
 []
  []
 
@@ -1370,7 +1362,7 @@ texmf-dist/fonts/type1/public/cm-super/sfrb1000.pfb><c:/texlive/2023/texmf-dist
 e1/public/cm-super/sfrm1000.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/
 cm-super/sfrm1200.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/cm-super/s
 fti1000.pfb>
-Output written on main.pdf (10 pages, 227683 bytes).
+Output written on main.pdf (10 pages, 227226 bytes).
 PDF statistics:
  159 PDF objects out of 1000 (max. 8388607)
  117 compressed objects within 2 object streams
