@@ -1,5 +1,11 @@
 \begin{thebibliography}{1}\itemsep=-1pt
 
+\bibitem{kaledin2020finite}
+M.~Kaledin, E.~Moulines, A.~Naumov, V.~Tadic, and H.-T. Wai.
+\newblock Finite time analysis of linear two-timescale stochastic approximation
+  with markovian noise.
+\newblock In {\em Conference on Learning Theory}, pages 2144--2203. PMLR, 2020.
+
 \bibitem{karimi2019non}
 B.~Karimi, B.~Miasojedow, E.~Moulines, and H.-T. Wai.
 \newblock Non-asymptotic analysis of biased stochastic approximation scheme.
