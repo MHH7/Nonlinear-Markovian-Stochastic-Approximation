@@ -546,7 +546,7 @@
 	
 	To solve the above recursion, we define $\tilde{S}_{t} \coloneq \frac{\constLPH{0}}{2}\gamma_{t}\Exs\left[\norm{\theta_{t} - \thetastar}^{2n}\right] + \sum_{l = 0}^{t - 1}2^{4n - 4}\stepsize L \gamma_{l + 1}\left[4\constLPH{1} + n\constLPH{0}\right]\Exs\left[\norm{\theta_{l} - \thetastar}^{2n}\right]$ for $1 \leq t \leq k$. Using this we can write
 	\begin{align*}
-		\Exs\left[\norm{\theta_{t + 1} - \thetastar}^{2n}\right] & \leq S_{t} + \tilde{c}_{2, t}\Exs\left[\norm{\theta_{0} - \thetastar}^{2n}\right] + \tilde{c}_{1, t} + \tilde{c}_{3, t} + o\left(\stepsize\right).
+		\Exs\left[\norm{\theta_{t + 1} - \thetastar}^{2n}\right] & \leq \tilde{S}_{t} + \tilde{c}_{2, t}\Exs\left[\norm{\theta_{0} - \thetastar}^{2n}\right] + \tilde{c}_{1, t} + \tilde{c}_{3, t} + o\left(\stepsize\right).
 	\end{align*}
 	Now notice that we have(recall that $\gamma_{t} = 2n\stepsize\left(1 - 2n\stepsize\mu\right)^{k - t}$.)
 	\begin{align*}
