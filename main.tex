@@ -385,11 +385,11 @@
 	
 	\textbf{Lemma3.} \textit{Using Assumptions 1, 3, 5, and $m, n \ge 1$, we have
 		\begin{align*}
-			\Exs\left[\norm{\theta_{t} - \theta_{t - 1}}^{m}\norm{\theta_{t - 1} - \thetastar}^{n}\right] \leq 2^{2m + n - 2}\stepsize^{m}L^{m}\left(\Exs\left[\norm{\theta_{t - 1} - \thetastar}\right] + 1\right).
+			\Exs\left[\norm{\theta_{t} - \theta_{t - 1}}^{m}\norm{\theta_{t - 1} - \thetastar}^{n}\right] \leq 2^{2m + n - 2}\stepsize^{m}L^{m}\left(\Exs\left[\norm{\theta_{t - 1} - \thetastar}^{m + n}\right] + 1\right).
 		\end{align*}
 		Also when $m = 0$, this upper bound can be written as
 		\begin{align}
-			\Exs\left[\norm{\theta_{t - 1} - \thetastar}^{n}\right] \leq 2^{n - 1}\left(\Exs\left[\norm{\theta_{t - 1} - \thetastar}\right] + 1\right).
+			\Exs\left[\norm{\theta_{t - 1} - \thetastar}^{n}\right] \leq 2^{n - 1}\left(\Exs\left[\norm{\theta_{t - 1} - \thetastar}^{n}\right] + 1\right).
 		\end{align}
 	}
 	
@@ -400,7 +400,7 @@
 		& = 2^{m - 1}\stepsize^{m}\Exs\left[\Exs\left[\left(\norm{g\left(\theta_{t - 1}, X_{t}\right)}^{m} + \norm{\xi_{t}\left(\theta_{t - 1}\right)}^{m}\right) | \mathcal{F}_{t - 1}\right]\norm{\theta_{t - 1} - \thetastar}^{n}\right]\\
 		& \leq 2^{m - 1}\stepsize^{m}\Exs\left[\left(L_{1}^{m}\Exs\left[\left(\norm{\theta_{t - 1} - \thetastar} + 1\right)^{m}\right] + L_{2}^{m}\Exs\left[\left(\norm{\theta_{t - 1} - \thetastar} + 1\right)^{m}\right]\right)\norm{\theta_{t - 1} - \thetastar}^{n}\right]\\
 		& \leq 2^{m - 1}\stepsize^{m}L^{m}\Exs\left[\left(\norm{\theta_{t - 1} - \thetastar} + 1\right)^{m + n}\right]\\
-		& \leq 2^{2m + n - 2}\stepsize^{m}L^{m}\left(\Exs\left[\norm{\theta_{t - 1} - \thetastar}\right] + 1\right)
+		& \leq 2^{2m + n - 2}\stepsize^{m}L^{m}\left(\Exs\left[\norm{\theta_{t - 1} - \thetastar}^{m + n}\right] + 1\right)
 	\end{align*}
 	where the second and the last line follows from the mclaurin's inequality. Also the fourth line follows from ??. Proof for the other case is a trivial consequence of these calculations.
 	
@@ -461,8 +461,8 @@
 		A_{2} & \leq \sum_{t = 1}^{k}\constLPH{1}\gamma_{t} \Exs\left[\norm{\theta_{t} - \theta_{t - 1}} \; \norm{\theta_{t} - \thetastar}^{2n - 1}\right]\\
 		& \leq \sum_{t = 1}^{k}\constLPH{1}\gamma_{t}\Exs\left[\norm{\theta_{t} - \theta_{t - 1}}\left(\norm{\theta_{t} - \theta_{t - 1}} + \norm{\theta_{t - 1} - \thetastar}\right)^{2n - 1}\right]\\
 		& \leq \sum_{t = 1}^{k}2^{2n - 2}\constLPH{1}\gamma_{t}\Exs\left[\norm{\theta_{t} - \theta_{t - 1}}^{2n} + \norm{\theta_{t} - \theta_{t - 1}} \; \norm{\theta_{t - 1} - \thetastar}^{2n - 1}\right]\\
-		& \leq \sum_{t = 1}^{k}2^{2n - 2}\constLPH{1}\gamma_{t}\left(2^{4n}\stepsize^{2n}L^{2n}\left(\Exs\left[\norm{\theta_{t - 1} - \thetastar}\right] + 1\right) + 2^{2n - 1}\stepsize L \left(\Exs\left[\norm{\theta_{t - 1} - \thetastar}\right] + 1\right)\right)\\
-		& \leq \sum_{t = 1}^{k}2^{4n - 2}\stepsize L \constLPH{1}\gamma_{t}\left(\Exs\left[\norm{\theta_{t - 1} - \thetastar}\right] + 1\right)
+		& \leq \sum_{t = 1}^{k}2^{2n - 2}\constLPH{1}\gamma_{t}\left(2^{4n}\stepsize^{2n}L^{2n}\left(\Exs\left[\norm{\theta_{t - 1} - \thetastar}^{2n}\right] + 1\right) + 2^{2n - 1}\stepsize L \left(\Exs\left[\norm{\theta_{t - 1} - \thetastar}^{2n}\right] + 1\right)\right)\\
+		& \leq \sum_{t = 1}^{k}2^{4n - 2}\stepsize L \constLPH{1}\gamma_{t}\left(\Exs\left[\norm{\theta_{t - 1} - \thetastar}^{2n}\right] + 1\right)
 	\end{align*}
 	where the second line follows from triangle inequality, third line from mclaurin's inequality, fourth line from Lemma 3, and the last line for $\stepsize < \frac{1}{4L}$.
 	
@@ -471,8 +471,8 @@
 		A_{3} & \leq \sum_{t = 1}^{k}\gamma_{t}\Exs\left[\norm{\theta_{t} - \theta_{t - 1}} \; \norm{P_{\theta_{t - 1}}\hat{g}\left(\theta_{t - 1}, X_{t}\right)} \; \norm{\theta_{t} - \thetastar}^{2(n - 1)}\right]\\
 		& \leq \sum_{t = 1}^{k}\constLPH{0}\gamma_{t}\Exs\left[\norm{\theta_{t} - \theta_{t - 1}}\left(\norm{\theta_{t} - \theta_{t - 1}} + \norm{\theta_{t - 1} - \thetastar}\right)^{2(n - 1)}\right]\\
 		& \leq \sum_{t = 1}^{k}2^{2n - 3}\constLPH{0}\gamma_{t}\Exs\left[\norm{\theta_{t} - \theta_{t - 1}}^{2n - 1} + \norm{\theta_{t} - \theta_{t - 1}} \; \norm{\theta_{t - 1} - \thetastar}^{2(n - 1)}\right]\\
-		& \leq \sum_{t = 1}^{k}2^{2n - 3}\constLPH{0}\gamma_{t}\left(2^{4n - 1}\stepsize^{2n - 1}L^{2n - 1}\left(\Exs\left[\norm{\theta_{t - 1} - \thetastar}\right] + 1\right) + 2^{2n - 2}\stepsize L\left(\Exs\left[\norm{\theta_{t - 1} - \thetastar}\right] + 1\right)\right)\\
-		& \leq \sum_{t = 1}^{k}2^{4n - 4}\stepsize L\constLPH{0}\gamma_{t}\left(\Exs\left[\norm{\theta_{t - 1} - \thetastar}\right] + 1\right)
+		& \leq \sum_{t = 1}^{k}2^{2n - 3}\constLPH{0}\gamma_{t}\left(2^{4n - 1}\stepsize^{2n - 1}L^{2n - 1}\left(\Exs\left[\norm{\theta_{t - 1} - \thetastar}^{2n - 1}\right] + 1\right) + 2^{2n - 2}\stepsize L\left(\Exs\left[\norm{\theta_{t - 1} - \thetastar}^{2n - 1}\right] + 1\right)\right)\\
+		& \leq \sum_{t = 1}^{k}2^{4n - 4}\stepsize L\constLPH{0}\gamma_{t}\left(\Exs\left[\norm{\theta_{t - 1} - \thetastar}^{2n - 1}\right] + 1\right)
 	\end{align*}
 	where second line follows from triangle inequality, third line from mclaurin's inequality, fourth line from Lemma 3, and the last line for $\stepsize < \frac{1}{4L}$.
 	
@@ -482,8 +482,8 @@
 		& \leq \sum_{t = 1}^{k}\constLPH{0}| \gamma_{t} - \gamma_{t - 1}| \; \Exs\left[\norm{\theta_{t - 1} - \thetastar} \; \norm{\theta_{t} - \thetastar}^{2(n - 1)}\right]\\
 		& \leq \sum_{t = 1}^{k}\constLPH{0}|\gamma_{t} - \gamma_{t - 1}| \Exs\left[\norm{\theta_{t - 1} - \thetastar}\left(\norm{\theta_{t} - \theta_{t - 1}} + \norm{\theta_{t - 1} - \thetastar}\right)^{2(n - 1)}\right]\\
 		& \leq \sum_{t = 1}^{k}2^{2n - 3}\constLPH{0}|\gamma_{t} - \gamma_{t - 1}| \Exs\left[\norm{\theta_{t} - \theta_{t - 1}}^{2(n - 1)} \; \norm{\theta_{t - 1} - \thetastar}\ + \norm{\theta_{t - 1} - \thetastar}^{2n - 1}\right]\\
-		& \leq \sum_{t = 1}^{k}2^{2n - 3}\constLPH{0}|\gamma_{t} - \gamma_{t - 1}| \left(2^{4n - 5}\stepsize^{2n - 2}L^{2n - 2}\left(\Exs\left[\norm{\theta_{t - 1} - \thetastar}\right] + 1\right) + 2^{2n - 2}\left(\Exs\left[\norm{\theta_{t - 1} - \thetastar}\right] + 1\right)\right)\\
-		& \leq \sum_{t = 1}^{k}2^{4n - 4}\constLPH{0}|\gamma_{t} - \gamma_{t - 1}|\left(\Exs\left[\norm{\theta_{t - 1} - \thetastar}\right] + 1\right)
+		& \leq \sum_{t = 1}^{k}2^{2n - 3}\constLPH{0}|\gamma_{t} - \gamma_{t - 1}| \left(2^{4n - 5}\stepsize^{2n - 2}L^{2n - 2}\left(\Exs\left[\norm{\theta_{t - 1} - \thetastar}^{2n - 1}\right] + 1\right) + 2^{2n - 2}\left(\Exs\left[\norm{\theta_{t - 1} - \thetastar}^{2n - 1}\right] + 1\right)\right)\\
+		& \leq \sum_{t = 1}^{k}2^{4n - 4}\constLPH{0}|\gamma_{t} - \gamma_{t - 1}|\left(\Exs\left[\norm{\theta_{t - 1} - \thetastar}^{2n - 1}\right] + 1\right)
 	\end{align*}
 	where the third line follows from triangle inequality, fourth line from mclaurin's inequality, fifth line from Lemma 3, and the last line for $\stepsize < \frac{1}{4L}$. 
 	
@@ -499,8 +499,8 @@
 		& \leq \sum_{t = 1}^{k}2^{2n - 3}(n - 1)\gamma_{t - 1}\Exs\left[\norm{\theta_{t - 1} - \thetastar} \; \norm{P_{\theta_{t - 1}}\hat{g}\left(\theta_{t - 1}, X_{t}\right)} \; \norm{\theta_{t} - \theta_{t - 1}}\left(\norm{\theta_{t} - \theta_{t - 1}}^{2n - 3} + \norm{\theta_{t - 1} - \thetastar}^{2n - 3}\right)\right]\\
 		& \leq \sum_{t = 1}^{k}2^{2n - 3}(n - 1)\constLPH{0}\gamma_{t - 1}\Exs\left[\norm{\theta_{t - 1} - \thetastar} \; \norm{\theta_{t} - \theta_{t - 1}}\left(\norm{\theta_{t} - \theta_{t - 1}}^{2n - 3} + \norm{\theta_{t - 1} - \thetastar}^{2n - 3}\right)\right]\\
 		& \leq \sum_{t = 1}^{k}2^{2n - 3}(n - 1)\constLPH{0}\gamma_{t - 1}\Exs\left[\norm{\theta_{t} - \theta_{t - 1}}^{2n - 2} \; \norm{\theta_{t - 1} - \thetastar} + \norm{\theta_{t} - \theta_{t - 1}} \; \norm{\theta_{t - 1} - \thetastar}^{2n - 2}\right]\\
-		& \leq \sum_{t = 1}^{k} 2^{2n - 3}(n - 1)\constLPH{0}\gamma_{t - 1}\left(2^{4n - 5}\stepsize^{2n - 2}L^{2n - 2}\left(\Exs\left[\norm{\theta_{t - 1} - \thetastar}\right] + 1\right) + 2^{2n - 2}\stepsize L\left(\Exs\left[\norm{\theta_{t - 1} - \thetastar}\right] + 1\right)\right)\\
-		& \leq \sum_{t = 1}^{k}2^{4n - 4}(n - 1)\stepsize L \constLPH{0}\gamma_{t - 1}\left(\Exs\left[\norm{\theta_{t - 1} - \thetastar}\right] + 1\right)
+		& \leq \sum_{t = 1}^{k} 2^{2n - 3}(n - 1)\constLPH{0}\gamma_{t - 1}\left(2^{4n - 5}\stepsize^{2n - 2}L^{2n - 2}\left(\Exs\left[\norm{\theta_{t - 1} - \thetastar}^{2n - 1}\right] + 1\right) + 2^{2n - 2}\stepsize L\left(\Exs\left[\norm{\theta_{t - 1} - \thetastar}^{2n - 1}\right] + 1\right)\right)\\
+		& \leq \sum_{t = 1}^{k}2^{4n - 4}(n - 1)\stepsize L \constLPH{0}\gamma_{t - 1}\left(\Exs\left[\norm{\theta_{t - 1} - \thetastar}^{2n - 1}\right] + 1\right)
 	\end{align*}
 	where the fifth line follows from Lemma 3 and the last line follows for $\stepsize < \frac{1}{4L}$.
 	
@@ -513,39 +513,52 @@
 	Combining the above terms gives us:
 	\begin{align*}
 		\sum_{t = 0}^{k}\gamma_{t}\Exs\left[\constTprime{1, t}\right] &= \Exs\left[\sum_{t = 0}^{k}\gamma_{t}\left\langle\theta_{t} - \thetastar, g\left(\theta_{t}, X_{t + 1}\right) - \bar{g}\left(\theta_{t}\right)\right\rangle \norm{\theta_{t} - \thetastar}^{2(n - 1)}\right]\\
-		& \leq \sum_{t = 0}^{k - 1}2^{4n - 2}\stepsize L \constLPH{1}\gamma_{t + 1}\left(\Exs\left[\norm{\theta_{t} - \thetastar}\right] + 1\right) + \sum_{t = 0}^{k - 1}2^{4n - 4}\stepsize L\constLPH{0}\gamma_{t + 1}\left(\Exs\left[\norm{\theta_{t} - \thetastar}\right] + 1\right) \\
-		& + \sum_{t = 0}^{k - 1}2^{4n - 4}\constLPH{0}|\gamma_{t + 1} - \gamma_{t}|\left(\Exs\left[\norm{\theta_{t} - \thetastar}\right] + 1\right) + \sum_{t = 0}^{k - 1}2^{4n - 4}\left(n - 1\right)\stepsize L \constLPH{0}\gamma_{t + 1}\left(\Exs\left[\norm{\theta_{t} - \thetastar}\right] + 1\right) \\
+		& \leq \sum_{t = 0}^{k - 1}2^{4n - 2}\stepsize L \constLPH{1}\gamma_{t + 1}\left(\Exs\left[\norm{\theta_{t} - \thetastar}^{2n}\right] + 1\right) + \sum_{t = 0}^{k - 1}2^{4n - 4}\stepsize L\constLPH{0}\gamma_{t + 1}\left(\Exs\left[\norm{\theta_{t} - \thetastar}^{2n - 1}\right] + 1\right) \\
+		& + \sum_{t = 0}^{k - 1}2^{4n - 4}\constLPH{0}|\gamma_{t + 1} - \gamma_{t}|\left(\Exs\left[\norm{\theta_{t} - \thetastar}^{2n - 1}\right] + 1\right) + \sum_{t = 0}^{k - 1}2^{4n - 4}\left(n - 1\right)\stepsize L \constLPH{0}\gamma_{t + 1}\left(\Exs\left[\norm{\theta_{t} - \thetastar}^{2n - 1}\right] + 1\right) \\
+		& + \constLPH{0}\left(\gamma_{0}\norm{\theta_{0} - \thetastar}^{2n - 1} + \gamma_{k}\norm{\theta_{k} - \thetastar}^{2n - 1}\right)\\
+		& = \sum_{t = 0}^{k - 1}2^{4n - 2}\stepsize L \constLPH{1}\gamma_{t + 1}\left(\Exs\left[\norm{\theta_{t} - \thetastar}^{2n}\right] + 1\right) + \sum_{t = 0}^{k - 1}2^{4n - 4}\constLPH{0}\left(\left(n\stepsize L + 1\right)\gamma_{t + 1} - \gamma_{t}\right)\left(\Exs\left[\norm{\theta_{t} - \thetastar}^{2n - 1}\right] + 1\right)\\
 		& + \constLPH{0}\left(\gamma_{0}\norm{\theta_{0} - \thetastar}^{2n - 1} + \gamma_{k}\norm{\theta_{k} - \thetastar}^{2n - 1}\right)
 	\end{align*}
+	where in the last equality we used the fact that for $\stepsize \leq \frac{\mu}{L^{2}}$, $\gamma_{t} \leq \gamma_{t + 1}$.
 	
-	Noticing that for $\stepsize \leq \frac{\mu}{L^{2}}$, $\gamma_{t} \leq \gamma_{t + 1}$. Consolidating the terms, for sufficiently small $\stepsize$, we have
+	Now, if we make use of the inequality $2|x|^{3} \leq x^{2} + x^{4}$ and consolidating the terms, for sufficiently small $\stepsize$, we have
 	\begin{align*}
-		\Exs\left[\norm{\theta_{k + 1} - \thetastar}^{2n}\right] & \leq \sum_{t = 0}^{k - 1}2^{4n - 4}\left[4\stepsize L \constLPH{1}\gamma_{t + 1} + \constLPH{0}\left(\left(n\stepsize L + 1\right)\gamma_{t + 1} - \gamma_{t}\right)\right]\left(\Exs\left[\norm{\theta_{t} - \thetastar}\right] + 1\right) + \gamma_{0}\Exs\left[\norm{\theta_{0} - \thetastar}^{2n}\right] + o\left(\stepsize\right)\\
-		& \leq \sum_{t = 0}^{k - 1}2^{4n - 3}\stepsize L \gamma_{t + 1}\left[2\constLPH{1} + n\constLPH{0}\right]\left(\Exs\left[\norm{\theta_{t} - \thetastar}\right] + 1\right) + \constLPH{0}\left(\gamma_{0}\norm{\theta_{0} - \thetastar}^{2n - 1} + \gamma_{k}\norm{\theta_{k} - \thetastar}^{2n - 1}\right) \\
-		& + \gamma_{0}\Exs\left[\norm{\theta_{0} - \thetastar}^{2n}\right] + o(\stepsize)
+		\Exs\left[\norm{\theta_{k + 1} - \thetastar}^{2n}\right] & \leq \sum_{t = 0}^{k - 1}2^{4n - 5}\left[8\stepsize L \constLPH{1}\gamma_{t + 1} + \constLPH{0}\left(\left(n\stepsize L + 1\right)\gamma_{t + 1} - \gamma_{t}\right)\right]\left(\Exs\left[\norm{\theta_{t} - \thetastar}^{2n}\right] + 1\right)\\ 
+		& + \sum_{t = 0}^{k - 1}2^{4n - 5}\constLPH{0}\left(\left(n\stepsize L + 1\right)\gamma_{t + 1} - \gamma_{t}\right)\left(\Exs\left[\norm{\theta_{t} - \thetastar}^{2(n - 1)}\right] + 1\right) + \frac{\constLPH{0}}{2}\left(\gamma_{0}\norm{\theta_{0} - \thetastar}^{2(n - 1)} + \gamma_{k}\norm{\theta_{k} - \thetastar}^{2(n - 1)}\right)\\
+		& + \left(\frac{\constLPH{0}}{2} + 1\right)\gamma_{0}\Exs\left[\norm{\theta_{0} - \thetastar}^{2n}\right] + \frac{\constLPH{0}}{2}\gamma_{k}\norm{\theta_{k} - \thetastar}^{2n} + o\left(\stepsize\right)\\
+		& \leq \sum_{t = 0}^{k - 1}2^{4n - 4}\stepsize L \gamma_{t + 1}\left[4\constLPH{1} + n\constLPH{0}\right]\Exs\left[\norm{\theta_{t} - \thetastar}^{2n}\right] + \sum_{t = 0}^{k - 1}2^{4n - 4}n\stepsize L \constLPH{0}\Exs\left[\norm{\theta_{t} - \thetastar}^{2(n - 1)}\right]\\
+		& + \frac{\constLPH{0}}{2}\left(\gamma_{0}\norm{\theta_{0} - \thetastar}^{2(n - 1)} + \gamma_{k}\norm{\theta_{k} - \thetastar}^{2(n - 1)}\right) + \left(\frac{\constLPH{0}}{2} + 1\right)\gamma_{0}\Exs\left[\norm{\theta_{0} - \thetastar}^{2n}\right] + \frac{\constLPH{0}}{2}\gamma_{k}\Exs\left[\norm{\theta_{k} - \thetastar}^{2n}\right] + \tilde{c}_{1, k} + o\left(\stepsize\right)
 	\end{align*}
-	Now from the induction hypothesis we know that $\Exs\left[\norm{\theta_{t} - \thetastar}^{2}\right] \leq \tilde{c}_{1} \cdot \left(1 - 2\stepsize \mu\right)^{t} + \tilde{c}_{2} \cdot 2\stepsize L\left(\constLPH{0} + \constLPH{1}\right)$. If we plug in this upper bound into the previous inequality(also using $u \leq \frac{u^{2} + 1}{2}$), we will have
+	where the last inequality follows for $\left(n\stepsize L + 1\right)\gamma_{t + 1} - \gamma_{t} \leq 2n\stepsize L \gamma_{t +‌ 1}$ and also with
 	\begin{align*}
-		\Exs\left[\norm{\theta_{k + 1} - \thetastar}^{2n}\right] & \leq \sum_{t = 0}^{k - 1}\tilde{c}_{1} \cdot 2^{4n - 3}\stepsize L \gamma_{t + 1}\left[2\constLPH{1} + n\constLPH{0}\right]\left(1 - 2\stepsize \mu\right)^{t}\Exs\left[\norm{\theta_{0} - \thetastar}^{2}\right] + 2^{2n}n\stepsize\Exs\left[\norm{\theta_{0} - \thetastar}^{2n - 1}\right]\left(1 - 2n\stepsize\mu\right)^{k - 1} \\
-		& + \gamma_{0}\Exs\left[\norm{\theta_{0} - \thetastar}^{2n}\right]
-		+ 2^{4n - 3}\stepsize L \left[2\constLPH{1} + n\constLPH{0}\right]\sum_{t = 0}^{k - 1}\left(3 + \tilde{c}_{2} \cdot \stepsize L \left(\constLPH{0} + \stepsize \constLPH{1}\right)\right)\gamma_{t + 1} + o(\stepsize)
+		\tilde{c}_{1, t} \coloneq \sum_{l = 0}^{t - 1}2^{4n - 4}n\stepsize L \gamma_{t +‌1}\left[4\constLPH{1} + n\constLPH{0}\right] + \sum_{l = 0}^{t - 1}2^{4n - 4}n\stepsize L\constLPH{0}
 	\end{align*}
-	To simplify the above, we first notice that
+	 being defined for $1 \le t \le k - 1$. It can be seen that for sufficiently small $\stepsize$, $\tilde{c}_{1, t}$ would be of order $4^{n}n\stepsize L\left(n\constLPH{0} + 4\stepsize \constLPH{1}\right)$. Now from induction hypothesis we know that
 	\begin{align*}
-		\gamma_{t + 1}\left(1 - 2\stepsize \mu\right)^{t} &= 2n\stepsize\left(1 - 2n\stepsize \mu\right)^{k - t - 1}\left(1 - 2\stepsize \mu\right)^{t}\\
-		& \leq 2^{t + 1}n\stepsize\left(1 - 2n\stepsize \mu\right)^{k - 1}\\
-		& \leq 2^{k}n\stepsize\left(1 - 2n\stepsize \mu\right)^{k - 1}
+		\Exs\left[\norm{\theta_{t} - \thetastar}^{2(n - 1)}\right] \leq \tilde{C}_{n - 1, 1} \cdot \left(1 - 2n\stepsize \mu\right)^{t}\Exs\left[\norm{\theta_{0} - \thetastar}^{2n}\right] + \tilde{C}_{n - 1, 2} \cdot 4^{n - 1}(n - 1)\stepsize L\left((n - 1)\constLPH{0} + 2\stepsize\constLPH{1}\right).
 	\end{align*}
-	Also, we have that $\sum_{k = 0}^{t - 1}\gamma_{t + 1} = 2n\stepsize\left[\frac{1 - \left(1 - 2n\stepsize\mu\right)^{k}}{1 - \left(1 - 2n\stepsize\mu\right)}\right]$. Using these we can rewrite the final error bound as
+	Thus, if we plug in this upper bound into the previous inequality, for $\stepsize < \frac{1}{4^{n}}$ we will have
 	\begin{align*}
-		\Exs\left[\norm{\theta_{k + 1} - \thetastar}^{2n}\right] &\leq \left(k \cdot \tilde{c}_{1} \cdot 2^{4n + k - 3}\stepsize^{2}L\left[2\constLPH{1} + 2^{2n}n\stepsize\Exs\left[\norm{\theta_{0} - \thetastar}^{2n - 1}\right] + n\constLPH{0}\right]\Exs\left[\norm{\theta_{0} - \thetastar}^{2}\right] + 2n\stepsize\left[\norm{\theta_{0} - \thetastar}^{2n}\right]\right)\left(1 - 2n\stepsize\mu\right)^{k - 1} \\
-		& + \tilde{c}_{2} \cdot 4^{n}n\stepsize L \left[2\stepsize \constLPH{1} + n\constLPH{0}\right]
+		\Exs\left[\norm{\theta_{k + 1} - \thetastar}^{2n}\right] & \leq \sum_{t = 0}^{k - 1}2^{4n - 4}\stepsize L\gamma_{t + 1}\left[4\constLPH{1} + n\constLPH{0}\right]\Exs\left[\norm{\theta_{t} - \thetastar}^{2n}\right]\\
+		& + \frac{\constLPH{0}}{2}\gamma_{k}\Exs\left[\norm{\theta_{k} - \thetastar}^{2n}\right] +‌ \tilde{c}_{2, k}\Exs\left[\norm{\theta_{0} - \thetastar}^{2n}\right] + \tilde{c}_{1, k} + \tilde{c}_{3, k} + o\left(\stepsize\right)
 	\end{align*}
-	In the end, for $\stepsize < \frac{1}{4^{n}}$, we have
+	in which $\tilde{c}_{3, k}$ would be of order $4^{n}n\stepsize L\left(n\constLPH{0} + 4\stepsize \constLPH{1}\right)$ and $\tilde{c}_{2, k}$ is an $\mathcal{O}(1)$ constant dependent to $k$.
+	
+	To solve the above recursion, we define $\tilde{S}_{t} \coloneq \frac{\constLPH{0}}{2}\gamma_{t}\Exs\left[\norm{\theta_{t} - \thetastar}^{2n}\right] + \sum_{l = 0}^{t - 1}2^{4n - 4}\stepsize L \gamma_{l + 1}\left[4\constLPH{1} + n\constLPH{0}\right]\Exs\left[\norm{\theta_{l} - \thetastar}^{2n}\right]$ for $1 \leq t \leq k$. Using this we can write
 	\begin{align*}
-		\Exs\left[\norm{\theta_{k + 1} - \thetastar}^{2n}\right] \leq \tilde{C}_{n, 1}\cdot \left(1 - 2n\stepsize\mu\right)^{k + 1}\Exs\left[\norm{\theta_{0} - \thetastar}^{2n}\right] + \tilde{C}_{n, 2} \cdot 4^{n}n\stepsize L\left(n\constLPH{0} + 2\stepsize \constLPH{1}\right)
+		\Exs\left[\norm{\theta_{t + 1} - \thetastar}^{2n}\right] & \leq S_{t} + \tilde{c}_{2, t}\Exs\left[\norm{\theta_{0} - \thetastar}^{2n}\right] + \tilde{c}_{1, t} + \tilde{c}_{3, t} + o\left(\stepsize\right).
 	\end{align*}
-	in which $\tilde{C}_{n, 1}$ and $\tilde{C}_{n, 2}$ are $\mathcal{O}(1)$ constants.
+	Now notice that we have(recall that $\gamma_{t} = 2n\stepsize\left(1 - 2n\stepsize\mu\right)^{k - t}$.)
+	\begin{align*}
+		\frac{\tilde{S}_{t}}{\tilde{S}_{t - 1}} &‌ \leq \frac{\tilde{S}_{t - 1} + \left(2^{4n - 4}\stepsize L \gamma_{t}\left[4\constLPH{1} + n\constLPH{0}\right] - \frac{\constLPH{0}}{2}\gamma_{t - 1}\right)\Exs\left[\norm{\theta_{t - 1} - \thetastar}^{2n}\right] + \frac{\constLPH{0}}{2}\gamma_{t}\Exs\left[\norm{\theta_{t} - \thetastar}^{2n}\right]}{\tilde{S}_{t - 1}}\\
+		& = \frac{\tilde{S}_{t - 1} + \left(2^{4n - 4}\stepsize L \gamma_{t}\left[4\constLPH{1} + n\constLPH{0}\right] - \frac{\constLPH{0}}{2}\gamma_{t - 1}\right)\Exs\left[\norm{\theta_{t - 1} - \thetastar}^{2n}\right] + \frac{\constLPH{0}}{2}\gamma_{t}\left[\tilde{S}_{t - 1} + \tilde{c}_{2, t - 1}\Exs\left[\norm{\theta_{0} - \thetastar}^{2n}\right] + \tilde{c}_{1, t} + \tilde{c}_{3, t} + o\left(\stepsize\right)\right]}{\tilde{S}_{t - 1}}
+	\end{align*}
+	it is not very hard to see that the if we take $\stepsize$ small enough above fraction could get as close as possible to $1$. This means that we can write our final error bound as the following
+	\begin{align*}
+		\Exs\left[\norm{\theta_{k +‌ 1} - \thetastar}^{2n}\right] & \leq \tilde{C}_{n, 1} \cdot \left(1 - 2n\stepsize\mu\right)^{k + 1}\Exs\left[\norm{\theta_{0} - \thetastar}^{2n}\right] + \tilde{C}_{n, 2} \cdot 4^{n}n\stepsize L\left(n\constLPH{0} + 4\stepsize \constLPH{1}\right)
+	\end{align*}
+	in which $\tilde{C}_{n, 1}$ and $\tilde{C}_{n, 2}$ are $\mathcal{O}(1)$ constants and also $\stepsize$ has been taken small enough.
+	 
 	\bibliographystyle{ieee}
 	\bibliography{ref.bib}
 	
