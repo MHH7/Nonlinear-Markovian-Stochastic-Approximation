@@ -1,5 +1,11 @@
 \begin{thebibliography}{1}\itemsep=-1pt
 
+\bibitem{huo2024collusion}
+D.~Huo, Y.~Zhang, Y.~Chen, and Q.~Xie.
+\newblock The collusion of memory and nonlinearity in stochastic approximation
+  with constant stepsize.
+\newblock {\em arXiv preprint arXiv:2405.16732}, 2024.
+
 \bibitem{kaledin2020finite}
 M.~Kaledin, E.~Moulines, A.~Naumov, V.~Tadic, and H.-T. Wai.
 \newblock Finite time analysis of linear two-timescale stochastic approximation
@@ -10,5 +16,16 @@ M.~Kaledin, E.~Moulines, A.~Naumov, V.~Tadic, and H.-T. Wai.
 B.~Karimi, B.~Miasojedow, E.~Moulines, and H.-T. Wai.
 \newblock Non-asymptotic analysis of biased stochastic approximation scheme.
 \newblock In {\em Conference on Learning Theory}, pages 1944--1974. PMLR, 2019.
+
+\bibitem{wu2020finite}
+Y.~F. Wu, W.~Zhang, P.~Xu, and Q.~Gu.
+\newblock A finite-time analysis of two time-scale actor-critic methods.
+\newblock {\em Advances in Neural Information Processing Systems},
+  33:17617--17628, 2020.
+
+\bibitem{zou2019finite}
+S.~Zou, T.~Xu, and Y.~Liang.
+\newblock Finite-sample analysis for sarsa with linear function approximation.
+\newblock {\em Advances in neural information processing systems}, 32, 2019.
 
 \end{thebibliography}

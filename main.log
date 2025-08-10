@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.15)  15 APR 2025 13:23
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.8.15)  3 AUG 2025 02:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -155,6 +155,17 @@ LaTeX Info: Redefining \Relbar on input line 971.
 LaTeX Info: Redefining \[ on input line 2953.
 LaTeX Info: Redefining \] on input line 2954.
 )
+(c:/texlive/2023/texmf-dist/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+
+(c:/texlive/2023/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+))
 (c:/texlive/2023/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
 
@@ -622,17 +633,6 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 )
 \Hy@SectionHShift=\skip59
 )
-(c:/texlive/2023/texmf-dist/tex/latex/amsfonts/amssymb.sty
-Package: amssymb 2013/01/14 v3.01 AMS font symbols
-
-(c:/texlive/2023/texmf-dist/tex/latex/amsfonts/amsfonts.sty
-Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
-\symAMSa=\mathgroup4
-\symAMSb=\mathgroup5
-LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
-LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
-(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
-))
 (c:/texlive/2023/texmf-dist/tex/latex/outline/outline.sty
 Package: outline 2002/08/23 Simple Outline Package
 \c@@outlndepth=\count317
@@ -1014,48 +1014,48 @@ Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
 ) (./main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 54.
-LaTeX Font Info:    ... okay on input line 54.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 54.
-LaTeX Font Info:    ... okay on input line 54.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 54.
-LaTeX Font Info:    ... okay on input line 54.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 54.
-LaTeX Font Info:    ... okay on input line 54.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 54.
-LaTeX Font Info:    ... okay on input line 54.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 54.
-LaTeX Font Info:    ... okay on input line 54.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 54.
-LaTeX Font Info:    ... okay on input line 54.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 54.
-LaTeX Font Info:    ... okay on input line 54.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 54.
-LaTeX Font Info:    ... okay on input line 54.
-LaTeX Font Info:    Checking defaults for FML/futm/m/it on input line 54.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 57.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for FML/futm/m/it on input line 57.
 LaTeX Font Info:    Trying to load font information for FML+futm on input line 
-54.
+57.
 
 (c:/texlive/2023/texmf-dist/tex/latex/fourier/fmlfutm.fd
 File: fmlfutm.fd 2004/10/30 Fontinst v1.926 font definitions for FML/futm.
 )
-LaTeX Font Info:    ... okay on input line 54.
-LaTeX Font Info:    Checking defaults for FMS/futm/m/n on input line 54.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for FMS/futm/m/n on input line 57.
 LaTeX Font Info:    Trying to load font information for FMS+futm on input line 
-54.
+57.
 
 (c:/texlive/2023/texmf-dist/tex/latex/fourier/fmsfutm.fd
 File: fmsfutm.fd 2004/10/30 Fontinst v1.926 font definitions for FMS/futm.
 )
-LaTeX Font Info:    ... okay on input line 54.
-LaTeX Font Info:    Checking defaults for FMX/futm/m/n on input line 54.
+LaTeX Font Info:    ... okay on input line 57.
+LaTeX Font Info:    Checking defaults for FMX/futm/m/n on input line 57.
 LaTeX Font Info:    Trying to load font information for FMX+futm on input line 
-54.
+57.
 
 (c:/texlive/2023/texmf-dist/tex/latex/fourier/fmxfutm.fd
 File: fmxfutm.fd futm-extension
 )
-LaTeX Font Info:    ... okay on input line 54.
+LaTeX Font Info:    ... okay on input line 57.
 
 (c:/texlive/2023/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -1079,30 +1079,30 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-Package hyperref Info: Link coloring OFF on input line 54.
+Package hyperref Info: Link coloring OFF on input line 57.
 
 (./main.out) (./main.out)
 \@outlinefile=\write4
 \openout4 = `main.out'.
 
-LaTeX Font Info:    Redeclaring math accent \widehat on input line 54.
-LaTeX Font Info:    Redeclaring math accent \widetilde on input line 54.
-LaTeX Info: Redefining \microtypecontext on input line 54.
-Package microtype Info: Applying patch `item' on input line 54.
-Package microtype Info: Applying patch `toc' on input line 54.
-Package microtype Info: Applying patch `eqnum' on input line 54.
+LaTeX Font Info:    Redeclaring math accent \widehat on input line 57.
+LaTeX Font Info:    Redeclaring math accent \widetilde on input line 57.
+LaTeX Info: Redefining \microtypecontext on input line 57.
+Package microtype Info: Applying patch `item' on input line 57.
+Package microtype Info: Applying patch `toc' on input line 57.
+Package microtype Info: Applying patch `eqnum' on input line 57.
 
 
-Package microtype Warning: Unable to apply patch `footnote' on input line 54.
+Package microtype Warning: Unable to apply patch `footnote' on input line 57.
 
-Package microtype Info: Applying patch `verbatim' on input line 54.
+Package microtype Info: Applying patch `verbatim' on input line 57.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
 Package microtype Info: Automatic font expansion enabled (level 2),
 (microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
 Package microtype Info: Using default expansion set `alltext-nott'.
-LaTeX Info: Redefining \showhyphens on input line 54.
+LaTeX Info: Redefining \showhyphens on input line 57.
 Package microtype Info: No adjustment of tracking.
 Package microtype Info: No adjustment of interword spacing.
 Package microtype Info: No adjustment of character kerning.
@@ -1122,18 +1122,18 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 LaTeX Font Info:    Trying to load font information for FML+futmi on input line
- 73.
+ 76.
 
 (c:/texlive/2023/texmf-dist/tex/latex/fourier/fmlfutmi.fd
 File: fmlfutmi.fd 2004/10/30 Fontinst v1.926 font definitions for FML/futmi.
 )
 LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 11.03998pt on input line 73.
+(Font)              scaled to size 11.03998pt on input line 76.
 LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 8.27998pt on input line 73.
+(Font)              scaled to size 8.27998pt on input line 76.
 LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 6.43999pt on input line 73.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 73.
+(Font)              scaled to size 6.43999pt on input line 76.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 76.
 
 
 (c:/texlive/2023/texmf-dist/tex/latex/amsfonts/umsa.fd
@@ -1142,7 +1142,7 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 (c:/texlive/2023/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 73.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 76.
 
 
 (c:/texlive/2023/texmf-dist/tex/latex/amsfonts/umsb.fd
@@ -1152,217 +1152,217 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 11.03998pt on input line 73.
+(Font)              scaled to size 11.03998pt on input line 76.
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 8.27998pt on input line 73.
+(Font)              scaled to size 8.27998pt on input line 76.
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 6.43999pt on input line 73.
+(Font)              scaled to size 6.43999pt on input line 76.
  [1
 
 {c:/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{c:/texlive/2023/
 texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}{c:/texlive/2023/texmf-dist
 /fonts/enc/dvips/tex-gyre/q-ec.enc}]
 LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 9.19998pt on input line 79.
+(Font)              scaled to size 9.19998pt on input line 82.
 LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 6.99199pt on input line 79.
+(Font)              scaled to size 6.99199pt on input line 82.
 LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 5.51999pt on input line 79.
+(Font)              scaled to size 5.51999pt on input line 82.
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 9.19998pt on input line 79.
+(Font)              scaled to size 9.19998pt on input line 82.
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 6.99199pt on input line 79.
+(Font)              scaled to size 6.99199pt on input line 82.
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 5.51999pt on input line 79.
+(Font)              scaled to size 5.51999pt on input line 82.
 
-Underfull \hbox (badness 10000) in paragraph at lines 98--107
+Underfull \hbox (badness 10000) in paragraph at lines 101--110
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 98--107
+Underfull \hbox (badness 10000) in paragraph at lines 101--110
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 114--123
+Underfull \hbox (badness 10000) in paragraph at lines 117--126
 
  []
 
 [2{c:/texlive/2023/texmf-dist/fonts/enc/dvips/base/8r.enc}]
 
-LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 130
+LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 133
 .
 
 [3]
-Underfull \hbox (badness 10000) in paragraph at lines 191--193
+Underfull \hbox (badness 10000) in paragraph at lines 193--195
 
  []
 
 
-LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 199
+LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 201
 .
 
 
-LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 199
+LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 201
 .
 
 
-LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 199
+LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 201
 .
 
 
-LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 199
+LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 201
 .
 
 
-LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 199
+LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 201
 .
 
 
-LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 199
+LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 201
 .
 
 
-LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 209
+LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 211
 .
 
 
-LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 209
+LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 211
 .
 
 
-LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 214
+LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 216
 .
 
 
-LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 214
+LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 216
 .
 
 
-LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 214
+LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 216
 .
 
 
-LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 214
+LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 216
 .
 
 [4]
 
 LaTeX Warning: Reference `MCLipschitzness' on page 5 undefined on input line 24
-1.
+3.
 
 [5]
 
-LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 282
+LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 285
 .
 
 
-LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 282
+LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 285
 .
 
 
 LaTeX Warning: Reference `MCLipschitzness' on page 6 undefined on input line 28
-3.
+6.
 
 
 LaTeX Warning: Reference `MCLipschitzness' on page 6 undefined on input line 29
-5.
+8.
 
 
-LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 301
+LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 304
 .
 
 
-LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 301
+LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 304
 .
 
 
-Overfull \hbox (18.90012pt too wide) detected at line 301
+Overfull \hbox (18.20093pt too wide) detected at line 304
 []
  []
 
 [6]
-Overfull \hbox (9.62189pt too wide) in paragraph at lines 324--326
-\T1/cmr/m/n/10 where the last equal-ity fol-lows from the def-i-ni-tion of $\FM
-L/futmi/m/it/10 ^^M[]$\T1/cmr/m/n/10 s. Sim-i-larly we de-fine $\FML/futmi/m/it
-/10 c[] [][]\FMS/futm/m/n/10 Å []$
+Overfull \hbox (24.9818pt too wide) in paragraph at lines 331--332
+[]\T1/cmr/m/n/10 where the last equal-ity fol-lows from the def-i-ni-tion of $\
+FML/futmi/m/it/10 ^^M[]$\T1/cmr/m/n/10 s. Sim-i-larly we de-fine $\FML/futmi/m/
+it/10 c[] [][]\FMS/futm/m/n/10 Å []$
  []
 
 [7]
 
-LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 360
+LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 361
 .
 
 
-LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 360
+LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 361
 .
 
 
-Overfull \hbox (46.84496pt too wide) detected at line 360
+LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 368
+.
+
+
+LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 368
+.
+
+
+Overfull \hbox (46.84496pt too wide) detected at line 368
 []
  []
 
 
-LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 368
+LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 377
 .
 
 
-LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 368
+LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 377
 .
 
 
-LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 374
+LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 383
 .
 
 
-LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 374
+LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 383
 .
 
 
-LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 374
+LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 383
 .
 
 
-LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 374
+LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 383
 .
 
 [8]
-Overfull \hbox (32.949pt too wide) detected at line 389
+Overfull \hbox (32.949pt too wide) detected at line 398
 []
  []
 
 [9]
-Overfull \hbox (0.1298pt too wide) detected at line 432
+Overfull \hbox (0.1298pt too wide) detected at line 441
 []
  []
 
 [10]
-Overfull \hbox (70.19313pt too wide) detected at line 457
+Overfull \hbox (70.19313pt too wide) detected at line 466
 []
  []
 
 [11] [12]
-Overfull \hbox (12.45158pt too wide) detected at line 540
+Overfull \hbox (12.45158pt too wide) detected at line 549
 []
  []
 
 
-Overfull \hbox (80.24057pt too wide) detected at line 550
+Overfull \hbox (80.24057pt too wide) detected at line 559
 []
  []
 
 [13]
 
-LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 551
-.
-
-
-LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 554
-.
-
-
-LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 554
+LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 560
 .
 
 
@@ -1374,138 +1374,127 @@ LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 563
 .
 
 
-Overfull \hbox (40.38779pt too wide) in paragraph at lines 566--567
+LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 572
+.
+
+
+LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 572
+.
+
+
+Overfull \hbox (40.38779pt too wide) in paragraph at lines 575--576
 []\T1/cmr/m/n/10 To solve the above re-cur-sion, we de-fine $[] [][]\FMS/futm/m
 /n/10 Å []\FML/futmi/m/it/10 ^^M[]\U/futm/m/n/10 E [] \FMS/futm/m/n/10 Ä [][] \
 T1/futs/m/n/10 2[]\FML/futmi/m/it/10 L^^M[] [] \U/futm/m/n/10 E []$
  []
 
 
-LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 574
+LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 583
 .
 
 
-LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 574
+LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 583
 .
 
 
-Overfull \hbox (63.38097pt too wide) detected at line 574
+Overfull \hbox (63.38097pt too wide) detected at line 583
 []
  []
 
 
-LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 578
+LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 587
 .
 
 
-LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 578
+LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 587
 .
 
-[14] [15]
-Overfull \hbox (80.32175pt too wide) detected at line 636
+[14]
+Overfull \hbox (26.6384pt too wide) detected at line 623
+[]
+ []
+
+[15]
+
+LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 635
+.
+
+
+LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 635
+.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 634--643
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 634--643
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 634--643
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 634--643
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 634--643
+
+ []
+
+[16]
+Overfull \hbox (42.94266pt too wide) detected at line 673
 []
  []
 
 
-Overfull \hbox (114.22598pt too wide) detected at line 645
+Overfull \hbox (21.7409pt too wide) detected at line 681
 []
  []
 
-LaTeX Font Info:    Trying to load font information for TS1+qbk on input line 6
-57.
-(c:/texlive/2023/texmf-dist/tex/latex/tex-gyre/ts1qbk.fd
+
+LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 687
+.
+
+
+LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 687
+.
+
+
+LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 687
+.
+
+
+LaTeX Warning: Command \textcompwordmark invalid in math mode on input line 687
+.
+
+[17]
+Overfull \hbox (46.0959pt too wide) in paragraph at lines 702--703
+[]\T1/cmr/b/n/10 Transition Rule. \T1/cmr/m/n/10 A dis-cretiza-tion of the Orns
+tein-Uhlenbeck (OU) pro-cess: $\FML/futmi/m/it/10 P[]\T1/futs/m/n/10 (\FML/futm
+i/m/it/10 x; dy\T1/futs/m/n/10 ) \FMS/futm/m/n/10 Å N  [] \T1/futs/m/n/10 (\FML
+/futmi/m/it/10 dy\T1/futs/m/n/10 )\FML/futmi/m/it/10 :$ 
+ []
+
+[18] [19] [20]
+LaTeX Font Info:    Trying to load font information for TS1+qbk on input line 7
+98.
+ (c:/texlive/2023/texmf-dist/tex/latex/tex-gyre/ts1qbk.fd
 File: ts1qbk.fd 2009/09/25 v1.2 font definition file for TS1/qbk
 )
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `qbk' (encoding: TS1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
- [16{c:/texlive/2023/texmf-dist/fonts/enc/dvips/tex-gyre/q-ts1.enc}]
-(c:/texlive/2023/texmf-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2023/02/27 1.9 listings language file
-)
-Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 701.
- [17]
-Overfull \hbox (56.91148pt too wide) in paragraph at lines 713--714
-[][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
 
-
-Overfull \hbox (2.92426pt too wide) in paragraph at lines 714--715
-[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (26.91858pt too wide) in paragraph at lines 721--722
-[][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (146.8902pt too wide) in paragraph at lines 722--723
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][] 
- []
-
-
-Overfull \hbox (170.88452pt too wide) in paragraph at lines 742--743
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (92.90297pt too wide) in paragraph at lines 747--748
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-[18{c:/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
-Overfull \hbox (50.9129pt too wide) in paragraph at lines 768--769
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (14.92142pt too wide) in paragraph at lines 790--791
-[][][][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (272.8604pt too wide) in paragraph at lines 794--795
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][] 
- []
-
-[19]
-Overfull \hbox (8.92284pt too wide) in paragraph at lines 795--796
-[][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (284.85756pt too wide) in paragraph at lines 806--807
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][] 
- []
-
-<fig1.png, id=241, 1082.54437pt x 590.95781pt>
-File: fig1.png Graphic file (type png)
-<use fig1.png>
-Package pdftex.def Info: fig1.png  used on input line 826.
-(pdftex.def)             Requested size: 487.14047pt x 265.92856pt.
-<fig2.png, id=243, 1026.83624pt x 50.43843pt>
-File: fig2.png Graphic file (type png)
-<use fig2.png>
-Package pdftex.def Info: fig2.png  used on input line 827.
-(pdftex.def)             Requested size: 513.41687pt x 25.21915pt.
-
-Overfull \hbox (34.17258pt too wide) in paragraph at lines 826--828
- [] 
- []
-
-
-Overfull \hbox (60.44897pt too wide) in paragraph at lines 826--828
- [] 
- []
-
-[20] (./main.bbl) [21 <./fig1.png> <./fig2.png>]
-
+[21{c:/texlive/2023/texmf-dist/fonts/enc/dvips/tex-gyre/q-ts1.enc}] (./main.bbl
+) [22] 
 enddocument/afterlastpage: lastpage setting LastPage.
 (./main.aux)
  ***********
@@ -1517,34 +1506,34 @@ L3 programming layer <2023-08-11>
 LaTeX Warning: There were undefined references.
 
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: BD5B5A5D4F41A030F24471E5D71AA156;795.
+(rerunfilecheck)             Checksum: E269FEFFAF99A48D5AB8D60A6F6B34AF;697.
  ) 
 Here is how much of TeX's memory you used:
- 30113 strings out of 475189
- 539357 string characters out of 5767835
- 1987248 words of memory out of 5000000
- 50655 multiletter control sequences out of 15000+600000
- 638645 words of font info for 140 fonts, out of 8000000 for 9000
+ 29497 strings out of 475189
+ 532933 string characters out of 5767835
+ 1947248 words of memory out of 5000000
+ 50156 multiletter control sequences out of 15000+600000
+ 638046 words of font info for 139 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 99i,18n,131p,1001b,2155s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 99i,18n,131p,1001b,637s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2023/texmf-dist/fonts/type1/public/fourier/fourier-bb.pfb><c:/tex
 live/2023/texmf-dist/fonts/type1/public/fourier/fourier-mcl.pfb><c:/texlive/202
 3/texmf-dist/fonts/type1/public/fourier/fourier-mex.pfb><c:/texlive/2023/texmf-
 dist/fonts/type1/public/fourier/fourier-ml.pfb><c:/texlive/2023/texmf-dist/font
 s/type1/public/fourier/fourier-mlit.pfb><c:/texlive/2023/texmf-dist/fonts/type1
-/public/fourier/fourier-ms.pfb><c:/texlive/2023/texmf-dist/fonts/type1/adobe/ut
-opia/putr8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/adobe/utopia/putri8a.pf
-b><c:/texlive/2023/texmf-dist/fonts/type1/public/tex-gyre/qbkb.pfb><c:/texlive/
-2023/texmf-dist/fonts/type1/public/tex-gyre/qbkr.pfb><c:/texlive/2023/texmf-dis
-t/fonts/type1/public/cm-super/sfrb1000.pfb><c:/texlive/2023/texmf-dist/fonts/ty
-pe1/public/cm-super/sfrb1728.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public
-/cm-super/sfrm1000.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/cm-super/
-sfrm1200.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfti1000.p
-fb>
-Output written on main.pdf (21 pages, 599150 bytes).
+/public/fourier/fourier-ms.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/a
+msfonts/symbols/msam10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/adobe/utopia
+/putr8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/adobe/utopia/putri8a.pfb><c
+:/texlive/2023/texmf-dist/fonts/type1/public/tex-gyre/qbkb.pfb><c:/texlive/2023
+/texmf-dist/fonts/type1/public/tex-gyre/qbkr.pfb><c:/texlive/2023/texmf-dist/fo
+nts/type1/public/cm-super/sfrb1000.pfb><c:/texlive/2023/texmf-dist/fonts/type1/
+public/cm-super/sfrb1728.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/cm-
+super/sfrm1000.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm
+1200.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfti1000.pfb>
+Output written on main.pdf (22 pages, 305377 bytes).
 PDF statistics:
- 395 PDF objects out of 1000 (max. 8388607)
- 331 compressed objects within 4 object streams
- 163 named destinations out of 1000 (max. 500000)
- 24143 words of extra memory for PDF output out of 24883 (max. 10000000)
+ 255 PDF objects out of 1000 (max. 8388607)
+ 196 compressed objects within 2 object streams
+ 50 named destinations out of 1000 (max. 500000)
+ 23101 words of extra memory for PDF output out of 24883 (max. 10000000)
 

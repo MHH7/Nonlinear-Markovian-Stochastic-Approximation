@@ -6,6 +6,7 @@
 \usepackage{algorithmic}
 \usepackage{fullpage}
 \usepackage{amsmath}
+\usepackage{amssymb}
 \usepackage{graphicx}
 \usepackage[colorinlistoftodos]{todonotes}
 \usepackage{hyperref}
@@ -42,8 +43,10 @@
 \newcommand{\constLPH}[1]{L_{PH}^{(#1)}}
 \newcommand{\constT}[1]{T_{#1}}
 \newcommand{\constTprime}[1]{T_{#1}^{\prime}}
+\newcommand{\cB}{C_{B}}
 \newcommand{\mwlcomment}[1]{{\color{orange} #1}}
 \newcommand*{\htwai}[1]{\textbf{\textcolor{red}{To: #1}}}
+\newcommand{\hadi}[1]{{\color{blue} #1}}
 \newcommand{\stepsize}{\alpha}
 
 \newcommand{\HRule}[1]{\rule{\linewidth}{#1}}
@@ -168,7 +171,6 @@
 	Proof of this lemma can be found in \cite{karimi2019non}, Lemma 7.
 	\section{Error Bound}
 	
-	
 	\subsection{Base Case}
 	
 	We first prove the following lemma because we are going to use that calculation in many different parts of the proof:
@@ -190,7 +192,7 @@
 		\Exs^{1 / 2 }\left[\norm{\xi_{t}\left(\theta_{t - 1}\right)}^{2} | \mathcal{F}_{t - 1}\right] \leq L_{2}\left(\Exs\left[\norm{\theta_{t - 1}}\right] + 1\right),
 	\end{align*}
 	 and the third line from ??.\\
-		
+	
 	For the base case analysis, we can write:
 	\begin{align*}
 		& \Exs\left[\norm{\theta_{k +‌ 1} - \thetastar}^{2}\right] - \Exs\left[\norm{\theta_{k} - \thetastar}^{2}\right] = \\
@@ -221,7 +223,7 @@
 	
 	For notational simplicity we define $\gamma_{t} \coloneq 2\stepsize\left(1 - 2\stepsize\left(-\stepsize L^{2} + \mu\right)\right)^{k - t}$ for $0 \le t \le k$.
 	
-	The second term above is just a geometric series. According to Lemma 12 of \cite{kaledin2020finite}, this equals to $\frac{\stepsize L^{2}\left[1 - \left(1 - 2\stepsize\left(-\stepsize L^{2} + \mu\right)\right)^{k + 1}\right]}{-\stepsize L^{2} + \mu}$.
+	The second term above is just a geometric series. According to Lemma 12 of \cite{kaledin2020finite}, this equals to $\frac{\stepsize L^{2}\left[1 - \left(1 - 2\stepsize\left(-\stepsize L^{2} + \mu\right)\right)^{k + 1}\right]}{-\stepsize L^{2} + \mu}$ which is of $\mathcal{O}\left(\stepsize^{2}\right)$.
 	
 	Now, we can upper bound the third summand using below decomposition:
 	\begin{align*}
@@ -233,7 +235,7 @@
 		A_{2} \coloneq & \Exs\left[\sum_{t = 1}^{k}\gamma_{t}\left\langle \theta_{t} - \thetastar, P_{\theta_{t}}\hat{g}\left(\theta_{t}, X_{t}\right) - P_{\theta_{t - 1}}\hat{g}\left( \theta_{t - 1}, X_{t} \right) \right\rangle\right],\\
 		A_{3} \coloneq & \Exs\left[\sum_{t = 1}^{k}\gamma_{t}\left\langle \theta_{t} - \theta_{t - 1}, P_{\theta_{t - 1}}\hat{g}\left( \theta_{t - 1}, X_{t}\right) \right\rangle\right],\\
 		A_{4} \coloneq & \Exs\left[\sum_{t = 1}^{k}\left(\gamma_{t} - \gamma_{t - 1}\right)\left\langle \theta_{t - 1} - \thetastar, P_{\theta_{t - 1}}\hat{g}\left( \theta_{t - 1} - \thetastar, X_{t}\right) \right\rangle\right],\\
-		A_{5} \coloneq & \Exs\left[\gamma_{0}\left\langle \theta_{0} - \thetastar, \hat{g}\left(\theta_{0}, X_{0}\right) \right\rangle\right] + \Exs\left[\gamma_{k}\left\langle \theta_{k} - \thetastar, P_{\theta_{k}}\hat{g}\left(\theta_{k}, X_{k + 1}\right)\right\rangle\right]
+		A_{5} \coloneq & \Exs\left[\gamma_{0}\left\langle \theta_{0} - \thetastar, \hat{g}\left(\theta_{0}, X_{1}\right) \right\rangle\right] - \Exs\left[\gamma_{k}\left\langle \theta_{k} - \thetastar, P_{\theta_{k}}\hat{g}\left(\theta_{k}, X_{k + 1}\right)\right\rangle\right]
 	\end{align*}
 	
 	For $A_{1}$, we note that $\hat{g}\left(\theta_{t}, X_{t + 1}\right) - P_{\theta_{t}}\hat{g}\left(\theta_{t}, X_{t}\right)$ is a martingale difference sequence [cf. ?] and therefore we have $A_{1} = 0$ by taking the total expectation.
@@ -272,12 +274,13 @@
 		& \leq \sum_{t = 1}^{k}\stepsize L \constLPH{1}\gamma_{t}\left(8\Exs\left[\norm{\theta_{t - 1} - \thetastar}^{2}\right] + 5\right)
 	\end{align*}
 	which in the last line we again used $u \leq \frac{u^{2} + 1}{2}$ property.	
+	
 		
 	For $A_{3}$, we obtain
 	\begin{align*}
 		A_{3} & \le \sum_{t = 1}^{k}\gamma_{t}\Exs\left[\norm{\theta_{t} - \theta_{t - 1}} \; \norm{P_{\theta_{t - 1}}\hat{g}\left(\theta_{t - 1}, X_{t}\right)}\right]\\
-		& \le \sum_{t = 1}^{k} \constLPH{0}\gamma_{t}\Exs\left[\norm{g\left(\theta_{t - 1}, X_{t}\right)‌ + \xi_{t}(\theta_{t - 1})}\right]\\
-		& \le \sum_{t = 1}^{k}\constLPH{0}\gamma_{t}\left(L_{1}\left(\Exs\left[\norm{\theta_{t - 1} - \thetastar}\right] + 1\right) + L_{2}\left(\Exs\left[\norm{\theta_{t - 1} - \thetastar}\right] + 1\right)\right)\\
+		& \le \sum_{t = 1}^{k}\stepsize \constLPH{0}\gamma_{t}\Exs\left[\norm{g\left(\theta_{t - 1}, X_{t}\right)‌ + \xi_{t}(\theta_{t - 1})}\right]\\
+		& \le \sum_{t = 1}^{k}\stepsize\constLPH{0}\gamma_{t}\left(L_{1}\left(\Exs\left[\norm{\theta_{t - 1} - \thetastar}\right] + 1\right) + L_{2}\left(\Exs\left[\norm{\theta_{t - 1} - \thetastar}\right] + 1\right)\right)\\
 		& \leq \sum_{t = 1}^{k}\stepsize L \constLPH{0}\gamma_{t}\left(\Exs\left[\norm{\theta_{t - 1} - \thetastar}\right] + 1\right)
 	\end{align*}
 	where second line follows from \ref{MCLipschitzness} and third line follows from ?? .
@@ -290,42 +293,45 @@
 	
 	Finally, for $A_{5}$, we obtain
 	\begin{align*}
-		A_{5} & \le \constLPH{0}\left(\gamma_{0}\Exs\left[\norm{\theta_{0} - \thetastar}\right] + \gamma_{k}\Exs\left[\norm{\theta_{k} - \thetastar}\right]\right)
+		A_{5} & \le \constLPH{0}\left(\gamma_{0}\Exs\left[\norm{\theta_{0} - \thetastar}\right] - \gamma_{k}\Exs\left[\norm{\theta_{k} - \thetastar}\right]\right)
 	\end{align*}
 	which follows from Cacuhy-Scwarz inequality and \ref{MCLipschitzness}.
 	
 	Combining the above terms gives us:
 	\begin{align*}
-		\Exs\left[\sum_{t = 1}^{k}\gamma_{t}\left\langle \theta_{t} - \thetastar, g\left(\theta_{t}, X_{t + 1} - \bar{g}\left(\theta_{t}\right)\right)\right\rangle\right] \le & \sum_{t = 0}^{k - 1}\stepsize L \constLPH{1}\gamma_{t + 1}\left(5 + 8\Exs\left[\norm{\theta_{t} - \thetastar}^{2}\right] \right) + \sum_{t = 0}^{k - 1}\stepsize L \constLPH{0}\gamma_{t + 1}\left(\Exs\left[\norm{\theta_{t - 1} - \thetastar}\right]‌ + 1\right) +\\
-		& \sum_{t = 0}^{k - 1}\constLPH{0}|\gamma_{t} - \gamma_{t + 1}| \; \Exs\left[\norm{\theta_{t} - \thetastar}\right] + \constLPH{0}\left(\gamma_{0}\Exs\left[\norm{\theta_{0} - \thetastar}\right] + \gamma_{k}\Exs\left[\norm{\theta_{k} - \thetastar}\right]\right)
+		\Exs\left[\sum_{t = 1}^{k}\gamma_{t}\left\langle \theta_{t} - \thetastar, g\left(\theta_{t}, X_{t + 1}\right) - \bar{g}\left(\theta_{t}\right)\right\rangle\right] \le & \sum_{t = 0}^{k - 1}\stepsize L \constLPH{1}\gamma_{t + 1}\left(5 + 8\Exs\left[\norm{\theta_{t} - \thetastar}^{2}\right] \right) + \sum_{t = 0}^{k - 1}\stepsize L \constLPH{0}\gamma_{t + 1}\left(\Exs\left[\norm{\theta_{t - 1} - \thetastar}\right]‌ + 1\right) +\\
+		& \sum_{t = 0}^{k - 1}\constLPH{0}|\gamma_{t} - \gamma_{t + 1}| \; \Exs\left[\norm{\theta_{t} - \thetastar}\right] + \constLPH{0}\left(\gamma_{0}\Exs\left[\norm{\theta_{0} - \thetastar}\right] - \gamma_{k}\Exs\left[\norm{\theta_{k} - \thetastar}\right]\right)
 	\end{align*}
+	
 	now it should be noticed that as long as the $\alpha$ satisfies $\stepsize \le \frac{\mu}{L^{2}}$, we have $\gamma_{t} \le \gamma_{t + 1}$. Thus, we can simplify the above upper bound and write it this way:
 	\begin{align*}
-		\Exs\left[\sum_{t = 0}^{k}\gamma_{t}\left\langle \theta_{t} - \thetastar, g\left(\theta_{t}, X_{t + 1} - \bar{g}\left(\theta_{t}\right)\right)\right\rangle\right] \le & \sum_{t = 0}^{k - 1}\stepsize L \constLPH{1}\gamma_{t + 1}\left(5 + 8\Exs\left[\norm{\theta_{t} - \thetastar}^{2}\right] \right) +\\
+		\Exs\left[\sum_{t = 0}^{k}\gamma_{t}\left\langle \theta_{t} - \thetastar, g\left(\theta_{t}, X_{t + 1}\right) - \bar{g}\left(\theta_{t}\right)\right\rangle\right] \le & \sum_{t = 0}^{k - 1}\stepsize L \constLPH{1}\gamma_{t + 1}\left(5 + 8\Exs\left[\norm{\theta_{t} - \thetastar}^{2}\right] \right) +\\
 		& \sum_{t = 0}^{k - 1}\constLPH{0}\left(\left(\stepsize L + 1\right)\gamma_{t + 1} - \gamma_{t}\right)\Exs\left[\norm{\theta_{t} - \thetastar}\right] +\\
-		& \sum_{t = 0}^{k - 1}\stepsize L \constLPH{0}\gamma_{t + 1} +  \constLPH{0}\left(\gamma_{0}\Exs\left[\norm{\theta_{0} - \thetastar}\right] + \gamma_{k}\Exs\left[\norm{\theta_{k} - \thetastar}\right]\right)
+		& \sum_{t = 0}^{k - 1}\stepsize L \constLPH{0}\gamma_{t + 1} +  \constLPH{0}\left(\gamma_{0}\Exs\left[\norm{\theta_{0} - \thetastar}\right] - \gamma_{k}\Exs\left[\norm{\theta_{k} - \thetastar}\right]\right)
 	\end{align*}
 	
 	Hence, using the derived upper bounds from the above terms, we have:
 	\begin{align*}
 		\Exs\left[\norm{\theta_{k + 1} - \thetastar}^{2}\right] \le & \sum_{t = 0}^{k - 1}\stepsize L \constLPH{1}\gamma_{t + 1}\left(5 + 8\Exs\left[\norm{\theta_{t} - \thetastar}^{2}\right] \right) + \sum_{t = 0}^{k - 1}\constLPH{0}\left(\left(\stepsize L + 1\right)\gamma_{t + 1} - \gamma_{t}\right)\Exs\left[\norm{\theta_{t} - \thetastar}\right] +\\
-		& \left(1 - 2\stepsize\left(-\stepsize L^{2} + \mu\right)\right)\gamma_{0}\Exs\left[\norm{\theta_{0} - \thetastar}^{2}\right] + \constLPH{0}\gamma_{0}\Exs\left[\norm{\theta_{0} - \thetastar}\right] + \constLPH{0}\gamma_{k}\Exs\left[\norm{\theta_{k} - \thetastar}\right] +\\ 
+		& \left(1 - 2\stepsize\left(-\stepsize L^{2} + \mu\right)\right)\gamma_{0}\Exs\left[\norm{\theta_{0} - \thetastar}^{2}\right] + \constLPH{0}\gamma_{0}\Exs\left[\norm{\theta_{0} - \thetastar}\right] - \constLPH{0}\gamma_{k}\Exs\left[\norm{\theta_{k} - \thetastar}\right] +\\ 
 		& 2\stepsize^{2}L\constLPH{0}\left[\frac{1 - \left(1 - 2\stepsize\left(-\stepsize L^{2} + \mu\right)\right)^{k}}{1 - \left(1 - 2\stepsize\left(-\stepsize L^{2} + \mu\right)\right)}\right] + \frac{\stepsize L^{2}\left[1 - \left(1 - 2\stepsize\left(-\stepsize L^{2} + \mu\right)\right)^{k + 1}\right]}{-\stepsize L^{2} + \mu}\\
 	\end{align*}
+	
 	for further notation simplicity we define $c_{1, t} \coloneq 2\stepsize^{2}L\constLPH{0}\left[\frac{1 - \left(1 - 2\stepsize\left(-\stepsize L^{2} + \mu\right)\right)^{t}}{1 - \left(1 - 2\stepsize\left(-\stepsize L^{2} + \mu\right)\right)}\right] + \frac{\stepsize L^{2}\left[1 - \left(1 - 2\stepsize\left(-\stepsize L^{2} + \mu\right)\right)^{t + 1}\right]}{-\stepsize L^{2} + \mu}$ for $0 \le t \le k$. Now to write down this upper bound in a way in which it only depends on $\norm{\theta_{0} - \thetastar}$ related terms and constants, we can write:
 	\begin{align*}
 		\Exs\left[\norm{\theta_{k + 1} - \thetastar}^{2}\right] \le & \sum_{t = 0}^{k - 1}\left[8\stepsize L \constLPH{1}\gamma_{t + 1}\Exs\left[\norm{\theta_{t} - \thetastar}^{2}\right] + 5\stepsize L \constLPH{1}\gamma_{t + 1}\right] + \sum_{t = 0}^{k - 1}\constLPH{0}\left(\left(\stepsize L + 1\right)\gamma_{t + 1} - \gamma_{t}\right)\Exs\left[\norm{\theta_{t} - \thetastar}\right] +\\
-		& \left(1 - 2\stepsize\left(-\stepsize L^{2} + \mu\right)\right)\gamma_{0}\Exs\left[\norm{\theta_{0} - \thetastar}^{2}\right] + \constLPH{0}\gamma_{0}\Exs\left[\norm{\theta_{0} - \thetastar}\right] + \constLPH{0}\gamma_{k}\Exs\left[\norm{\theta_{k} - \thetastar}\right] + c_{1, k}\\
-		= & \sum_{t = 0}^{k - 1}8\stepsize L \constLPH{1}\gamma_{t + 1}\Exs\left[\norm{\theta_{t} - \thetastar}^{2}\right] + 5\stepsize L \constLPH{1}\sum_{t = 0}^{k - 1}\gamma_{t + 1} + \sum_{t = 0}^{k - 1}\constLPH{0}\left(\left(\stepsize L _ 1\right)\gamma_{t + 1} - \gamma_{t}\right)\Exs\left[\norm{\theta_{t} - \thetastar}\right] +\\
-		& \left(1 - 2\stepsize\left(-\stepsize L^{2} + \mu\right)\right)\gamma_{0}\Exs\left[\norm{\theta_{0} - \thetastar}^{2}\right] + \constLPH{0}\gamma_{0}\Exs\left[\norm{\theta_{0} - \thetastar}\right] + \constLPH{0}\gamma_{k}\Exs\left[\norm{\theta_{k} - \thetastar}\right] + c_{1, k}\\
+		& \left(1 - 2\stepsize\left(-\stepsize L^{2} + \mu\right)\right)\gamma_{0}\Exs\left[\norm{\theta_{0} - \thetastar}^{2}\right] + \constLPH{0}\gamma_{0}\Exs\left[\norm{\theta_{0} - \thetastar}\right] - \constLPH{0}\gamma_{k}\Exs\left[\norm{\theta_{k} - \thetastar}\right] + c_{1, k}\\
+		= & \sum_{t = 0}^{k - 1}8\stepsize L \constLPH{1}\gamma_{t + 1}\Exs\left[\norm{\theta_{t} - \thetastar}^{2}\right] + 5\stepsize L \constLPH{1}\sum_{t = 0}^{k - 1}\gamma_{t + 1} + \sum_{t = 0}^{k - 1}\constLPH{0}\left(\left(\stepsize L + 1\right)\gamma_{t + 1} - \gamma_{t}\right)\Exs\left[\norm{\theta_{t} - \thetastar}\right] +\\
+		& \left(1 - 2\stepsize\left(-\stepsize L^{2} + \mu\right)\right)\gamma_{0}\Exs\left[\norm{\theta_{0} - \thetastar}^{2}\right] + \constLPH{0}\gamma_{0}\Exs\left[\norm{\theta_{0} - \thetastar}\right] - \constLPH{0}\gamma_{k}\Exs\left[\norm{\theta_{k} - \thetastar}\right] + c_{1, k}\\
 		= & \sum_{t = 0}^{k - 1}8\stepsize L \constLPH{1}\gamma_{t + 1}\Exs\left[\norm{\theta_{t} - \thetastar}^{2}\right] + \sum_{t = 0}^{k - 1}\constLPH{0}\left(\left(\stepsize L + 1\right)\gamma_{t + 1} - \gamma_{t}\right)\Exs\left[\norm{\theta_{t} - \thetastar}\right] +\\
-		& \left(1 - 2\stepsize\left(-\stepsize L^{2} + \mu\right)\right)\gamma_{0}\Exs\left[\norm{\theta_{0} - \thetastar}^{2}\right] + \constLPH{0}\gamma_{0}\Exs\left[\norm{\theta_{0} - \thetastar}\right] + \constLPH{0}\gamma_{k}\Exs\left[\norm{\theta_{k} - \thetastar}\right] + c_{1, k} + \\ 
+		& \left(1 - 2\stepsize\left(-\stepsize L^{2} + \mu\right)\right)\gamma_{0}\Exs\left[\norm{\theta_{0} - \thetastar}^{2}\right] + \constLPH{0}\gamma_{0}\Exs\left[\norm{\theta_{0} - \thetastar}\right] - \constLPH{0}\gamma_{k}\Exs\left[\norm{\theta_{k} - \thetastar}\right] + c_{1, k} + \\ 
 		& \frac{10\stepsize^{2} L \constLPH{1}\left[1 - \left(1 - 2\stepsize\left(-\stepsize L^{2} + \mu\right)\right)^{k}\right]}{\left[1 - \left(1 - 2\stepsize\left(-\stepsize L^{2} + \mu\right)\right)\right]}\\
 	\end{align*}
+	
 	where the last equality follows from the definition of $\gamma_{t}$s. Similarly we define $c_{2, t} \coloneq \frac{10\stepsize^{2} L \constLPH{1}\left[1 - \left(1 - 2\stepsize\left(-\stepsize L^{2} + \mu\right)\right)^{t}\right]}{\left[1 - \left(1 - 2\stepsize\left(-\stepsize L^{2} + \mu\right)\right)\right]}$ for $0 \le t \le k$. So we can write it as
 	\begin{align*}
 		\Exs\left[\norm{\theta_{k + 1} - \thetastar}^{2}\right] \le & \sum_{t = 0}^{k - 1}8\stepsize L \constLPH{1}\gamma_{t + 1}\Exs\left[\norm{\theta_{t} - \thetastar}^{2}\right] + \sum_{t = 0}^{k - 1}\constLPH{0}\left(\left(\stepsize L + 1\right)\gamma_{t + 1} - \gamma_{t}\right)\Exs\left[\norm{\theta_{t} - \thetastar}\right] +\\
-		& \left(1 - 2\stepsize\left(-\stepsize L^{2} + \mu\right)\right)\gamma_{0}\Exs\left[\norm{\theta_{0} - \thetastar}^{2}\right] + \constLPH{0}\gamma_{0}\Exs\left[\norm{\theta_{0} - \thetastar}\right] + \constLPH{0}\gamma_{k}\Exs\left[\norm{\theta_{k} - \thetastar}\right] + c_{1, k} + c_{2, k}
+		& \left(1 - 2\stepsize\left(-\stepsize L^{2} + \mu\right)\right)\gamma_{0}\Exs\left[\norm{\theta_{0} - \thetastar}^{2}\right] + \constLPH{0}\gamma_{0}\Exs\left[\norm{\theta_{0} - \thetastar}\right] - \constLPH{0}\gamma_{k}\Exs\left[\norm{\theta_{k} - \thetastar}\right] + c_{1, k} + c_{2, k}
 	\end{align*}
 	\\
 	Now for the second term on RHS, we note that since $L \ge 2\mu$,
@@ -334,14 +340,16 @@
 	\end{align*}
 	and consequently
 	\begin{align*}
-		&\frac{1}{(1 - 2 \stepsize (-\stepsize L^2 + \mu))^k} \sum_{t = 0}^{k - 1} \constLPH{0} \big( ( \stepsize L + 1 \big) \gamma_{t + 1} + \gamma_{t}\big)\Exs \big[ \norm{\theta_{t} - \thetastar} \big] \\
+		&\frac{1}{(1 - 2 \stepsize (-\stepsize L^2 + \mu))^k} \sum_{t = 0}^{k - 1} \constLPH{0} \big( ( \stepsize L + 1 \big) \gamma_{t + 1} - \gamma_{t}\big)\Exs \big[ \norm{\theta_{t} - \thetastar} \big] \\
 		&\leq 4 \constLPH{0} L \stepsize^2  \sum_{t = 0}^{k - 1} \frac{1}{(1 - 2 \stepsize (-\stepsize L^2 + \mu))^{t + 1}} \sqrt{\Exs \big[ \norm{\theta_{t} - \thetastar}^2 \big]}\\
-		&\leq 4 \constLPH{0} L \stepsize^2  \Big(  \sum_{t = 0}^{k - 1} \frac{1}{(1 - 2 \stepsize (-\stepsize L^2 + \mu))^{t + 1}} \Big)^{1/2} \Big( \sum_{t = 1}^{k - 1} \frac{1}{(1 - 2 \stepsize (-\stepsize L^2 + \mu))^{t + 1}} \Exs \big[ \norm{\theta_{t} - \thetastar}^2 \big] \Big)^{1/2}\\
-		&\leq 4 \constLPH{0} L \stepsize^2 \cdot \sum_{t = 0}^{k - 1} \frac{1}{(1 - 2 \stepsize (-\stepsize L^2 + \mu))^{t + 1}} \Exs \big[ \norm{\theta_{t} - \thetastar}^2 \big] + \frac{1}{-\stepsize L^{2} + \mu} \cdot \frac{2 \stepsize L\constLPH{0}}{(1 - 2 \stepsize (-\stepsize L^2 + \mu))^k}.
+		&\leq 4 \constLPH{0} L \stepsize^2 \sum_{t = 0}^{k - 1} \frac{1}{(1 - 2 \stepsize (-\stepsize L^2 + \mu))^{t + 1}}\left(\Exs\left[\norm{\theta_{t} - \thetastar}^{2}\right] + 1\right)\\
+		&\leq 4 \constLPH{0} L \stepsize^2 \cdot \sum_{t = 0}^{k - 1} \frac{1}{(1 - 2 \stepsize (-\stepsize L^2 + \mu))^{t + 1}} \Exs \big[ \norm{\theta_{t} - \thetastar}^2 \big] + 2\stepsize L\constLPH{0}\sum_{t = 0}^{k - 1}\gamma_{t + 1}.
 	\end{align*}
+	
+	
 	We also note that
 	\begin{align*}
-		\frac{\gamma_k}{(1 - 2 \stepsize (-\stepsize L^2 + \mu))^k} \Exs \big[ \norm{\theta_k - \thetastar} \big] \leq \stepsize \frac{\Exs \big[ \norm{\theta_k - \thetastar}^2 \big]}{(1 - 2 \stepsize (-\stepsize L^2 + \mu))^k} + \frac{\stepsize}{(1 - 2 \stepsize (-\stepsize L^2 + \mu))^k}.
+		\frac{\gamma_{k}}{\left(1 - 2\stepsize\left(-\stepsize L^{2} + \mu\right)\right)^{k}}\Exs\left[\norm{\theta_{k} - \thetastar}\right] \leq \stepsize\frac{\Exs\left[\norm{\theta_{k} - \thetastar}^{2}\right]}{\left(1 - 2\stepsize\left(-\stepsize L^{2} + \mu\right)\right)^{k}} + \frac{\stepsize}{\left(1 - 2\stepsize\left(-\stepsize L^{2} + \mu\right)\right)^{k}}.
 	\end{align*}
 	similarly
 	\begin{align*}
@@ -349,7 +357,7 @@
 	\end{align*}
 	and we also define for $0 \le t \le k$
 	\begin{align*}
-		c_{3, t} \coloneq \frac{1}{-\stepsize L^{2} + \mu}\frac{2\stepsize L\constLPH{0}}{\left(1 - 2\stepsize\left(-\stepsize L^{2} + \mu\right)\right)^{t}} + \frac{\stepsize\constLPH{0}}{\left(1 - 2\stepsize\left(-\stepsize L^{2} + \mu\right)\right)^{t}} + \stepsize\constLPH{0}
+		c_{3, t} \coloneq \frac{1}{-\stepsize L^{2} +‌ \mu}\frac{2\stepsize L \constLPH{0}}{\left(1 - 2\stepsize\left(-\stepsize L^{2} + \mu\right)\right)^{t}} + \frac{\stepsize\constLPH{0}}{\left(1 - 2\stepsize\left(-\stepsize L^{2} + \mu\right)\right)^{t}} \stepsize\constLPH{0}
 	\end{align*}
 	to wrap up all the remainder terms.
 	
@@ -358,6 +366,7 @@
 		\frac{\Exs \big[ \norm{\theta_{k + 1} - \thetastar}^2 \big]}{(1 - 2 \stepsize (-\stepsize L^2 + \mu))^k} & \leq  \frac{\stepsize}{\left(1 - 2\stepsize\left(-\stepsize L^{2} + \mu\right)\right)^{k}}\Exs\left[\norm{\theta_{k} - \thetastar}^{2}\right] + \sum_{t = 0}^{k - 1}\frac{\stepsize\left(8L \constLPH{1} + 4\stepsize\left(1 - 2\stepsize\left(-\stepsize L^{2} + \mu\right)\right)^{-1}L\constLPH{0}\right)}{\left(1 - 2\stepsize \left(-\stepsize L^{2} + \mu\right)\right)^{t}}\Exs\left[\norm{\theta_{t} - \thetastar}^{2}\right] + \\
 		& \stepsize\Exs\left[\norm{\theta_{0} - \thetastar}^{2}\right] +‌ c_{1, k}^{\prime} + c_{2, k}^{\prime} + c_{3, k}.
 	\end{align*}
+	
 	for sufficiently small $\stepsize$s, we have
 	\begin{align*}
 		\stepsize\left(\frac{3}{2}L \constLPH{1} + 2\stepsize\left(1 - 2\stepsize\left(-\stepsize L^{2} + \mu\right)\right)^{-1}L\constLPH{0}\right) \leq 4\stepsize\left(\left(\stepsize L + 1\right)\constLPH{0} + 2L \constLPH{1}\right)
@@ -471,7 +480,7 @@
 		A_{3} \coloneq & \Exs\left[\sum_{t = 1}^{k}\gamma_{t}\left\langle \theta_{t} - \theta_{t - 1}, P_{\theta_{t - 1}}\hat{g}\left( \theta_{t - 1} X_{t}\right) \right\rangle \norm{\theta_{t} - \thetastar}^{2(n - 1)}\right],\\
 		A_{4} \coloneq & \Exs\left[\sum_{t = 1}^{k}\left(\gamma_{t} - \gamma_{t - 1}\right)\left\langle \theta_{t - 1} - \thetastar, P_{\theta_{t - 1}}\hat{g}\left( \theta_{t - 1} - \thetastar, X_{t}\right) \right\rangle\norm{\theta_{t} - \thetastar}^{2(n - 1)}\right],\\
 		A_{5} \coloneq & \Exs\left[\sum_{t = 1}^{k}\gamma_{t - 1}\left\langle \theta_{t - 1} - \thetastar, P_{\theta_{t - 1}}\hat{g}\left(\theta_{t - 1} - \thetastar, X_{t}\right)\right\rangle\left(\norm{\theta_{t} - \thetastar}^{2(n - 1)} - \norm{\theta_{t - 1} - \thetastar}^{2(n - 1)}\right)\right],\\
-		A_{6} \coloneq & \Exs\left[\gamma_{0}\left\langle \theta_{0} - \thetastar, \hat{g}\left(\theta_{0}, X_{0}\right) \right\rangle\norm{\theta_{0} - \thetastar}^{2(n - 1)}\right] + \Exs\left[\gamma_{k}\left\langle \theta_{k} - \thetastar, P_{\theta_{k}}\hat{g}\left(\theta_{k}, X_{k + 1}\right)\right\rangle\norm{\theta_{k} - \thetastar}^{2(n - 1)}\right].
+		A_{6} \coloneq & \Exs\left[\gamma_{0}\left\langle \theta_{0} - \thetastar, \hat{g}\left(\theta_{0}, X_{0}\right) \right\rangle\norm{\theta_{0} - \thetastar}^{2(n - 1)}\right] - \Exs\left[\gamma_{k}\left\langle \theta_{k} - \thetastar, P_{\theta_{k}}\hat{g}\left(\theta_{k}, X_{k + 1}\right)\right\rangle\norm{\theta_{k} - \thetastar}^{2(n - 1)}\right].
 	\end{align*}
 	For $A_{1}$, we note that $\hat{g}\left(\theta_{t}, X_{t + 1}\right) - P_{\theta_{t}} \hat{g}\left(\theta_{t}, X_{t}\right)$ is a martingale difference sequence [cf. ?] and therefore we have $A_{1} = 0$ by taking the total expectation.
 	
@@ -579,258 +588,225 @@
 	in which $\tilde{C}_{n, 1}$ and $\tilde{C}_{n, 2}$ are $\mathcal{O}(1)$ constants and also $\stepsize$ has been taken small enough.
 	
 	\section{Bias Characterization}
-	Before proceeding to the proof, we introduce the following shorthands and notations:
-	
 	First, we recall that as a consequence of Assumption 2, the target equation $\bar{g}\left(\theta\right) = \Exs_{X \sim \pi_{\theta}}\left[g\left(\theta, X\right)\right] = 0$, has a unique solution which we denote by $\thetastar$. Moreover, we define $\xstar$ to be the samples being drawn from the stationary distribution of the Markov chain related to $\thetastar$; \textit{i.e.,} $\pi_{\thetastar}$. Note that, from stationarity we know this is equal to the case that $\{X^{*}_{n}, n \in \mathbb{N}\}$ is a Markov chain initialized same as the other $\{X_{n}\}$ chain and evolving w.r.t. the $P_{\thetastar}$. In this case we also take $\mathcal{F}_{n} = \{\theta_{0}, \{\xi_{m + 1}\}_{m \leq n - 1}, \{X_{m}\}_{m \leq n}, \{X^{*}_{m}\}_{m \leq n} \}$. For notational simplicity, we omit indexes related to the \textit{optimal Chain}(\textit{i.e.,} $\{X^{*}_{n}\}$).
 	
-	Additionally, For $X \in \mathcal{X}$, 
+	Now, following the differentiability assumption of $g$ in Assumption 1, we can apply Taylor expansion to $g$ and note the following notation on residuals.
 	\begin{align*}
-		z_{i}(X) & \coloneq \Exs\left[\left(\thetainf - \thetastar\right)^{\otimes i} | \xstar = X\right],\\
-		\delta_{i}(X) & \coloneq z_{i}(X) - \pi_{\thetastar}z_{i}. 
+		g(\theta, x) &= g\left(\thetastar, x\right) + g^{\prime}\left(\thetastar, x\right)\left(\theta - \thetastar\right) + \frac{1}{2}g^{\prime\prime}\left(\thetastar, x\right)\left(\theta - \thetastar\right)^{\otimes 2} + R_{3}\left(\theta, x\right)\\
+		&= g\left(\thetastar, x\right) + g^{\prime}\left(\thetastar, x\right)\left(\theta - \thetastar\right) + R_{2}\left(\theta, x\right).
+	\end{align*}
+	By Assumptions 1 and 2 and our boundedness of the error results,  we note that the residual $R_{n}\left(\theta, X\right)$ satisfies
+	\begin{align*}
+		\sup_{x \in \mathcal{X}, \theta \in \mathbb{R}^{d}}\{\norm{R_{n}\left(\theta, x\right)} / \norm{\theta - \thetastar}^{n}\} < +\infty.
+	\end{align*}
+	Hence, we have
+	\begin{align*}
+		\norm{R_{n}\left(\thetainf, \xinfPone\right)}_{L^{2}\left(\pi_{\thetainf}\right)} \lesssim \Exs\left[\norm{\thetainf - \thetastar}^{n}\right] = \mathcal{O}\left(\stepsize^{n / 2}\right), \quad n = 2, 3, 4.
+	\end{align*}
+	Lastly we denote
+	\begin{align*}
+		\bar{g}\left(\theta\right) \coloneq \Exs_{X \sim \pi_{\theta}}\left[g\left(\theta, X\right)\right],& \quad \bar{g}_{2}\left(\theta\right) \coloneq \Exs_{X \sim \pi_{\theta}}\left[\left(g\left(\theta, X\right)\right)^{\otimes 2}\right],\\
+		\bar{g}^{(1)}\left(\theta\right) \coloneq \Exs_{X \sim \pi_{\theta}}\left[g^{\prime}\left(\theta, X\right)\right],& \quad \bar{g}_{2}^{(1)}\left(\theta\right) \coloneq \Exs_{X \sim \pi_{\theta}}\left[\left(g^{\prime}\left(\theta, X\right)\right)^{\otimes 2}\right], \quad \bar{g}^{(2)}\left(\theta\right) \coloneq \Exs_{X \sim \pi_{\theta}}\left[g^{\prime\prime}\left(\theta, X\right)\right].
 	\end{align*}
 	
-	We also denote
+	Proceeding to computing the bias, it is good to notice in the beginning that
 	\begin{align*}
-		\bar{g}\left(\theta\right) \coloneq \Exs_{X \sim \pi_{\thetastar}}\left[g\left(\theta, X\right)\right], \quad & \bar{g}_{2}\left(\theta\right) \coloneq \Exs_{X \sim \pi_{\thetastar}}\left[\left(g\left(\theta, X\right)\right)^{\otimes 2}\right]\\
-		\bar{g}^{(1)}\left(\theta\right) \coloneq \Exs_{X \sim \pi_{\thetastar}}\left[g^{\prime}\left(\theta, X\right)\right], \quad & \bar{g}^{(1)}_{2} \coloneq \Exs_{X \sim \pi_{\thetastar}}\left[\left(g^{\prime}\left(\theta, X\right)\right)^{\otimes 2}\right], \quad \bar{g}^{(2)}\left(\theta\right) \coloneq \Exs_{X \sim \pi_{\thetastar}}\left[g^{\prime\prime}\left(\theta, X\right)\right].
+		\Exs\left[\thetainfpone - \thetastar\right] = \Exs\left[\thetainf - \thetastar\right] + \stepsize\left(\Exs\left[g\left(\thetainf, \xinfPone\right)\right] + \Exs\left[\xi_{\infty + 1}\left(\thetainf\right)\right]\right),
 	\end{align*}
+	which immediately implies that $0 = \Exs\left[g\left(\thetainf, \xinfPone\right)\right]$. Writing the Taylor approximation again for this term and expanding it would give us:
 	
 	\begin{align*}
-		\Exs\left[g\left(\thetainf, \xinfPone\right)\right] &=  \Exs\left[g\left(\thetastar, \xinfPone\right) - g\left(\thetastar, \xstar\right)\right] + \Exs\left[g\left(\thetastar, \xstar\right)\right] \\
+		\Exs\left[g\left(\thetainf, \xinfPone\right)\right] &= \Exs\left[g\left(\thetastar, \xinfPone\right)\right] + \Exs\left[g^{\prime}\left(\thetastar, \xinfPone\right)\left(\thetainf - \thetastar\right)\right] + \frac{1}{2}\Exs\left[\left(g^{\prime\prime}\left(\thetastar, \xinfPone\right)\right)\left(\thetainf - \thetastar\right)^{\otimes 2}\right] + \Exs\left[R_{3}\left(\thetainf, \xinfPone\right)\right]\\  &= \Exs\left[g\left(\thetastar, \xinfPone\right) - g\left(\thetastar, \xstar\right)\right] + \Exs\left[g\left(\thetastar, \xstar\right)\right] \\
 		& + \Exs\left[\left(g^{\prime}\left(\thetastar, \xinfPone\right) - g^{\prime}\left(\thetastar, \xstar\right)\right)\left(\thetainf - \thetastar\right)\right] + \Exs\left[g^{\prime}\left(\thetastar, \xstar\right)\left(\thetainf - \thetastar\right)\right]\\
 		& + \frac{1}{2}\Exs\left[\left(g^{\prime\prime}\left(\thetastar, \xinfPone\right) - g^{\prime\prime}\left(\thetastar, \xstar\right)\right)\left(\thetainf - \thetastar\right)^{\otimes 2}\right] + \frac{1}{2}\Exs\left[g^{\prime\prime}\left(\thetastar, \xstar\right)\left(\thetainf - \thetastar\right)^{\otimes 2}\right]\\
 		& + \Exs\left[R_{3}\left(\thetainf, \xinfPone\right)\right]
 	\end{align*}
 	 
-	 Firstly, note that from the definition we have $\Exs\left[g\left(\thetastar, X^{*}\right)\right] = 0$. Also, 
+	 Firstly, note that from the definition we have $\Exs\left[g\left(\thetastar, X^{*}\right)\right] = 0$. Secondly, the two terms on the r.h.s. of the above($\Exs\left[g^{\prime}\left(\thetastar, \xstar\right)\left(\thetainf - \thetastar\right)\right]$ and $\frac{1}{2}\Exs\left[g^{\prime\prime}\left(\thetastar, \xstar\right)\left(\thetainf - \thetastar\right)^{\otimes 2}\right]$), are equivalent to the two terms in Bias Characterization of \cite{huo2024collusion} which means that we do not need to analyze them here. Hence, it remains to analyze the three other terms. 
+	 
+	 To analyze the first term, we introduce a new variable $\tilde{X}_{n, k}$. This is the random variable which has initialized from $X_{0}$, evolved according to the kernel $P_{\theta_{i}}$ for $i = 0, \dots, k - 1$, and then with the kernel $P_{\thetastar}$ for $n - k$ times:
+	 \begin{align*}
+	 	X_{0} \quad \underset{P_{\theta_{0}}}{\longmapsto}  \quad X_{1} \quad \underset{P_{\theta_{1}}}{\longmapsto} \quad \dots \quad \underset{P_{\theta_{k - 1}}}{\longmapsto} \quad X_{k} = \tilde{X}_{k, k} \quad \underset{P_{\thetastar}}{\longmapsto} \quad \dots \quad \underset{P_{\thetastar}}{\longmapsto} \quad \tilde{X}_{n - 1, k} \quad \underset{P_{\thetastar}}{\longmapsto} \quad \tilde{X}_{n, k}
+	 \end{align*}
+	 In addition, since we are interested in the difference between $g\left(\thetastar, \xinfPone\right)$ and $g\left(\thetastar, \xstar\right)$, and the decision parameter of the function is fixed here, for notational simplicity we use $f\left( . \right) \coloneq g\left(\thetastar, .\right)$. Also note that $f\left(\xinfPone\right)$ and $f\left(\xinf\right)$ are the same kind of objects in distribution. Using these new notations, we can write
+	 \begin{align*}
+	 	\Exs\left[g\left(\thetastar, \xinfPone\right) - g\left(\thetastar, \xstar\right)\right] = \lim_{n \to \infty}\Exs\left[f\left(\tilde{X}_{n, n}\right) - f\left(\tilde{X}_{n, 0}\right)\right] = \lim_{n \to \infty}\Exs\left[\sum_{k = 0}^{n - 1}f\left(\tilde{X}_{n, k + 1}\right) - f\left(\tilde{X}_{n, k}\right)\right].
+	 \end{align*}
+	 From the above we see that we are interested in calculating $f\left(\tilde{X}_{n, k +‌ 1}\right) - f\left(\tilde{X}_{n, k}\right)$. Notice that $\tilde{X}_{n, k +‌ 1}$ and $\tilde{X}_{n, k}$ are the same random variables in their first $k$ rounds of evolution. This means that we can write $\tilde{X}_{n, k + 1} = P_{\thetastar}^{n - k - 1}P_{\theta_{k}}\tilde{X}_{k, k}$ and $\tilde{X}_{n, k} = P_{\thetastar}^{n - k}\tilde{X}_{k, k}$. 
+	 \\
+	 \\
+	 \\
+	 \\
+	 \\
+	 \\	 
+	 Starting with the first one, we have 
 	 \begin{align*}
 	 	\Exs\left[g\left(\thetastar, \xinfPone\right) - g\left(\thetastar, \xstar\right)\right] &= \Exs\left[\Exs\left[g\left(\thetastar, \xinfPone\right) | \thetainf, \xinf\right] - g\left(\thetastar, \xstar\right)\right]\\
 	 	&= \Exs\left[P_{\thetainf}g\left(\thetastar, \xinf\right) - g\left(\thetastar, \xstar\right)\right]\\
 	 	&= \Exs\left[P_{\thetainf}g\left(\thetastar, \xinf\right) - P_{\thetastar}g\left(\thetastar, \xinf\right) + P_{\thetastar}g\left(\thetastar, \xinf\right) - P_{\thetastar}g\left(\thetastar, \xstar\right)\right]\\
-	 	&= \Exs\left[\left(P_{\thetainf} - P_{\thetastar}\right)g\left(\thetastar, \xinf\right) + P_{\thetastar}\left(g\left(\thetastar, \xinf\right) - g\left(\thetastar, \xstar\right)\right)\right]
+	 	&= \Exs\left[\left(P_{\thetainf} - P_{\thetastar}\right)g\left(\thetastar, \xinf\right) + P_{\thetastar}\left(g\left(\thetastar, \xinf\right) - g\left(\thetastar, \xstar\right)\right)\right],
 	 \end{align*}
-	 where the third equality follows from the fact that $\xstar$ comes from the stationary distribution of $\thetastar$. Now notice that we have from Assumption 1 that $\Exs\left[g\left(\thetastar, \xinf\right)\right] \leq L_{1}$. Additionally,
+	 where the third equality follows from the fact that $\xstar$ comes from the stationary distribution of $\thetastar$. Now notice that we have from Assumption 1 that $\Exs\left[\norm{g\left(\thetastar, \xinf\right)}\right] \leq L_{1}$. Additionally,
 	 \begin{align*}
-	 	\Exs\left[\norm{P_{\thetainf} - P_{\thetastar}}\right] \leq L_{P}\Exs\left[\norm{\thetainf - \thetastar}\right]
+	 	\Exs\left[\norm{P_{\thetainf} - P_{\thetastar}}\right] \leq L_{P}\Exs\left[\norm{\thetainf - \thetastar}\right],
 	 \end{align*}
 	 from Assumption 7. For the remaining term we also have
 	 \begin{align*}
-	 	\Exs\left[P_{\thetastar}\left(g\left(\thetastar, \xinf\right) - g\left(\thetastar, \xstar\right)\right)\right] &= \Exs\left[P_{\thetastar}\int_{\mathbb{R}}g\left(\thetastar, x\right)\pi_{\thetainf}(x) - g\left(\thetastar, x\right)\pi_{\thetastar}(x) dx\right]\\
-	 	& \leq \Exs\left[P_{\thetastar}L_{S}\norm{\thetainf - \thetastar}\int_{\mathbb{R}}g\left(\thetastar, x\right)dx\right]\\
+	 	\Exs\left[\norm{P_{\thetastar}\left(g\left(\thetastar, \xinf\right) - g\left(\thetastar, \xstar\right)\right)}\right] &= \Exs\left[\norm{\int_{\mathbb{R}}P_{\thetastar}\left[g\left(\thetastar, x\right)\pi_{\thetainf}(x) - g\left(\thetastar, x\right)\pi_{\thetastar}(x)\right] dx}\right]\\
+	 	& \leq \Exs\left[L_{S}\norm{\thetainf - \thetastar}\norm{\int_{\mathbb{R}}P_{\thetastar}g\left(\thetastar, x\right)dx}\right]\\
 	 	& \leq L_{1}L_{S}\Exs\left[\norm{\thetainf - \thetastar}\right]
 	 \end{align*}
 	 where the second line follows from Assumption 8. Summing up all these would give us
 	 \begin{align*}
-	 	\Exs\left[g\left(\thetastar, \xinfPone\right) - g\left(\thetastar, \xstar\right)\right] \leq L_{1}\left(L_{P} + L_{S}\right)\Exs\left[\norm{\thetainf - \thetastar}\right],
+	 	\Exs\left[\norm{g\left(\thetastar, \xinfPone\right) - g\left(\thetastar, \xstar\right)}\right] \leq L_{1}\left(L_{P} + L_{S}\right)\Exs\left[\norm{\thetainf - \thetastar}\right],
 	 \end{align*}
-	 which is of $\mathcal{O}(\stepsize^{1 / 2})$.
+	 which is of $\mathcal{O}(\stepsize^{1 / 2})$, considering our error bound.
 	 
-	 For the first and second derivative cases, conditioning on $\thetainf$ would give us a similar setting and thus we will have
+	 To analyze the first derivative related terms, we use a method similar to \cite{wu2020finite} and \cite{zou2019finite} by conditioning on the information of $\tau$ steps before(what is the exact definition for this such that the TV distance between distributions becomes equal to $\alpha$).
+
+	 From Assumption 1 we know that $\norm{g\left(\theta_{\infty - \tau + k}, X_{\infty - \tau + k + 1}\right)} \leq L_{1}\left(\norm{\theta_{\infty - \tau + k} - \thetastar} + 1\right)$. Thus we can write
 	 \begin{align*}
-	 	\Exs\left[\left(g^{\prime}\left(\thetastar, \xinfPone\right) - g^{\prime}\left(\thetastar, \xstar\right)\right)\left(\thetainf - \thetastar\right)\right] &= \Exs\left[\Exs\left[\left(\Exs\left[g^{\prime}\left(\thetastar, \xinfPone\right)|\xinf, \thetainf\right] - g^{\prime}\left(\thetastar, \xstar\right)\right)\left(\thetainf - \thetastar\right)|\thetainf\right]\right]\\
-	 	&= \Exs\left[\Exs\left[\left(P_{\thetainf}g^{\prime}\left(\thetastar, \xinf\right) - g^{\prime}\left(\thetastar, \xstar\right)\right)\left(\thetainf - \thetastar\right)|\thetainf\right]\right]\\
-	 	&= \Exs\left[\Exs\left[\left(P_{\thetainf}g^{\prime}\left(\thetastar, \xinf\right) - P_{\thetastar}g^{\prime}\left(\thetastar, \xinf\right) + P_{\thetastar}g^{\prime}\left(\thetastar, \xinf\right) - P_{\thetastar}g^{\prime}\left(\thetastar, \xstar\right)\right)\left(\thetainf - \thetastar\right)|\thetainf\right]\right]\\
-	 	&= \Exs\left[\Exs\left[\left(\left(P_{\thetainf} - P_{\thetastar}\right)g^{\prime}\left(\thetastar, \xinf\right) + P_{\thetastar}\left(g^{\prime}\left(\thetastar, \xinf\right) - g^{\prime}\left(\thetastar, \xstar\right)\right)\right)\left(\thetainf - \thetastar\right)|\thetainf\right]\right]\\
-	 	& \leq \Exs\left[\Exs\left[L_{1}\left(L_{P} + L_{S}\right)\norm{\thetainf - \thetastar}\left(\thetainf - \thetastar\right)|\thetainf\right]\right]\\
-	 	& \leq L_{1}\left(L_{P} + L_{S}\right)\Exs\left[\norm{\thetainf - \thetastar}\left(\thetainf - \thetastar\right)\right]
+	 	&\Exs\left[\norm{\left(g^{\prime}\left(\thetastar, \xinfPone\right) - g^{\prime}\left(\thetastar, \xstar\right)\right)\left(\thetainf - \thetastar\right)}\right] \\
+	 	&\leq\Exs\left[\Exs\left[\norm{g^{\prime}\left(\thetastar, \xinfPone\right) - g^{\prime}\left(\thetastar, \xstar\right)}\norm{\left(\theta_{\infty - \tau} + \stepsize\sum_{k = 0}^{\tau - 1}\left[g\left(\theta_{\infty - \tau + k}, X_{\infty - \tau + k + 1}\right) + \xi_{\infty - \tau + k + 1}\left(\theta_{\infty - \tau + k + 1}\right)\right] - \thetastar\right)} | \mathcal{F_{\infty - \tau}}\right]\right]\\
+	 	& \leq \Exs\left[\Exs\left[\norm{g^{\prime}\left(\thetastar, \xinfPone\right) - g^{\prime}\left(\thetastar, \xstar\right)}\left(\norm{\theta_{\infty - \tau} - \thetastar} + \norm{\stepsize\sum_{k = 0}^{\tau - 1}\left[g\left(\theta_{\infty - \tau + k}, X_{\infty - \tau + k + 1}\right) + \xi_{\infty - \tau + k + 1}\left(\theta_{\infty - \tau + k + 1}\right)\right]}\right)|\mathcal{F}_{\infty - \tau}\right]\right]\\
+	 	& \leq \Exs\left[\Exs\left[\norm{g^{\prime}\left(\thetastar, \xinfPone\right) - g^{\prime}\left(\thetastar, \xstar\right)}\left[\norm{\theta_{\infty - \tau} - \thetastar} + \stepsize\sum_{k = 0}^{\tau - 1}\left(\norm{g\left(\theta_{\infty - \tau + k}, X_{\infty - \tau + k + 1}\right)} + \norm{\xi_{\infty - \tau + k + 1}\left(\theta_{\infty - \tau + k + 1}\right)}\right)\right]| \mathcal{F}_{\infty - \tau}\right]\right]. 
 	 \end{align*}
-	 which is of $\mathcal{O}\left(\stepsize\right)$ in the end. In the same manner for the second derivative we can calculate this
+	  To handle the above expression, we separate two multiplications arising from the sum in the r.h.s term; one involving an $\stepsize$ and the other one which is constant when being conditioned on $\mathcal{F_{\infty - \tau}}$. The second part which has an $\stepsize$ coefficient, is easier to take care of and for that part we only upper bound the l.h.s term using the trivial upper bound that Assumption 1 gives us. Also for the other term, since the r.h.s term is constant when being conditioned, we use a similar procedure to the previous step and use the fact that in $\tau$ steps the chain has mixed enough to do the final bounding. Writing all of these in mathematical terms would give us
+	  \begin{align*}
+	  	&\Exs\left[\Exs\left[\norm{g^{\prime}\left(\thetastar, \xinfPone\right) - g^{\prime}\left(\thetastar, \xstar\right)}\norm{\theta_{\infty - \tau} - \thetastar}|\mathcal{F_{\infty - \tau}}\right]\right] \\
+	  	&= \Exs\left[\Exs\left[\norm{\left(P_{\thetainf} - P_{\thetastar}\right)g^{\prime}\left(\thetastar, \xinf\right) + P_{\thetastar}\left(g^{\prime}\left(\thetastar, \xinf\right) - g^{\prime}\left(\thetastar, \xstar\right)\right)}\norm{\theta_{\infty - \tau} - \thetastar}|\mathcal{F_{\infty - \tau}}\right]\right]\\
+	  	&\leq \Exs\left[\Exs\left[\left(\norm{\left(P_{\theta_{\infty}} - P_{\thetastar}\right)g^{\prime}\left(\thetastar, \xinf\right)} + \norm{P_{\thetastar}\left(g^{\prime}\left(\thetastar, \xinf\right) - g^{\prime}\left(\thetastar, \xstar\right)\right)}\right)\norm{\theta_{\infty - \tau} - \thetastar}|\mathcal{F_{\infty - \tau}}\right]\right]\\
+	  	&\leq L_{1}L_{P}\Exs\left[\Exs\left[\norm{\thetainf - \thetastar}\norm{\theta_{\infty - \tau} - \thetastar}|\mathcal{F_{\infty - \tau}}\right]\right] + \Exs\left[\Exs\left[\norm{\int_{\mathbb{R}}P_{\thetastar}\left[g\left(\thetastar, x\right)\pi_{\thetainf}(x) - g\left(\thetastar, x\right)\pi_{\thetastar}(x)\right]}|\mathcal{F_{\infty - \tau}}\right]\norm{\theta_{\infty - \tau} - \thetastar}\right]\\
+	  	& \leq \mathcal{O}\left(\stepsize\right)\Exs\left[\norm{\theta_{\infty - \tau} - \thetastar}\right] + L_{1}L_{S}\Exs\left[\norm{\thetainf - \thetastar} + \mathcal{O}\left(\stepsize\right)\right] = \mathcal{O}\left(\stepsize^{2}\right) + 2\mathcal{O}\left(\stepsize\right) = \mathcal{O}\left(\stepsize\right),
+	  \end{align*}
+	 in which the second line in the above has been done similar to the previous steps by replacing $g^{\prime}$ with $g$ and using the fact that equality of two expressions would result in equality of their norms. And,
 	 \begin{align*}
-	 	\Exs\left[\left(g^{\prime\prime}\left(\thetastar, \xinfPone\right) - g^{\prime\prime}\left(\thetastar, \xstar\right)\right)\left(\thetainf - \thetastar\right)^{\otimes 2}\right] &= \Exs\left[\Exs\left[\left(\Exs\left[g^{\prime\prime}\left(\thetastar, \xinfPone\right)|\xinf, \thetainf\right] - g^{\prime\prime}\left(\thetastar, \xstar\right)\right)\left(\thetainf - \thetastar\right)^{\otimes 2}|\thetainf\right]\right]\\
-	 	&= \Exs\left[\Exs\left[\left(P_{\thetainf}g^{\prime\prime}\left(\thetastar, \xinf\right) - g^{\prime\prime}\left(\thetastar, \xstar\right)\right)\left(\thetainf - \thetastar\right)^{\otimes 2}|\thetainf\right]\right]\\
-	 	&= \Exs\left[\Exs\left[\left(P_{\thetainf}g^{\prime\prime}\left(\thetastar, \xinf\right) - P_{\thetastar}g^{\prime\prime}\left(\thetastar, \xinf\right) + P_{\thetastar}g^{\prime\prime}\left(\thetastar, \xinf\right) - P_{\thetastar}g^{\prime\prime}\left(\thetastar, \xstar\right)\right)\left(\thetainf - \thetastar\right)^{\otimes 2}|\thetainf\right]\right]\\
-	 	&= \Exs\left[\Exs\left[\left(\left(P_{\thetainf} - P_{\thetastar}\right)g^{\prime\prime}\left(\thetastar, \xinf\right) + P_{\thetastar}\left(g^{\prime\prime}\left(\thetastar, \xinf\right) - g^{\prime\prime}\left(\thetastar, \xstar\right)\right)\right)\left(\thetainf - \thetastar\right)^{\otimes 2}|\thetainf\right]\right]\\
-	 	& \leq \Exs\left[\Exs\left[L_{1}\left(L_{P} + L_{S}\right)\norm{\thetainf - \thetastar}\left(\thetainf - \thetastar\right)^{\otimes 2}|\thetainf\right]\right]\\
-	 	& \leq L_{1}\left(L_{P} + L_{S}\right)\Exs\left[\norm{\thetainf - \thetastar}\left(\thetainf - \thetastar\right)^{\otimes 2}\right]
+	 	&\Exs\left[\Exs\left[\stepsize\norm{g^{\prime}\left(\thetastar, \xinfPone\right) - g^{\prime}\left(\thetastar, \xstar\right)}\sum_{k = 0}^{\tau - 1}\left(\norm{g\left(\theta_{\infty - \tau + k}, X_{\infty - \tau + k + 1}\right)} +‌ \norm{\xi_{\infty - \tau + k + 1}\left(\theta_{\infty - \tau + k + 1}\right)}\right)|\mathcal{F_{\infty - \tau}}\right]\right]\\
+	 	&\leq \Exs\left[\Exs\left[2\stepsize L_{1}\sum_{k = 0}^{\tau - 1}\left(\norm{g\left(\theta_{\infty - \tau + k},X_{\infty - \tau + k + 1}\right)} +‌ \norm{\xi_{\infty - \tau + k + 1}\left(\theta_{\infty - \tau + k + 1}\right)}\right)|\mathcal{F_{\infty - \tau}}\right]\right]\\
+	 	& \leq 2\stepsize L_{1}\Exs\left[\sum_{k = 0}^{\tau - 1}\left(\norm{g\left(\theta_{\infty - \tau + k}, X_{\infty - \tau + k + 1}\right)} + \norm{\xi_{\infty - \tau + k + 1}\left(\theta_{\infty - \tau + k + 1}\right)}\right)\right] = \mathcal{O}\left(\stepsize \tau\right).
 	 \end{align*}
-	 in this case the difference will be of $\mathcal{O}\left(\stepsize^{3 / 2}\right)$.
+	 Where the last equality easily follows from our boundedness assumptions of the function $g$ and the noise field. Thus, we showed that the first order term is of $\mathcal{O}\left(\stepsize \tau\right)$.
 	 
-	 \section{Experiments}
-	 \subsection*{Problem Setting}
+	 Lastly, for the remaining second order term, using a Cauchy-Scwarz inequality, we have from Assumption 1 that
+	 \begin{align*}
+		\frac{1}{2}\Exs\left[\norm{\left(g^{\prime\prime}\left(\thetastar, \xinfPone\right) - g^{\prime\prime}\left(\thetastar, \xstar\right)\right)\left(\thetainf - \thetastar\right)^{\otimes 2}}\right] \leq \stepsize L_{1}\Exs\left[\norm{\left(\thetainf - \thetastar\right)^{\otimes 2}}\right].
+	 \end{align*}
+	 It has been showed in \cite{huo2024collusion} that $\Exs\left[\norm{\left(\thetainf - \thetastar\right)^{\otimes 2}}\right]$ is of $\mathcal{O}\left(\stepsize^{2} \tau\right)$, which results in our term to be of $\mathcal{O}\left(\stepsize^{2}\tau\right)$ and completes our proof.
 	 
-	 We consider a stochastic approximation (SA) scheme where the control parameter \(\theta_t \in \mathbb{R}^d\) is updated via the rule:
-	 \[
-	 \theta_{t+1} = \theta_t + \alpha \left( g(\theta_t, X_{t+1}) + \xi_{t+1} \right),
-	 \]
-	 where:
-	 \begin{itemize}
-	 	\item \(\alpha > 0\) is a constant step size,
-	 	\item \(g: \mathbb{R}^d \times \mathbb{R} \to \mathbb{R}^d\) is a Lipschitz and strongly monotone function,
-	 	\item \(\xi_t\) is a zero-mean noise sequence with bounded moments,
-	 	\item \(\{X_t\}\) is a state-dependent Markov chain with kernel parameterized by \(\theta_t\).
-	 \end{itemize}
-	 
-	 \subsubsection*{Markov Chain Structure}
-	 
-	 We define a family of Markov chains on \(\mathbb{R}\), each corresponding to a parameter \(\theta \in \mathbb{R}\), given by a discretized Langevin dynamics:
-	 \[
-	 X_{t+1} = X_t - \frac{\epsilon^2}{2} (X_t - \theta_t) + \epsilon Z_t, \quad Z_t \sim \mathcal{N}(0, 1),
-	 \]
-	 which approximates the dynamics of an SDE with potential \(U(x; \theta) = \frac{1}{2}(x - \theta)^2\). The stationary distribution of this Markov chain is approximately \(\mathcal{N}(\theta, 1)\).
-	 
-	 \subsubsection*{Choice of \(g(\theta, x)\)}
-	 
-	 We take
-	 \[
-	 g(\theta, x) = \theta - x,
-	 \]
-	 which is Lipschitz and strongly monotone. If \(X \sim \mathcal{N}(\theta, 1)\), then
-	 \[
-	 \mathbb{E}[g(\theta, X)] = \theta - \mathbb{E}[X] = 0,
-	 \]
-	 i.e., the expected value of \(g\) under the stationary distribution of the Markov chain with parameter \(\theta\) is zero.
-	 
-	 \subsection*{Poisson Equation}
-	 
-	 We require that for each \(\theta\), there exists a function \(\hat{g}(\theta, x)\) satisfying the Poisson equation:
-	 \[
-	 \hat{g}(\theta, x) - P_\theta \hat{g}(\theta, x) = g(\theta, x) - \bar{g}(\theta),
-	 \]
-	 where \(P_\theta\) is the transition kernel of the Markov chain with parameter \(\theta\), and \(\bar{g}(\theta)\) is the expected value of \(g\) under the stationary distribution \(\pi_\theta\). In this setup, \(\bar{g}(\theta^*) = 0\) where \(\theta^* = 0\).
-	 
-	 \subsection*{Bias Estimation}
-	 
-	 We estimate the instantaneous bias over time as:
-	 \[
-	 \text{Bias}_t = \mathbb{E}[g(\theta_t, X_{t+1})] - \mathbb{E}[g(\theta^*, X^*)],
-	 \]
-	 where \(X^* \sim \mathcal{N}(0, 1)\). We approximate the expectation over time using cumulative means.
-	 
-	 \subsection*{Python Implementation}
-	 
-	 \begin{lstlisting}[language=Python, caption=Stochastic Approximation with Bias Tracking]
-	 	import numpy as np
-	 	import matplotlib.pyplot as plt
-	 	import seaborn as sns
-	 	from scipy.stats import norm
-	 	
-	 	# ------------------------------
-	 	# PARAMETERS
-	 	# ------------------------------
-	 	np.random.seed(42)
-	 	T = 10000                # number of SA iterations
-	 	alpha = 0.001            # SA step size (constant)
-	 	epsilon = 0.1            # discretized Langevin stepsize for X update
-	 	sigma_xi = 0.1           # std dev for noise in theta-update
-	 	d = 1                    # dimension (we work in R)
-	 	
-	 	# ------------------------------
-	 	# FUNCTIONS
-	 	# ------------------------------
-	 	
-	 	# Markov chain update for X using discretized Langevin dynamics.
-	 	# Here the potential U(x;theta) = 0.5*(x - theta)^2, so grad_U(x,theta) = x - theta.
-	 	def update_X(x, theta):
-	 	grad_U = x - theta  # gradient of U
-	 	noise = np.random.normal(0, 1)
-	 	x_next = x - 0.5 * epsilon**2 * grad_U + epsilon * noise
-	 	return x_next
-	 	
-	 	# Function g: R x R -> R, here chosen as:
-	 	def g(theta, x):
-	 	return theta - x
-	 	
-	 	# ------------------------------
-	 	# SIMULATION OF STOCHASTIC APPROXIMATION SCHEME
-	 	# ------------------------------
-	 	# Initialize theta and X
-	 	theta_vals = np.zeros(T+1)
-	 	X_vals = np.zeros(T+1)
-	 	g_vals = np.zeros(T)   # record g(theta_t, X_{t+1})
-	 	
-	 	# For illustration, start with non-optimal theta and X
-	 	theta_vals[0] = 1.0    # initial theta (nonzero so that we see a drift toward theta^*=0)
-	 	X_vals[0] = 1.0        # initial state for X
-	 	
-	 	# SA loop:
-	 	for t in range(T):
-	 	# Sample X_{t+1} from the Markov chain with kernel parameterized by theta_t
-	 	X_vals[t+1] = update_X(X_vals[t], theta_vals[t])
-	 	
-	 	# Compute g(theta_t, X_{t+1})
-	 	g_val = g(theta_vals[t], X_vals[t+1])
-	 	g_vals[t] = g_val
-	 	
-	 	# Sample the noise \xi_{t+1}
-	 	xi = np.random.normal(0, sigma_xi)
-	 	
-	 	# SA update for theta
-	 	theta_vals[t+1] = theta_vals[t] + alpha * (g_val + xi)
-	 	
-	 	# ------------------------------
-	 	# VISUALIZATIONS
-	 	# ------------------------------
-	 	plt.figure(figsize=(14, 6))
-	 	
-	 	# Plot evolution of theta
-	 	plt.subplot(1,2,1)
-	 	plt.plot(theta_vals, label=r'$\theta_t$')
-	 	plt.axhline(0, color='black', linestyle='--', label=r'$\theta^*=0$')
-	 	plt.title('Evolution of control parameter $\\theta_t$')
-	 	plt.xlabel('Iteration')
-	 	plt.ylabel('$\\theta_t$')
-	 	plt.legend()
-	 	plt.grid(True)
-	 	
-	 	# Plot evolution of g(theta, X) values
-	 	plt.subplot(1,2,2)
-	 	plt.plot(g_vals, label=r'$g(\theta_t, X_{t+1})$')
-	 	plt.axhline(0, color='black', linestyle='--')
-	 	plt.title(r'Evolution of $g(\theta_t, X_{t+1})$')
-	 	plt.xlabel('Iteration')
-	 	plt.ylabel('g value')
-	 	plt.legend()
-	 	plt.grid(True)
-	 	plt.tight_layout()
-	 	plt.show()
-	 	
-	 	# ------------------------------
-	 	# BIAS ESTIMATION
-	 	# ------------------------------
-	 	# After T iterations, we treat theta_T as our final parameter.
-	 	theta_final = theta_vals[-1]
-	 	print(f"Final theta: {theta_final:.4f}")
-	 	
-	 	# (A) Estimate E[g(theta_final, X)] when X is drawn from the stationary chain with parameter theta_final.
-	 	# For this, simulate a long chain with parameter theta_final.
-	 	T_chain = 5000
-	 	burn_in = 1000
-	 	X_chain = np.zeros(T_chain+1)
-	 	X_chain[0] = theta_final  # start at the mean
-	 	for t in range(T_chain):
-	 	X_chain[t+1] = update_X(X_chain[t], theta_final)
-	 	# Use the samples after burn_in:
-	 	g_final_samples = g(theta_final, X_chain[burn_in:])
-	 	E_g_final = np.mean(g_final_samples)
-	 	
-	 	# (B) Estimate E[g(theta*, X)] when theta*=0 and X is drawn from the corresponding stationary distribution.
-	 	theta_star = 0.0
-	 	X_chain_star = np.zeros(T_chain+1)
-	 	X_chain_star[0] = theta_star
-	 	for t in range(T_chain):
-	 	X_chain_star[t+1] = update_X(X_chain_star[t], theta_star)
-	 	g_star_samples = g(theta_star, X_chain_star[burn_in:])
-	 	E_g_star = np.mean(g_star_samples)
-	 	
-	 	bias = E_g_final - E_g_star
-	 	
-	 	print(f"Estimated E[g(theta_final, X)] = {E_g_final:.4f}")
-	 	print(f"Estimated E[g(theta*, X)] = {E_g_star:.4f}")
-	 	print(f"Estimated Bias = {bias:.4f}")
-	 	
-	 	
-	 \end{lstlisting}
-	 
-	 \subsection*{Results}
-	 \begin{center}
-	 	\includegraphics[scale=0.45]{fig1.png}
-	 	\includegraphics[scale=0.5]{fig2.png}
-	 \end{center}
-	 
-	 \subsection*{Conclusion}
-	 
-	 This simulation tracks the evolution of the control parameter \(\theta_t\), the evaluated update function \(g(\theta_t, X_{t+1})\), and the bias over time. The algorithm converges toward the optimal value \(\theta^* = 0\), and the empirical bias decreases as expected, supporting both theoretical intuition and the Poisson equation structure.
-	 
+\section*{Family of Transition Kernels: Theoretical Properties and Experimental Analysis}
+
+Below we summarize the nine kernels used in our experiments. For each kernel, we detail its theoretical properties and connect them to its observed behavior in the convergence plots.
+
+\subsection*{1. Langevin (Gaussian) Kernel}
+\begin{itemize}
+	\item[\bfseries 1.1] \textbf{Transition Rule.} A discretization of the Ornstein-Uhlenbeck (OU) process: \( P_\theta(x,dy) = \mathcal{N}\! \left( x - \tfrac{\epsilon^2}{2}(x-\theta), \epsilon^2 \right)(dy). \)
+	\item[\bfseries 1.2] \textbf{Stationary Law.} The stationary distribution is Gaussian, \(\pi_\theta = \mathcal{N}(\theta,1)\). The mean is \(m(\theta)=\theta\).
+	\item[\bfseries 1.3] \textbf{Derivatives.} \(m'(\theta)=1\) and \(m''(\theta)=0\). Both are constant and globally Lipschitz.
+	\item[\bfseries 1.4] \textbf{Experimental Analysis.} As the archetypal "smooth" kernel, the Langevin process exhibits the expected \(O(\alpha)\) bias behavior. The convergence curves for different stepsizes are clearly separated, indicating that smaller \(\alpha\) values lead to significantly more accurate estimates. A subtle non-linear effect may be visible, as the improvement for the smallest stepsizes appears less pronounced, though this could also suggest that these runs require more iterations to reach their asymptotic floor.
+\end{itemize}
+
+\subsection*{2. Oscillatory Kernel}
+\begin{itemize}
+	\item[\bfseries 2.1] \textbf{Transition Rule.} An OU-type process where the mean function \(m(\theta)\) oscillates wildly near zero:
+	\[ m(\theta)= \begin{cases} \theta+\theta^2\sin(1/\theta), & \theta\neq0 \\ 0, & \theta=0 \end{cases} \]
+	The transition is \( P_\theta(x,dy)=\mathcal{N}\!\left(x-\tfrac{\epsilon^2}{2}(x-m(\theta)), \epsilon^2\right)(dy) \).
+	\item[\bfseries 2.2] \textbf{Stationary Law.} \(\pi_\theta = \mathcal{N}(m(\theta),1)\).
+	\item[\bfseries 2.3] \textbf{Derivatives of \(m(\theta)\) (for \(\theta\neq0\)).}
+	\[ m'(\theta)=1+2\theta\sin(1/\theta)-\cos(1/\theta), \]
+	\[ m''(\theta)=2\sin(1/\theta)-\frac{2}{\theta}\cos(1/\theta)-\frac{1}{\theta^2}\sin(1/\theta). \]
+	\item[\bfseries 2.4] \textbf{Lipschitz Properties.} \(m'(\theta)\) is bounded on compact sets but is not globally Lipschitz. \(m''(\theta)\) is unbounded near \(\theta=0\).
+	\item[\bfseries 2.5] \textbf{Experimental Analysis.} This kernel is a canonical example of pathological non-smoothness. The experiments clearly demonstrate this: the convergence curves for all stepsizes are tightly clustered, showing almost no improvement in accuracy as \(\alpha\) decreases. This aligns with the theoretical prediction of a slower, \(O(\sqrt{\alpha})\)-like bias, where the benefits of a smaller stepsize are severely diminished by the violent oscillations of the kernel's derivatives.
+\end{itemize}
+
+\subsection*{3. OU Uniform Smooth Kernel}
+\begin{itemize}
+	\item[\bfseries 3.1] \textbf{Transition Rule.} An OU process driven by uniform noise: \( y_{t+1} = x_t - \tfrac{\epsilon^2}{2}(x_t-\theta) + \xi_t, \quad \xi_t \sim \mathcal{U}(-\epsilon, \epsilon). \)
+	\item[\bfseries 3.2] \textbf{Stationary Law.} The mean of the stationary distribution is \(\mathbb{E}_{\pi_\theta}[X] = \theta\).
+	\item[\bfseries 3.3] \textbf{Derivatives.} The mean function is \(m(\theta)=\theta\), with globally Lipschitz derivatives \(m'(\theta)=1\) and \(m''(\theta)=0\).
+	\item[\bfseries 3.4] \textbf{Experimental Analysis.} While theoretically as smooth as the Langevin kernel, its experimental behavior is less ideal. The curves for different \(\alpha\) are not as clearly separated, appearing only slightly better than the Oscillatory kernel. This suggests that while smoothness is a necessary condition for \(O(\alpha)\) bias, the magnitude of the derivatives also matters. Here, the constant and relatively small derivatives may lead to a smaller leading constant in the bias term, making the differences between stepsizes harder to distinguish within the given number of iterations.
+\end{itemize}
+
+\subsection*{4. OU Uniform Sin Kernel}
+\begin{itemize}
+	\item[\bfseries 4.1] \textbf{Transition Rule.} An OU process with uniform noise and a mean function \( m(\theta)=\tfrac12|\sin\theta| \).
+	\item[\bfseries 4.2] \textbf{Stationary Law.} The mean of the stationary distribution is \(\mathbb{E}_{\pi_\theta}[X] = m(\theta)\).
+	\item[\bfseries 4.3] \textbf{Derivatives of \(m(\theta)\) (for \(\theta\neq k\pi, k \in \mathbb{Z}\)).}
+	\[ m'(\theta)=\frac{1}{2} \cos\theta \cdot
+	\begin{cases}
+		1 & \text{if } \sin\theta > 0 \\
+		-1 & \text{if } \sin\theta < 0
+	\end{cases},
+	\quad m''(\theta)=-\tfrac12|\sin\theta|.
+	\]
+	\item[\bfseries 4.4] \textbf{Lipschitz Properties.} \(m'(\theta)\) has jump discontinuities but is bounded. \(m''(\theta)\) is continuous, bounded, and globally Lipschitz.
+	\item[\bfseries 4.5] \textbf{Experimental Analysis.} This is one of the most interesting cases. Despite having a non-Lipschitz first derivative, its convergence behavior is remarkably similar to the smooth kernels, exhibiting a clear separation between the curves for different \(\alpha\). This strongly suggests that the nature of the non-smoothness is critical. Because the "kinks" in the derivative are isolated and predictable, and the second derivative is well-behaved, the system retains the faster \(O(\alpha)\) bias scaling.
+\end{itemize}
+
+\subsection*{5. OU Uniform SqrtOsc Kernel}
+\begin{itemize}
+	\item[\bfseries 5.1] \textbf{Transition Rule.} An OU process with uniform noise and a scaled oscillatory mean function:
+	\[ m(\theta)= \begin{cases} 0.1\left(\theta+\theta^2\sin(1/\theta)\right), & \theta\neq0 \\ 0, & \theta=0 \end{cases} \]
+	\item[\bfseries 5.2] \textbf{Derivatives.} The derivatives of \(m(\theta)\) are scaled versions of those from the Oscillatory Kernel (2). The first derivative is bounded but not Lipschitz, and the second derivative is unbounded.
+	\item[\bfseries 5.3] \textbf{Experimental Analysis.} This kernel exhibits clear non-smooth properties, consistent with its highly irregular derivatives. As with the Oscillatory kernel, the final error levels are tightly clustered, indicating that decreasing the stepsize provides minimal benefit. This reinforces the conclusion that unbounded or wildly oscillating derivatives severely degrade the convergence rate of the bias.
+\end{itemize}
+
+\subsection*{6. Discrete Smooth 500 Kernel}
+\begin{itemize}
+	\item[\bfseries 6.1] \textbf{Transition Rule.} A 500-state birth-death process on a scaled state space \(\mathcal{X} \subset [-1, 1]\). It is designed to mimic the OU dynamic. The probability of moving right from state \(x\) is a smooth logistic function of the difference \((\theta - x)\), creating a mean-reverting drift towards \(\theta\).
+	\item[\bfseries 6.2] \textbf{Stationary Law.} For each \(\theta\), there is a unique stationary distribution \(\pi_\theta\). At \(\theta=0\), the process is a symmetric random walk on a centered state space, ensuring \(\mathbb{E}_{\pi_0}[X]=0\).
+	\item[\bfseries 6.3] \textbf{Derivatives.} The transition probabilities are infinitely differentiable with respect to \(\theta\). Consequently, the mean of the stationary distribution, \(m(\theta) = \mathbb{E}_{\pi_\theta}[X]\), is a smooth function with globally Lipschitz derivatives.
+	\item[\bfseries 6.4] \textbf{Experimental Analysis.} As intended, this kernel successfully discretizes the properties of its continuous counterpart, `OU Smooth`. The plot shows a clear separation between the different \(\alpha\) curves, consistent with the \(O(\alpha)\) bias expected from a smooth kernel. This demonstrates that discretization, when done carefully to preserve smoothness properties, does not fundamentally alter the convergence behavior.
+\end{itemize}
+
+\subsection*{7. RW Hinge 500 Kernel}
+\begin{itemize}
+	\item[\bfseries 7.1] \textbf{Transition Rule.} A random walk on \(\{0,\dots,499\}\) where the right-move probability is given by the hinge function \(p(\theta) = \min(1, \max(0, \theta))\).
+	\item[\bfseries 7.2] \textbf{Stationary Law.} For \(0 < p(\theta) < 1\), the stationary distribution is \(\pi_\theta(i) \propto \left(\frac{p(\theta)}{1-p(\theta)}\right)^i\).
+	\item[\bfseries 7.3] \textbf{Derivatives of \(p(\theta)\).}
+	\[
+	p'(\theta)=
+	\begin{cases}
+		1, & \text{if } 0 < \theta < 1, \\
+		0, & \text{if } \theta < 0\text{ or }\theta > 1,
+	\end{cases}
+	\quad p''(\theta)=0 \quad (\text{a.e.}).
+	\]
+	\item[\bfseries 7.4] \textbf{Lipschitz Properties.} \(p'(\theta)\) is not Lipschitz due to jump discontinuities at \(\theta=0\) and \(\theta=1\).
+	\item[\bfseries 7.5] \textbf{Experimental Analysis.} This is another fascinating case. Like `OU Sin`, this is a non-smooth discrete kernel that exhibits behavior remarkably similar to the smooth kernels, with clear \(O(\alpha)\) separation. This further supports the hypothesis that isolated, well-behaved "kinks" in the derivative do not degrade the bias to \(O(\sqrt{\alpha})\). It is also observable that the smallest stepsize has not yet fully converged, suggesting that the combination of discrete states and small derivative magnitudes can lead to slow convergence dynamics.
+\end{itemize}
+
+\subsection*{8. RW ClipOsc 500 Kernel}
+\begin{itemize}
+	\item[\bfseries 8.1] \textbf{Transition Rule.} A random walk on \(\{0,\dots,499\}\) where the right-move probability is a clipped, oscillatory function of \(\theta\), \( p(\theta) = \min(1, \max(0, r(\theta))) \), where \( r(\theta)=\theta\sqrt{|\theta|}\,\sin(1/\theta) \).
+	\item[\bfseries 8.2] \textbf{Derivatives.} The underlying function's derivative \(r'(\theta)\) oscillates unboundedly near \(\theta=0\), making the derivatives of the transition probability non-Lipschitz.
+	\item[\bfseries 8.3] \textbf{Experimental Analysis.} This kernel clearly demonstrates its non-smooth properties. The final error levels show significant clustering, characteristic of a slower bias convergence rate. The plot also highlights extremely slow convergence for the two smallest stepsizes, which have not reached their asymptotic floors. This indicates that the combination of discrete states and pathological derivative behavior can make convergence exceptionally slow.
+\end{itemize}
+
+\subsection*{9. Two-State Centered Kernel}
+\begin{itemize}
+	\item[\bfseries 9.1] \textbf{Transition Rule.} A two-state Markov chain on \(\{-0.5, 0.5\}\) where the probability of switching states is \(p(\theta) = \cos^2(\theta)\).
+	\item[\bfseries 9.2] \textbf{Stationary Law.} The stationary distribution is uniform, \(\pi_\theta(-0.5) = \pi_\theta(0.5) = 1/2\), so its mean is always zero.
+	\item[\bfseries 9.3] \textbf{Derivatives.} The derivatives of the transition probability \(p(\theta)\) are \( p'(\theta) = -\sin(2\theta) \) and \( p''(\theta) = -2\cos(2\theta) \). Both are globally Lipschitz.
+	\item[\bfseries 9.4] \textbf{Experimental Analysis.} As a simple, smooth discrete kernel, it displays the expected \(O(\alpha)\) behavior with clear separation between the curves. However, like other discrete kernels, the final convergence appears slow, suggesting that reaching the asymptotic limit requires a very large number of iterations.
+\end{itemize}
+
+
+
+\subsection*{Key Findings and Theoretical Justification}
+
+\begin{itemize}
+	\item \textbf{Universal Ergodicity and Foundational Assumptions:} All nine kernels are ergodic and satisfy the foundational assumption that the transition probability \(P_\theta\) is Lipschitz in \(\theta\) with respect to the total variation norm. This ensures a valid theoretical framework for the stochastic approximation analysis.
+	
+	\item \textbf{Correlation of Asymptotic Bias with Derivative Regularity:} The simulation results reveal a clear correlation between the asymptotic behavior of the iterates and the regularity of the kernel's parameter function derivatives. However, the initial hypothesis of a simple binary split between "smooth" ($O(\alpha)$ bias) and "non-smooth" ($O(\sqrt{\alpha})$ bias) kernels is insufficient. The experimental data suggests a more nuanced categorization based on the nature and magnitude of the derivative's behavior.
+	
+	\begin{itemize}
+		\item \textbf{Class 1: Smooth Kernels with Clear \(O(\alpha)\) Bias.} This class includes the \textbf{Langevin}, \textbf{OU Smooth}, \textbf{Discrete Smooth 500}, and \textbf{Two-State} kernels. These kernels all possess globally Lipschitz first and second derivatives. As predicted by theory, they exhibit a distinct separation between the convergence curves for different stepsizes, confirming the expected \(O(\alpha)\) scaling of the asymptotic bias. For the Langevin kernel, this separation is particularly clear. For OU Smooth and its discrete counterpart, the effect is visible but less pronounced, suggesting that the smaller magnitude of their derivatives results in a smaller leading constant in the bias term, making the curves appear closer. The slow final convergence of the discrete kernels also highlights the impact of the Markov chain's mixing time.
+		
+		\item \textbf{Class 2: Pathological Kernels with Clustered Bias.} This class includes the \textbf{Oscillatory}, \textbf{OU SqrtOsc}, and \textbf{RW ClipOsc} kernels. These were designed with severe irregularities, such as wildly oscillating or unbounded derivatives near the origin. The experimental results are stark: the final error levels for all stepsizes are tightly clustered together. This indicates that decreasing the stepsize yields almost no improvement in accuracy, a hallmark of a much slower bias convergence rate, likely on the order of \(O(\sqrt{\alpha})\). The extremely slow convergence of the RW ClipOsc kernel for small \(\alpha\) further demonstrates how pathological derivative behavior, combined with the memory of a discrete chain, can severely hamper performance.
+		
+		\item \textbf{Class 3: Piecewise-Smooth Kernels Exhibiting \(O(\alpha)\) Bias.} This is the most insightful category, containing the \textbf{OU Sin} and \textbf{RW Hinge 500} kernels. Theoretically, both are "non-smooth" because their first derivatives are not Lipschitz, possessing jump discontinuities. However, their experimental behavior is nearly indistinguishable from the truly smooth kernels, showing clear \(O(\alpha)\) separation. This strongly suggests that the nature of the non-smoothness is paramount. Because the derivatives of these kernels are well-behaved and constant between isolated "kinks," the system retains the faster bias scaling. This challenges the simple smooth/non-smooth dichotomy and indicates that as long as the derivatives are not pathologically oscillatory, the algorithm's performance remains robust.
+	\end{itemize}
+\end{itemize}
 	 
 	\bibliographystyle{ieee}
 	\bibliography{ref.bib}
