@@ -623,22 +623,7 @@
 	\end{align*}
 	 
 	 Firstly, note that from the definition we have $\Exs\left[g\left(\thetastar, X^{*}\right)\right] = 0$. Secondly, the two terms on the r.h.s. of the above($\Exs\left[g^{\prime}\left(\thetastar, \xstar\right)\left(\thetainf - \thetastar\right)\right]$ and $\frac{1}{2}\Exs\left[g^{\prime\prime}\left(\thetastar, \xstar\right)\left(\thetainf - \thetastar\right)^{\otimes 2}\right]$), are equivalent to the two terms in Bias Characterization of \cite{huo2024collusion} which means that we do not need to analyze them here. Hence, it remains to analyze the three other terms. 
-	 
-	 To analyze the first term, we introduce a new variable $\tilde{X}_{n, k}$. This is the random variable which has initialized from $X_{0}$, evolved according to the kernel $P_{\theta_{i}}$ for $i = 0, \dots, k - 1$, and then with the kernel $P_{\thetastar}$ for $n - k$ times:
-	 \begin{align*}
-	 	X_{0} \quad \underset{P_{\theta_{0}}}{\longmapsto}  \quad X_{1} \quad \underset{P_{\theta_{1}}}{\longmapsto} \quad \dots \quad \underset{P_{\theta_{k - 1}}}{\longmapsto} \quad X_{k} = \tilde{X}_{k, k} \quad \underset{P_{\thetastar}}{\longmapsto} \quad \dots \quad \underset{P_{\thetastar}}{\longmapsto} \quad \tilde{X}_{n - 1, k} \quad \underset{P_{\thetastar}}{\longmapsto} \quad \tilde{X}_{n, k}
-	 \end{align*}
-	 In addition, since we are interested in the difference between $g\left(\thetastar, \xinfPone\right)$ and $g\left(\thetastar, \xstar\right)$, and the decision parameter of the function is fixed here, for notational simplicity we use $f\left( . \right) \coloneq g\left(\thetastar, .\right)$. Also note that $f\left(\xinfPone\right)$ and $f\left(\xinf\right)$ are the same kind of objects in distribution. Using these new notations, we can write
-	 \begin{align*}
-	 	\Exs\left[g\left(\thetastar, \xinfPone\right) - g\left(\thetastar, \xstar\right)\right] = \lim_{n \to \infty}\Exs\left[f\left(\tilde{X}_{n, n}\right) - f\left(\tilde{X}_{n, 0}\right)\right] = \lim_{n \to \infty}\Exs\left[\sum_{k = 0}^{n - 1}f\left(\tilde{X}_{n, k + 1}\right) - f\left(\tilde{X}_{n, k}\right)\right].
-	 \end{align*}
-	 From the above we see that we are interested in calculating $f\left(\tilde{X}_{n, k +‌ 1}\right) - f\left(\tilde{X}_{n, k}\right)$. Notice that $\tilde{X}_{n, k +‌ 1}$ and $\tilde{X}_{n, k}$ are the same random variables in their first $k$ rounds of evolution. This means that we can write $\tilde{X}_{n, k + 1} = P_{\thetastar}^{n - k - 1}P_{\theta_{k}}\tilde{X}_{k, k}$ and $\tilde{X}_{n, k} = P_{\thetastar}^{n - k}\tilde{X}_{k, k}$. 
-	 \\
-	 \\
-	 \\
-	 \\
-	 \\
-	 \\	 
+	 	 
 	 Starting with the first one, we have 
 	 \begin{align*}
 	 	\Exs\left[g\left(\thetastar, \xinfPone\right) - g\left(\thetastar, \xstar\right)\right] &= \Exs\left[\Exs\left[g\left(\thetastar, \xinfPone\right) | \thetainf, \xinf\right] - g\left(\thetastar, \xstar\right)\right]\\
@@ -807,6 +792,271 @@ Below we summarize the nine kernels used in our experiments. For each kernel, we
 		\item \textbf{Class 3: Piecewise-Smooth Kernels Exhibiting \(O(\alpha)\) Bias.} This is the most insightful category, containing the \textbf{OU Sin} and \textbf{RW Hinge 500} kernels. Theoretically, both are "non-smooth" because their first derivatives are not Lipschitz, possessing jump discontinuities. However, their experimental behavior is nearly indistinguishable from the truly smooth kernels, showing clear \(O(\alpha)\) separation. This strongly suggests that the nature of the non-smoothness is paramount. Because the derivatives of these kernels are well-behaved and constant between isolated "kinks," the system retains the faster bias scaling. This challenges the simple smooth/non-smooth dichotomy and indicates that as long as the derivatives are not pathologically oscillatory, the algorithm's performance remains robust.
 	\end{itemize}
 \end{itemize}
+
+\section*{Advanced Experimental Analysis}
+
+To gain a deeper understanding of how a kernel's properties influence the asymptotic bias and convergence rate of the SA algorithm, we designed several new sets of targeted experiments. The first investigates the transition from a smooth to a non-smooth regime via interpolation. The subsequent experiments analyze the system's sensitivity to the *degree* of smoothness and non-smoothness by tuning specific parameters in the kernel's design over several orders of magnitude.
+
+\subsection*{Update Functions (g-functions)}
+Across these experiments, we utilized three different update functions, \(g(\theta, x)\), to drive the SA scheme. Each was chosen to have a unique, stable root at \(\theta^*=0\) when the mean of the Markovian noise, \(\mathbb{E}_{\pi_0}[X]\), is zero.
+
+\begin{enumerate}
+	\item \textbf{Linear Function:} \(g_{\text{linear}}(\theta, x) = x - \theta\). This is the simplest case, where the associated ODE is \(\dot{\theta} = \mathbb{E}_{\pi_\theta}[X] - \theta\). It is strongly monotone if \(\frac{d}{d\theta}\mathbb{E}_{\pi_\theta}[X] < 1\). Its simplicity helps to isolate the effects of the kernel's properties.
+	
+	\item \textbf{Cubic Function:} \(g_{\text{cubic}}(\theta, x) = -2\theta + \frac{\theta^3}{1+\theta^2} + x\). This function introduces non-linearity. It is strongly monotone near the origin, with a derivative of \(-2\) at \(\theta=0\). The stability condition is \(\frac{d}{d\theta}\mathbb{E}_{\pi_\theta}[X] < 2\).
+	
+	\item \textbf{Exponential Decay Function:} \(g_{\text{exp}}(\theta, x) = -\theta e^{-\theta^2} + x\). This provides another form of non-linearity. It is strongly monotone near the origin with a derivative of \(-1\), and the stability condition is \(\frac{d}{d\theta}\mathbb{E}_{\pi_\theta}[X] < 1\).
+\end{enumerate}
+
+\subsection*{Experiment 1: Interpolation Between Smooth and Non-Smooth Kernels}
+This experiment was designed to visualize the transition in bias behavior as a kernel smoothly changes from perfectly smooth to pathologically non-smooth.
+
+\paragraph{Experimental Setup.} We used a two-state Markov chain on \(\mathcal{X}=\{-0.5, 0.5\}\). The experiment is defined by two "endpoint" kernels:
+\begin{itemize}
+	\item \textbf{Smooth Endpoint (\(\lambda=0\)):} A kernel where the probability of switching states is \(p(\theta) = \cos^2(\theta)\). This function and all its derivatives are globally Lipschitz.
+	\item \textbf{Non-Smooth Endpoint (\(\lambda=1\)):} A kernel where the switching probability is governed by the oscillatory function \(m(\theta) = \theta + \theta^2\sin(1/\theta)\). The resulting transition probability function is Lipschitz, but its derivative is bounded but not Lipschitz continuous.
+\end{itemize}
+We then created a family of interpolated kernels where the final transition probability is a linear combination of the two endpoints, controlled by a parameter \(\lambda \in [0,1]\):
+\[ p_{\text{final}}(\theta) = (1-\lambda)p_{\text{smooth}}(\theta) + \lambda p_{\text{non-smooth}}(\theta) \]
+
+\paragraph{Observations.} The results confirmed our hypothesis. For \(\lambda=0\), the kernel exhibited a clear \(O(\alpha)\) bias, with distinct separation between the convergence curves for different stepsizes. As \(\lambda\) was increased towards 1, this separation gradually disappeared, and the curves began to cluster together, indicating a transition towards a slower, \(O(\sqrt{\alpha})\)-like bias. It was also noted that for intermediate values of \(\lambda\), the non-natural structure of the interpolated kernel appeared to slow the rate of convergence.
+
+\subsection*{Experiment 2: Sensitivity to the Degree of Smoothness}
+This set of experiments was designed to test the hypothesis that the *magnitude* of the derivatives (for smooth kernels) and the *amplitude* of oscillations (for non-smooth kernels) are critical factors in determining convergence speed and bias. All experiments in this section were conducted with the \(g_{\text{linear}}\) function and uniform noise on \([-0.1, 0.1]\).
+
+\subsubsection*{Experiment 2a: Tanh Smooth vs. Oscillatory Non-Smooth}
+This experiment uses a hyperbolic tangent function for the smooth family and an oscillatory function for the non-smooth family.
+
+\paragraph{Kernel Definitions.}
+\begin{itemize}
+	\item \textbf{Smooth Family:} The mean function is \(m(\theta, \beta) = \tanh(\beta \cdot \theta)\). Its derivative at the origin is \(m'(0) = \beta\). For stability, we require \(\beta < 2\). The derivatives are globally Lipschitz.
+	\item \textbf{Non-Smooth Family:} The mean function is \(m(\theta, \lambda) = \lambda(\theta + \theta^2\sin(1/\theta))\). The derivative contains the non-Lipschitz term \(-\lambda\cos(1/\theta)\). For stability, we require \(\lambda < 1\).
+\end{itemize}
+
+\paragraph{Parameters and Observations.}
+The parameters chosen were \(\beta \in \{0.1, 0.5, 1.0\}\) and \(\lambda \in \{0.1, 0.5, 1.0\}\). The value \(\lambda=1.0\) is at the boundary of the stability region. The plots show a clear trend: as \(\beta\) increases, the smooth kernels converge faster, but the final bias appears to increase. Similarly, as \(\lambda\) increases, the non-smooth kernels show more pronounced clustering of the final error values, indicating a stronger degradation of the bias.
+
+\subsubsection*{Experiment 2b: Tanh Smooth vs. Oscillatory Non-Smooth (Large Differences)}
+This experiment uses the same kernel families as above but with parameters chosen to be orders of magnitude different.
+
+\paragraph{Parameters and Observations.}
+The parameters chosen were \(\beta \in \{0.02, 0.2, 1.8\}\) and \(\lambda \in \{0.01, 0.1, 0.9\}\). These values represent roughly 10x and 100x differences in the effective derivative magnitudes. The results are much more dramatic. The smooth kernel with \(\beta=1.8\) converges extremely rapidly, but to a noticeably higher error floor than the slower-converging kernel with \(\beta=0.02\). For the non-smooth kernels, the transition is stark: the \(\lambda=0.01\) case shows clear \(O(\alpha)\) separation, while the \(\lambda=0.9\) case shows extreme clustering, confirming that the magnitude of the non-Lipschitz component is a key determinant of the asymptotic bias.
+
+\subsubsection*{Experiment 2c: Arctan Smooth vs. Oscillatory Non-Smooth (Large Differences)}
+This experiment validates the previous findings using a different family of smooth kernels based on the arctangent function.
+
+\paragraph{Kernel Definitions.}
+\begin{itemize}
+	\item \textbf{Smooth Family (Arctan):} The mean function is \(m(\theta, \beta) = 0.1 \cdot \arctan(\beta \cdot \theta)\). Its derivative at the origin is \(m'(0) = 0.1 \cdot \beta\).
+	\item \textbf{Non-Smooth Family (Oscillatory):} Same as in the previous experiments.
+\end{itemize}
+
+\paragraph{Parameters and Observations.}
+The parameters chosen were \(\beta \in \{0.1, 1.0, 10.0\}\) and \(\lambda \in \{0.01, 0.1, 0.9\}\). This again creates orders-of-magnitude differences. The results are consistent with the Tanh family: increasing \(\beta\) leads to faster convergence but a higher bias floor. The non-smooth kernels behave identically to the previous experiment, showing a clear transition from \(O(\alpha)\)-like bias to strong clustering as \(\lambda\) increases.
+
+\paragraph{Overall Conclusion from Sensitivity Analysis.}
+The experiments strongly support the hypothesis that there is a fundamental trade-off between convergence speed and asymptotic bias, governed by the magnitude of the kernel's derivatives. A kernel with larger derivatives (a "stronger signal") accelerates convergence to the neighborhood of the solution, but this same sensitivity allows the iterates to fluctuate more widely around the root, leading to a larger final bias.
+
+\section*{Experiment 3: Asymptotic Bias Analysis with Large Iteration Counts}
+
+\subsection*{Introduction: Probing Asymptotic Behavior at Scale}
+The theoretical analysis of stochastic approximation (SA) schemes with Markovian noise often relies on assumptions of smoothness in the underlying transition kernels. Prior experiments have demonstrated a clear bifurcation in performance: kernels satisfying these smoothness conditions typically exhibit an asymptotic bias that scales favorably with the stepsize $\alpha$ (e.g., $O(\alpha)$), while "pathological" kernels with non-smooth derivatives converge to a bias that scales much more poorly (e.g., $O(\sqrt{\alpha})$).
+
+However, these prior experiments also revealed a critical practical challenge: the true asymptotic behavior of non-smooth kernels, particularly for very small stepsizes ($\alpha < 10^{-4}$), is often not observable within typical iteration budgets. The convergence can be so slow that the algorithm fails to reach its asymptotic error floor even after hundreds of millions of iterations. This raises a crucial question: does the observed clustering of error curves for non-smooth kernels represent their true asymptotic limit, or is it a pre-asymptotic artifact of extremely slow convergence?
+
+To definitively answer this, this report details a new set of experiments conducted with massive iteration counts, ranging from $10^8$ to $10^9$. By pushing the simulation horizon to these extreme lengths, we can ensure that even the slowest-converging stepsize has sufficient time to reach its true asymptotic error floor, allowing for a rigorous and conclusive characterization of the bias.
+
+For this investigation, we have selected four distinct kernels, each designed to probe a different aspect of the interplay between a kernel's global shape and the local "texture" of its derivatives:
+\begin{itemize}
+	\item \textbf{1. Original Oscillatory Kernel:} This serves as our baseline case. It has a simple linear global structure, but its non-smoothness is pathologically localized at the origin.
+	
+	\item \textbf{2. Linear Backbone (Global \& Wild Oscillations):} This kernel retains the simple linear backbone but makes the non-smoothness global and periodic. The oscillations in its derivatives are "wild," with a high amplitude and frequency, allowing us to isolate the effect of globalizing a severe pathology.
+	
+	\item \textbf{3. Sublinear Backbone (Sharp Two-Phase \& Wild Oscillations):} This kernel fundamentally alters the global shape to be sublinear. It features a sophisticated two-phase structure: a max-growth linear phase in a tiny neighborhood of the origin, followed by a sharp transition to a flattening sublinear phase. This tests how a different global dynamic interacts with wild, non-smooth derivatives.
+	
+	\item \textbf{4. Sublinear Backbone (Multi-Stage \& Wild Oscillations):} This is the most complex design, featuring a sublinear backbone with a three-stage growth profile (linear core, wide transition, and a final slow-growth phase). It allows us to study a non-smooth system with highly engineered global dynamics.
+\end{itemize}
+
+By comparing the true asymptotic performance of these four archetypes, this experiment aims to provide a definitive and nuanced understanding of how different forms of non-smoothness impact the long-term behavior of stochastic approximation algorithms.
+
+\subsection*{Theoretical Analysis of Experimental Kernels}
+
+\subsubsection*{Kernel 1: Original Oscillatory Kernel}
+
+\paragraph{Introduction.}
+This is the canonical example of a kernel with pathological non-smoothness. Its global structure is fundamentally linear, but it is perturbed by an oscillatory term whose frequency explodes as it approaches the origin. This design creates a function whose derivative is bounded but not Lipschitz continuous, a key violation of standard smoothness assumptions. The non-smooth behavior is entirely localized at the root, $\theta^*=0$.
+
+\paragraph{Recipe.}
+The kernel is constructed by taking a simple linear mean function, $m(\theta) = \theta$, and adding a classic pathological term, $\theta^2 \sin(1/\theta)$. This term is known to be differentiable at the origin, but its own derivative oscillates infinitely fast, preventing it from being smooth. A scaling factor $\lambda=0.9$ is introduced to ensure the overall function satisfies the strong monotonicity condition away from the immediate vicinity of the origin.
+
+\paragraph{Definitions and Parameters.}
+For all kernels, we consider a two-state Markov chain. The stationary distribution $\pi_\theta$ has a mean given by $\mathbb{E}_{\pi_\theta}[X] = m(\theta)$.
+
+\begin{itemize}
+	\item \textbf{Mean Function:} The mean of the stationary distribution is given by:
+	\[ m(x) = 0.9 \left( x + x^2 \sin\left(\frac{1}{x}\right) \right) \quad \text{for } x \neq 0, \text{ and } m(0)=0 \]
+	\item \textbf{First Derivative:}
+	\[ m'(x) = 0.9 \left( 1 + 2x\sin\left(\frac{1}{x}\right) - \cos\left(\frac{1}{x}\right) \right) \]
+	\item \textbf{Second Derivative:}
+	\[ m''(x) = 0.9 \left( 2\sin\left(\frac{1}{x}\right) - \frac{2}{x}\cos\left(\frac{1}{x}\right) - \frac{1}{x^2}\sin\left(\frac{1}{x}\right) \right) \]
+\end{itemize}
+
+\paragraph{Properties.}
+\begin{itemize}
+	\item \textbf{Lipschitz Continuity:} The first derivative $m'(x)$ is globally bounded, thus the mean function $m(x)$ and the kernel itself are globally Lipschitz. However, the second derivative $m''(x)$ is unbounded as $x \to 0$, which means the first derivative $m'(x)$ is \textbf{not} Lipschitz continuous.
+	\item \textbf{Strong Monotonicity:} This kernel is \textbf{not} globally strongly monotone. The condition $m'(x) - 1 \le -\mu < 0$ is violated in any neighborhood of the origin, since the term $-0.9\cos(1/x)$ oscillates between $-0.9$ and $0.9$, allowing $m'(x)-1$ to become positive.
+\end{itemize}
+
+\section*{Experiment 3: Asymptotic Bias Analysis with Large Iteration Counts}
+
+\subsection*{Introduction: Probing Asymptotic Behavior at Scale}
+The theoretical analysis of stochastic approximation (SA) schemes with Markovian noise often relies on assumptions of smoothness in the underlying transition kernels. Prior experiments have demonstrated a clear bifurcation in performance: kernels satisfying these smoothness conditions typically exhibit an asymptotic bias that scales favorably with the stepsize $\alpha$ (e.g., $O(\alpha)$), while "pathological" kernels with non-smooth derivatives converge to a bias that scales much more poorly (e.g., $O(\sqrt{\alpha})$).
+
+However, these prior experiments also revealed a critical practical challenge: the true asymptotic behavior of non-smooth kernels, particularly for very small stepsizes ($\alpha < 10^{-4}$), is often not observable within typical iteration budgets. The convergence can be so slow that the algorithm fails to reach its asymptotic error floor even after hundreds of millions of iterations. This raises a crucial question: does the observed clustering of error curves for non-smooth kernels represent their true asymptotic limit, or is it a pre-asymptotic artifact of extremely slow convergence?
+
+To definitively answer this, this report details a new set of experiments conducted with massive iteration counts, ranging from $10^8$ to $10^9$. By pushing the simulation horizon to these extreme lengths, we can ensure that even the slowest-converging stepsize has sufficient time to reach its true asymptotic error floor, allowing for a rigorous and conclusive characterization of the bias.
+
+For this investigation, we have selected four distinct kernels, each designed to probe a different aspect of the interplay between a kernel's global shape and the local "texture" of its derivatives:
+\begin{itemize}
+	\item \textbf{1. Original Oscillatory Kernel:} This serves as our baseline case. It has a simple linear global structure, but its non-smoothness is pathologically localized at the origin.
+	
+	\item \textbf{2. Linear Backbone (Global \& Wild Oscillations):} This kernel retains the simple linear backbone but makes the non-smoothness global and periodic. The oscillations in its derivatives are "wild," with a high amplitude and frequency, allowing us to isolate the effect of globalizing a severe pathology.
+	
+	\item \textbf{3. Sublinear Backbone (Sharp Two-Phase \& Wild Oscillations):} This kernel fundamentally alters the global shape to be sublinear. It features a sophisticated two-phase structure: a max-growth linear phase in a tiny neighborhood of the origin, followed by a sharp transition to a flattening sublinear phase. This tests how a different global dynamic interacts with wild, non-smooth derivatives.
+	
+	\item \textbf{4. Sublinear Backbone (Multi-Stage \& High-Amplitude Oscillations):} This is the most complex design, featuring a sublinear backbone with a three-stage growth profile (linear core, wide transition, and a final slow-growth phase). It allows us to study a non-smooth system with highly engineered global dynamics.
+\end{itemize}
+
+By comparing the true asymptotic performance of these four archetypes, this experiment aims to provide a definitive and nuanced understanding of how different forms of non-smoothness impact the long-term behavior of stochastic approximation algorithms.
+
+\subsection*{Theoretical Analysis of Experimental Kernels}
+
+\subsubsection*{Kernel 1: Original Oscillatory Kernel}
+
+\paragraph{Introduction.}
+This is the canonical example of a kernel with pathological non-smoothness. Its global structure is fundamentally linear, but it is perturbed by an oscillatory term whose frequency explodes as it approaches the origin. This design creates a function whose derivative is bounded but not Lipschitz continuous, a key violation of standard smoothness assumptions. The non-smooth behavior is entirely localized at the root, $\theta^*=0$.
+
+\paragraph{Recipe.}
+The kernel is constructed in two steps. First, we define a target mean function for the stationary distribution, $m(\theta)$. This is achieved by taking a simple linear function, $m_{base}(\theta) = \theta$, and adding a classic pathological term, $\theta^2 \sin(1/\theta)$, which is known to have a non-Lipschitz derivative. A scaling factor $\lambda=0.9$ is applied to the sum to ensure the final function $m(\theta) = \lambda(m_{base} + \text{pathology})$ has a derivative whose magnitude does not consistently exceed 1. Second, for a two-state Markov chain on $\mathcal{X}=\{-0.5, 0.5\}$, this mean function is translated into a transition kernel by defining the probability of switching states as $p(\theta) = m(\theta) + 0.5$. This ensures that the mean of the stationary distribution, $\mathbb{E}_{\pi_\theta}[X]$, is exactly $m(\theta)$.
+
+\paragraph{Definitions and Parameters.}
+The stationary distribution $\pi_\theta$ has a mean $\mathbb{E}_{\pi_\theta}[X] = m(\theta)$.
+\begin{itemize}
+	\item \textbf{Mean Function:}
+	\[ m(x) = 0.9 \left( x + x^2 \sin\left(\frac{1}{x}\right) \right) \quad \text{for } x \neq 0, \text{ and } m(0)=0 \]
+	\item \textbf{Transition Kernel:} The probability of switching from state $x$ to $-x$ is:
+	\[ p(x) = 0.9 \left( x + x^2 \sin\left(\frac{1}{x}\right) \right) + 0.5 \]
+	\item \textbf{First Derivative of Mean:}
+	\[ m'(x) = 0.9 \left( 1 + 2x\sin\left(\frac{1}{x}\right) - \cos\left(\frac{1}{x}\right) \right) \]
+	\item \textbf{Second Derivative of Mean:}
+	\[ m''(x) = 0.9 \left( 2\sin\left(\frac{1}{x}\right) - \frac{2}{x}\cos\left(\frac{1}{x}\right) - \frac{1}{x^2}\sin\left(\frac{1}{x}\right) \right) \]
+\end{itemize}
+
+\paragraph{Properties.}
+\begin{itemize}
+	\item \textbf{Lipschitz Continuity:} The first derivative of the transition probability, $p'(x) = m'(x)$, is globally bounded. A loose bound is $|m'(x)| \le 0.9(1 + 2|x||\sin(1/x)| + |\cos(1/x)|) \le 0.9(2+2|x|)$, which is bounded on any compact set. Thus, the transition kernel $p(x)$ is locally Lipschitz. The second derivative $m''(x)$ is unbounded as $x \to 0$, which means the first derivative $m'(x)$ is \textbf{not} Lipschitz continuous.
+	\item \textbf{Strong Monotonicity:} This kernel is \textbf{not} globally strongly monotone. The condition $m'(x) - 1 \le -\mu < 0$ is violated in any neighborhood of the origin, since the term $-0.9\cos(1/x)$ oscillates between $-0.9$ and $0.9$, allowing $m'(x)-1$ to become positive.
+\end{itemize}
+
+\subsubsection*{Kernel 2: Linear Backbone (Global \& Wild Oscillations)}
+\paragraph{Introduction.}
+This kernel takes the concept of non-smoothness and makes it a global feature. While its "zoomed-out" shape is a simple linear function, its derivative is textured with periodic, high-amplitude, high-frequency oscillations. This design allows us to study the effect of a severe and globally distributed pathology on an otherwise simple system.
+
+\paragraph{Recipe.}
+This kernel is constructed as a sum of two components: a smooth, stable linear backbone and a globally non-smooth pathological function.
+\begin{enumerate}
+	\item \textbf{The Backbone}: $m_{\text{backbone}}(\theta) = (1-\lambda)\theta$ with $\lambda=0.7$. This provides the primary linear shape and guarantees strong monotonicity with a constant $\mu=0.7$.
+	\item \textbf{The Pathology}: $h(\theta)$ is made periodic by using the sawtooth function, $s(\theta) = |\theta| - \lfloor|\theta|\rfloor$, as the input to the classic non-smooth term $s^2\sin(k/s)$. This places the unbounded second derivative at every integer. The oscillations are made symmetric using $\text{sgn}(\theta)$ and their amplitude is modulated by a Gaussian-based term $C(e^{-\alpha\theta^2}+1)$ to ensure they are most prominent near the origin. The parameters $C=0.4$ and $k=5\pi$ create "wild" oscillations.
+\end{enumerate}
+The final mean function is $m(\theta) = m_{\text{backbone}}(\theta) + h(\theta)$. For a two-state chain on $\mathcal{X}=\{-1, 1\}$, this is converted to a switching probability $p(\theta) = (1-m(\theta))/2$.
+
+\paragraph{Definitions and Parameters.}
+Let $s(x) = |x| - \lfloor|x|\rfloor$.
+\begin{itemize}
+	\item \textbf{Mean Function:}
+	\[ m(x) = 0.3x + 0.4 \cdot \text{sgn}(x)(e^{-0.1x^2}+1) s(x)^2 \sin\left(\frac{5\pi}{s(x)}\right) \]
+	\item \textbf{Transition Kernel:} The probability of switching states is $p(x) = (1 - m(x))/2$.
+	\item \textbf{First Derivative of Mean:}
+	\[ \begin{aligned} m'(x) = & \ 0.3 - 0.08|x|e^{-0.1x^2}s(x)^2\sin\left(\frac{5\pi}{s(x)}\right) \\ & + 0.4(e^{-0.1x^2}+1)\left[2s(x)\sin\left(\frac{5\pi}{s(x)}\right) - 5\pi\cos\left(\frac{5\pi}{s(x)}\right)\right] \end{aligned} \]
+	\item \textbf{Second Derivative of Mean:}
+	\[ \begin{aligned} m''(x) = & \ 0.4 \cdot \text{sgn}(x)(-0.2+0.04x^2)e^{-0.1x^2}s(x)^2\sin\left(\frac{5\pi}{s(x)}\right) \\ & - 0.16xe^{-0.1x^2}\left[2s(x)\sin\left(\frac{5\pi}{s(x)}\right) - 5\pi\cos\left(\frac{5\pi}{s(x)}\right)\right] \\ & + 0.4(e^{-0.1x^2}+1)\text{sgn}(x)\left[\left(2 - \frac{25\pi^2}{s(x)^2}\right)\sin\left(\frac{5\pi}{s(x)}\right) - \frac{10\pi}{s(x)}\cos\left(\frac{5\pi}{s(x)}\right)\right] \end{aligned} \]
+\end{itemize}
+
+\paragraph{Properties.}
+\begin{itemize}
+	\item \textbf{Lipschitz Continuity:} The first derivative $m'(x)$ is globally bounded, thus the kernel is globally Lipschitz with a constant $L_P$. The second derivative $m''(x)$ is unbounded near every integer, thus $m'(x)$ is \textbf{not} Lipschitz continuous.
+	\item \textbf{Strong Monotonicity:} The parameters were chosen such that the derivative of the pathological part is always smaller in magnitude than the stability margin provided by the backbone. This ensures that $\sup_{x \in \mathbb{R}} |m'(x)| < 1$, and thus the condition $m'(x) - 1 \le -\mu < 0$ holds for some $\mu > 0$. The kernel is globally strongly monotone.
+\end{itemize}
+
+\subsubsection*{Kernel 3: Sublinear Backbone (Sharp Two-Phase \& Wild Oscillations)}
+\paragraph{Introduction.}
+This kernel introduces a fundamentally different global dynamic. Instead of a linear backbone, it has a sublinear global shape. Its most prominent feature is a sharp, two-phase transition: for $|\theta| < 10^{-4}$, it behaves like a max-growth linear function with a slope of $0.99$. For $|\theta| > 10^{-4}$, it sharply transitions to a sublinear, flattening phase. This design tests how a system with extreme local sensitivity and global stability interacts with wild, non-smooth derivative oscillations.
+
+\paragraph{Recipe.}
+This kernel is built by designing a sublinear backbone and adding a pathological function with a very small amplitude.
+\begin{enumerate}
+	\item \textbf{The Backbone}: $m_{\text{backbone}}(\theta) = A \cdot \epsilon \cdot \tanh(\theta/\epsilon)$. This function is provably linear for $|\theta| \ll \epsilon$ and constant for $|\theta| \gg \epsilon$, creating the desired sharp two-phase behavior with slope $A=0.99$ inside the region defined by $\epsilon=10^{-4}$.
+	\item \textbf{The Pathology}: The same symmetric, periodic pathological function from Kernel 2 is layered on top, but with an extremely small amplitude ($C=10^{-7}$) to avoid disturbing the delicate stability of the max-growth backbone.
+\end{enumerate}
+The final mean function is the sum of these two components.
+
+\paragraph{Definitions and Parameters.}
+Let $s(x) = |x| - \lfloor|x|\rfloor$.
+\begin{itemize}
+	\item \textbf{Mean Function:}
+	\[ m(x) = 0.99 \cdot 10^{-4} \tanh\left(\frac{x}{10^{-4}}\right) + 10^{-7} \cdot \text{sgn}(x)(e^{-0.1x^2}+1) s(x)^2 \sin\left(\frac{5\pi}{s(x)}\right) \]
+	\item \textbf{First Derivative of Mean:}
+	\[ \begin{aligned} m'(x) = & \ 0.99 \cdot \text{sech}^2\left(\frac{x}{10^{-4}}\right) - 2 \cdot 10^{-8}|x|e^{-0.1x^2}s(x)^2\sin\left(\frac{5\pi}{s(x)}\right) \\ & + 10^{-7}(e^{-0.1x^2}+1)\left[2s(x)\sin\left(\frac{5\pi}{s(x)}\right) - 5\pi\cos\left(\frac{5\pi}{s(x)}\right)\right] \end{aligned} \]
+	\item \textbf{Second Derivative of Mean:}
+	\[ \begin{aligned} m''(x) = & -19800 \cdot \text{sech}^2\left(\frac{x}{10^{-4}}\right)\tanh\left(\frac{x}{10^{-4}}\right) \\ & - 2 \cdot 10^{-8}\text{sgn}(x)(1-0.2x^2)e^{-0.1x^2}s(x)^2\sin\left(\frac{5\pi}{s(x)}\right) \\ & - 4 \cdot 10^{-8}xe^{-0.1x^2}\left[2s(x)\sin\left(\frac{5\pi}{s(x)}\right) - 5\pi\cos\left(\frac{5\pi}{s(x)}\right)\right] \\ & + 10^{-7}(e^{-0.1x^2}+1)\text{sgn}(x)\left[\left(2 - \frac{25\pi^2}{s(x)^2}\right)\sin\left(\frac{5\pi}{s(x)}\right) - \frac{10\pi}{s(x)}\cos\left(\frac{5\pi}{s(x)}\right)\right] \end{aligned} \]
+\end{itemize}
+\paragraph{Properties.}
+\begin{itemize}
+	\item \textbf{Lipschitz Continuity:} $m'(x)$ is globally bounded, so the kernel is globally Lipschitz. $m''(x)$ is unbounded near every integer, so $m'(x)$ is \textbf{not} Lipschitz continuous.
+	\item \textbf{Strong Monotonicity:} The derivative at the origin is exactly $m'(0)=0.99$. The pathological part has a negligible contribution. The condition $m'(x) - 1 \le -\mu < 0$ is satisfied globally with $\mu \approx 0.01$.
+\end{itemize}
+
+\subsubsection*{Kernel 4: Sublinear Backbone (Multi-Stage \& High-Amplitude Oscillations)}
+\paragraph{Introduction.}
+This is the most complex and sophisticated design. It features a sublinear backbone with a carefully engineered three-stage growth profile: a stable linear core, a wide transition phase between $10^{-4}$ and $10^{-2}$, and a final, persistent slow-growth phase. The pathological oscillations are global, symmetric, and "wild" due to a very high amplitude (`C=0.5`). This kernel tests the system's behavior under a highly structured global dynamic combined with a severe, high-amplitude non-smoothness.
+
+\paragraph{Recipe.}
+The kernel is constructed by designing a smooth "shaping function" (the backbone) and adding a high-amplitude pathological "foundation."
+\begin{enumerate}
+	\item \textbf{The Shaping Function}: A sum of two `tanh` functions and a linear term, $S(\theta) = H_1\tanh(\theta/W_1) + H_2\tanh(\theta/W_2) + S_{slow}\theta$. Each component is parameterized to control a different phase of the growth profile (linear core, transition, final slow growth), ensuring the desired multi-stage behavior while keeping the total slope at the origin safely below 1.
+	\item \textbf{The Pathological Foundation}: The same symmetric, periodic function from Kernel 2, but with a much larger amplitude ($C=0.5$) to make its effect more pronounced.
+\end{enumerate}
+The final mean function is the sum of these two parts, $m(\theta) = S(\theta) + h(\theta)$.
+
+\paragraph{Definitions and Parameters.}
+Let $s(x) = |x| - \lfloor|x|\rfloor$.
+\begin{itemize}
+	\item \textbf{Mean Function:}
+	\[ m(x) = 6 \cdot 10^{-5} \tanh\left(\frac{x}{10^{-4}}\right) + 10^{-3} \tanh\left(\frac{x}{10^{-2}}\right) + 0.2x + 0.5 \cdot \text{sgn}(x) s(x)^2 \sin\left(\frac{5\pi}{s(x)}\right) \]
+	\item \textbf{First Derivative of Mean:}
+	\[ \begin{aligned} m'(x) = & \ 0.6 \cdot \text{sech}^2\left(\frac{x}{10^{-4}}\right) + 0.1 \cdot \text{sech}^2\left(\frac{x}{10^{-2}}\right) + 0.2 \\ & + 0.5 \left[ 2s(x)\sin\left(\frac{5\pi}{s(x)}\right) - 5\pi\cos\left(\frac{5\pi}{s(x)}\right) \right] \end{aligned} \]
+	\item \textbf{Second Derivative of Mean:}
+	\[ \begin{aligned} m''(x) = & -12000 \cdot \text{sech}^2\left(\frac{x}{10^{-4}}\right)\tanh\left(\frac{x}{10^{-4}}\right) - 20 \cdot \text{sech}^2\left(\frac{x}{10^{-2}}\right)\tanh\left(\frac{x}{10^{-2}}\right) \\ & + 0.5 \cdot \text{sgn}(x)\left[\left(2 - \frac{25\pi^2}{s(x)^2}\right)\sin\left(\frac{5\pi}{s(x)}\right) - \frac{10\pi}{s(x)}\cos\left(\frac{5\pi}{s(x)}\right)\right] \end{aligned} \]
+\end{itemize}
+\paragraph{Properties.}
+\begin{itemize}
+	\item \textbf{Lipschitz Continuity:} $m'(x)$ is globally bounded, so the kernel is globally Lipschitz. $m''(x)$ is unbounded near every integer, so $m'(x)$ is \textbf{not} Lipschitz continuous.
+	\item \textbf{Strong Monotonicity:} The derivative of the backbone at the origin is $m'_{\text{backbone}}(0) = 0.6 + 0.1 + 0.2 = 0.9$. The parameters were chosen such that the oscillations from the pathological part do not cause the total derivative to exceed 1. The kernel is globally strongly monotone with $\mu \approx 0.1$.
+\end{itemize}
+
+\subsection*{Conclusion}
+
+The results from these large-scale simulations provide a nuanced and, in some cases, surprising perspective on the behavior of non-smooth stochastic approximation.
+
+A primary, and perhaps unexpected, finding was that the canonical "Oscillatory" kernel, with its pathology localized at the origin, in fact demonstrated clear $O(\alpha)$ scaling in its final bias. This challenges the simple dichotomy that any kernel with a non-Lipschitz derivative will immediately degrade to slower convergence rates. It suggests that the global structure and the localization of the pathology are critical factors.
+
+However, this came with a significant caveat: for all non-smooth kernels, convergence for very small stepsizes (e.g., $\alpha < 10^{-4}$) is extraordinarily slow. In several cases, true convergence was not achieved even after $10^9$ iterations. This highlights a fundamental tension: the very non-smoothness introduced to violate theoretical assumptions also drastically slows down the algorithm's dynamics, making it computationally prohibitive to observe the true asymptotic behavior. It leads one to believe that it may be impossible to design a non-smooth kernel that also converges quickly for small stepsizes.
+
+The experiments also strongly support the hypothesis that the bias is not a simple, monolithic function of $\alpha$. The observed convergence rate can change depending on the magnitude of the stepsize. This can be justified by considering the "local landscape" that the algorithm explores. For larger $\alpha$, the iterates fluctuate more widely and may experience a smoother, averaged-out version of the kernel. For smaller $\alpha$, the iterates become trapped in the more pathological regions near the root (or near integers, in the global cases), where the oscillatory dynamics dominate and slow down convergence, potentially shifting the bias from a linear to a sublinear regime.
+
+Ultimately, the findings suggest that while kernels exhibiting $O(\sqrt{\alpha})$ bias behavior can certainly be designed, the conditions required might be more specific than initially thought. The true final conclusion remains somewhat elusive. It would not be shocking if the true asymptotic behavior for even the wildest kernels remains $O(\alpha)$, and the observed clustering is a pre-asymptotic artifact of immense variance and astronomically long convergence times. While some experiments do suggest a genuine $O(\sqrt{\alpha})$ rate, the possibility that these are artifacts of random parameters in a high-variance system cannot be dismissed. What can be said with certainty is that kernels with $O(\alpha)$ bias are abundant, even among non-smooth and oscillatory examples. If true $O(\sqrt{\alpha})$ kernels exist, they may be rare, and definitively observing their behavior might be beyond the practical limits of current computational resources.
+
+
 	 
 	\bibliographystyle{ieee}
 	\bibliography{ref.bib}
